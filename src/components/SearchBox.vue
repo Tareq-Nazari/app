@@ -37,10 +37,5 @@
     width: 100%;
 
   }
-  .search-bottun {
-    height: 114px;
-    width: 30px;
-    border-radius : 10%
-  }
 
 </style>
