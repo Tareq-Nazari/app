@@ -10,13 +10,13 @@
 
   import SearchBox from "./components/SearchBox";
   import WeeklyBox from "./components/WeeklyBox";
-  import Footer from "./components/Footer";
+
 export default {
 
   components: {
     SearchBox,
     WeeklyBox,
-    Footer
+
   }
 
 }
