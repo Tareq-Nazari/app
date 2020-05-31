@@ -1,8 +1,8 @@
 <template>
 
   <div id="app">
-    <html dir="rtl">
-    <Nav></Nav>    <SearchBox></SearchBox>
+    <html >
+    <Nav></Nav>
     <weekly-box></weekly-box>
     <Footer></Footer>
     </html>
@@ -23,7 +23,7 @@
 export default {
 
   components: {
-    SearchBox,
+
     WeeklyBox,
 
     Footer,
@@ -36,5 +36,7 @@ export default {
 </script>
 
 <style>
+
+
 
 </style>

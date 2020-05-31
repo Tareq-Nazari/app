@@ -1,40 +1,18 @@
 <template>
+<div class="nav-container">
 
-  <div class="nav">
-    <div class="main">
-
-
-      <div class="row">
-        <a style="text-decoration: none    " href="#">
-
-          <img style="padding-right: 15px; width: 20px;height: 20px; position: absolute;top: 47px;right: 214px"
-               class="icon"
-               src="src/img/logo.svg">
-          سايت
-        </a>
+  <div class="item">خانه</div>
+  <div class="item">فروشگاه ها</div>
+  <div class="item">محصولات</div>
+  <div class="item">تماس با ما</div>
+  <div class="item">درباره ما</div>
+  <div class="item">لوگو</div>
+  <div><font-awesome-icon :icon="['fas','search']" /></div>
+  <div><font-awesome-icon :icon="['fas','shopping-cart']" /></div>
+  <div><font-awesome-icon :icon="['fas', 'user']" /></div>
 
 
-      </div>
-      <div>
-        <a style="margin-left:50px "> درباره سايت</a>
-
-      </div>
-      <div>
-        <a>تماس باما</a>
-
-      </div>
-      <div>
-        <a>نقد فيلم</a>
-
-      </div>
-      <div style="position: absolute ; left: 300px" class="ad">
-
-        <a class="c">ورود / </a>
-        <a class="c"> ثبت نام</a>
-      </div>
-
-    </div>
-  </div>
+</div>
 
 
 </template>
@@ -47,54 +25,22 @@
   }
 </script>
 <style>
-
   @font-face {
-
-    font-family: “yekan”;
-
-    src: url('/src/fonts/Yekan.eot');
-    src: url('/src/fonts/Yekan.eot?#iefix') format('embedded-opentype'),
-    url('/src/fonts/Yekan.woff') format('woff'),
-    url('/src/fonts/Yekan.ttf') format('truetype'),
-    url('/src/fonts/Yekan.svg#BYekan') format('svg');
+    font-family: vasir;
+    src: url('/src/assets/font/Vazir.woff');
 
     font-weight: normal;
-
-    font-style: normal
-
+    font-style: normal;
   }
-
-  .nav {
-    display: grid;
-    background-color: #333333;
-
-  }
-
-  .main {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 83px;
-    transition: 0.5s;
-    margin-right: 250px;
-    margin-left: 100px;
-
-  }
-
-  .main > div {
-    padding-top: 31px;
-  }
-
-  .main > div > a {
-    cursor: pointer;
-    color: #e50914;
-    font-size: 18px;
-    font-family: '“yekan”';
-
-  }
-
-  .main > div > a:hover {
-    color: coral;
-
+.nav-container {
+  display: grid;
+  font-family: vasir;
+  grid-template-rows: 50px;
+  grid-template-columns: 2fr 2fr 2fr 2fr 2fr 10fr 1fr 1fr 1fr;
+}
+  .nav-container > div {
+    text-align: center;
+    align-self: center;
   }
 
 </style>
