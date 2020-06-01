@@ -1,7 +1,11 @@
 <template>
 
   <div id="app">
+
     <html dir="rtl">
+
+
+
     <Nav></Nav>
     <weekly-box></weekly-box>
     <Footer></Footer>
@@ -36,5 +40,7 @@ export default {
 </script>
 
 <style>
+
+
 
 </style>
