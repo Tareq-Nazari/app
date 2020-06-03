@@ -1,13 +1,12 @@
 <template>
 
 </template>
-
 <script>
-    export default {
-        name: "WeeklyBox"
-    }
-</script>
+  export default {
+    name: "WeeklyBox"
 
-<style scoped>
-  
+  }
+</script>
+<style>
+
 </style>

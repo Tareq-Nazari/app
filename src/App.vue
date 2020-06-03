@@ -7,7 +7,8 @@
 
 
     <Nav></Nav>
-    <weekly-box></weekly-box>
+    <ProductDetail></ProductDetail>
+
     <Footer></Footer>
     </html>
   </div>
@@ -21,6 +22,7 @@
 
   import Footer from "./components/Footer";
   import Nav from "./components/Nav";
+  import ProductDetail from "./components/ProductDetail";
 
 
 
@@ -29,9 +31,10 @@ export default {
   components: {
 
     WeeklyBox,
-
     Footer,
     Nav,
+    ProductDetail,
+
 
 
   }

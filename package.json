@@ -15,7 +15,12 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/vue-fontawesome": "^0.1.9",
     "vue": "^2.5.11",
-    "vue-router": "^3.3.0"
+    "vue-carousel": "^0.18.0",
+    "vue-cool-lightbox": "^2.3.3",
+    "vue-easy-lightbox": "^0.13.0",
+    "vue-owl-carousel": "^2.0.3",
+    "vue-router": "^3.3.0",
+    "vueperslides": "^2.8.6"
   },
   "browserslist": [
     "> 1%",

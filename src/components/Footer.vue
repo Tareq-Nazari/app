@@ -167,7 +167,7 @@
     border-top: 1px solid #e8e8e8;
     padding-bottom: 40px;
     row-gap: 300px;
-
+    margin-top: 350px;
   }
 
   .footer-subcribe {
