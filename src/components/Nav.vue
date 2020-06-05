@@ -1,10 +1,10 @@
 <template>
 <div class="nav-container">
 
-  <div class="item">خانه</div>
-  <div class="item">فروشگاه ها</div>
+  <div class="item"><router-link to="/">خانه</router-link></div>
+  <div class="item"><router-link to="/store">فروشگاه ها</router-link></div>
   <div class="item">محصولات</div>
-  <div class="item">تماس با ما</div>
+  <div class="item"><router-link to="/contact">تماس با ما</router-link></div>
   <div class="item">درباره ما</div>
   <div class="item">لوگو</div>
   <div><font-awesome-icon :icon="['fas','search']" /></div>

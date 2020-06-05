@@ -1,11 +1,12 @@
 <template>
 
   <div id="app">
-    <html >
     <Nav></Nav>
-    <weekly-box></weekly-box>
+   <router-view></router-view>
+
+    <main-slider></main-slider>
     <Footer></Footer>
-    </html>
+
   </div>
 
 </template>
@@ -13,7 +14,7 @@
 <script>
 
 
-  import WeeklyBox from "./components/WeeklyBox";
+  import MainSlider from "./components/MainSlider";
 
   import Footer from "./components/Footer";
   import Nav from "./components/Nav";
@@ -24,7 +25,8 @@ export default {
 
   components: {
 
-    WeeklyBox,
+    MainSlider,
+    
 
     Footer,
     Nav,

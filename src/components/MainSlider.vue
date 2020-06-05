@@ -1,13 +1,21 @@
 <template>
+  <div>
+
+  </div>
 
 </template>
 
 <script>
+
     export default {
-        name: "WeeklyBox"
+      components: {
+
+
+      },
+        name: "MainSlider"
     }
 </script>
 
 <style scoped>
-  
+
 </style>
