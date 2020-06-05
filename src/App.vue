@@ -5,15 +5,7 @@
     <Nav></Nav>
    <router-view></router-view>
 
-    <main-slider></main-slider>
-
-
-    <html dir="rtl">
-
-
-
-    <Nav></Nav>
-    <ProductDetail></ProductDetail>
+   
 
     <Footer></Footer>
 
@@ -24,7 +16,6 @@
 <script>
 
 
-  import MainSlider from "./components/MainSlider";
 
   import Footer from "./components/Footer";
   import Nav from "./components/Nav";
@@ -37,11 +28,11 @@ export default {
   components: {
 
 
-    MainSlider,
 
 
 
-    WeeklyBox,
+
+
 
 
 
