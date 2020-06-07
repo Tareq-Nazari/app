@@ -3,7 +3,11 @@
   <div id="app">
 
     <Nav></Nav>
-   <router-view></router-view>
+    <transition name="fade">
+      <router-view></router-view>
+
+    </transition>
+
 
 
 
@@ -38,6 +42,19 @@ export default {
 
 <style>
 
+.fade-enter {
+  opacity: 0;
+}
+  .fade-enter-active{
+    transition: opacity 0.75s;
+  }
+  .fade-leave{
+    
+  }
 
+  .fade-leave-active{
+    transition: opacity 0.75s;
+    opacity: 0;
+  }
 
 </style>
