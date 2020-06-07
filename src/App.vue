@@ -5,7 +5,7 @@
     <Nav></Nav>
    <router-view></router-view>
 
-   
+
 
     <Footer></Footer>
 
@@ -27,21 +27,9 @@ export default {
 
   components: {
 
-
-
-
-
-
-
-
-
-
-
     Footer,
     Nav,
     ProductDetail,
-
-
 
   }
 
