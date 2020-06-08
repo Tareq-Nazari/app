@@ -1,6 +1,6 @@
 <template>
 
-  <div >
+  <div style="!important;direction: ltr ">
 
     <vueper-slides
 

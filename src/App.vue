@@ -3,6 +3,7 @@
   <div id="app">
 
     <Nav></Nav>
+
     <transition name="fade">
       <router-view></router-view>
 
@@ -27,6 +28,7 @@
 
 
 
+
 export default {
 
   components: {
@@ -34,6 +36,7 @@ export default {
     Footer,
     Nav,
     ProductDetail,
+
 
   }
 
@@ -49,12 +52,15 @@ export default {
     transition: opacity 0.75s;
   }
   .fade-leave{
-    
+
   }
 
   .fade-leave-active{
     transition: opacity 0.75s;
     opacity: 0;
+  }
+  #app{
+    direction: rtl;
   }
 
 </style>

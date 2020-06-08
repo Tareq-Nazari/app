@@ -4,6 +4,7 @@ import Home from "./components/Home"
 import ProductDetail from "./components/ProductDetail";
 
 
+
 export const routes = [
 
   {path : '/store' , components:{
@@ -17,7 +18,9 @@ export const routes = [
     ]},
   {path: '' , component: Home},
   {path : '*' , component: StorePage},
-  {path: '/product' , component: ProductDetail}
+  {path: '/product' , component: ProductDetail},
+
+
 
 
 
