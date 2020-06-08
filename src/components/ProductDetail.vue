@@ -46,15 +46,14 @@
       <div></div>
       <div class="moreDetail">
 
-        <p @click="moreInformationDisplay='none',DescriptionDisplay='block',ReviewsDisplay='none'"
-           style="text-align: center">
+        <p @click="change,moreInformationDisplay='none',DescriptionDisplay='block',ReviewsDisplay='none'"
+           :style="DescriptionDisplay==='block'? style5:style4">
 
           توضیحات</p>
-        <p style="
-text-align: center" @click="moreInformationDisplay='block',DescriptionDisplay='none',ReviewsDisplay='none'">اطلاعات
+        <p :style="moreInformationDisplay==='block'? style5:style4" @click="moreInformationDisplay='block',DescriptionDisplay='none',ReviewsDisplay='none'">اطلاعات
           بیشتر</p>
         <p @click="moreInformationDisplay='none',DescriptionDisplay='none',ReviewsDisplay='block'"
-           style="text-align: center">بازخوردها</p>
+           :style="ReviewsDisplay==='block'? style5:style4">بازخوردها</p>
       </div>
       <div></div>
 
@@ -205,7 +204,8 @@ margin-top: 100px
         ],
         src: "src/img/product-12.jpg",
         display: "none",
-
+        style5:"border-bottom:1px solid black;text-align:center;color:black",
+        style4:"text-align:center;color:#888888",
         DescriptionDisplay: "none",
         moreInformationDisplay: "none",
         ReviewsDisplay: "none",
@@ -220,6 +220,7 @@ margin-top: 100px
         ]
       }
     },
+
 
     methods: {
       resize: function () {
@@ -237,6 +238,9 @@ margin-top: 100px
       handleHide() {
         this.visible = false
       },
+      change(){
+        this.style5="font-size:40px"
+      }
 
     }
 
@@ -307,7 +311,7 @@ margin-top: 100px
   }
 
   .moreDetail > p:hover {
-    border-bottom: 1px solid #222222;
+    border-bottom: 1px solid #888888;
     cursor: pointer;
   }
 

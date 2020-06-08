@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 
 export const store = new Vuex.store({
     state: {
-      cart : [{}]
-    }
+      cart : [{}],
+      style5:"border-bottom:1px solid "
+    },
+
 })
