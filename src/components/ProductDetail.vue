@@ -1,13 +1,15 @@
 <template>
 
   <div class="main">
+
     <div class="main1">
-      <div></div>
+<div></div>
       <div class="description">
+
         <div class="details" style="border-bottom:1px solid #e8e8e8">
           <a style="font-size: 12px">برگشت به صفحه اصلی </a>
           <h1>اسم محصول : </h1>
-          <h2>قیمت : </h2>
+          <h2>  قیمت : {{info[0].price}}</h2>
           <h3>برند: </h3>
           <h4>سایز : </h4>
           <h5>رنگ : </h5>
@@ -132,6 +134,7 @@ margin-top: 100px
   import VueEasyLightbox from 'vue-easy-lightbox'
   import 'vueperslides/dist/vueperslides.css'
   import {VueperSlides, VueperSlide} from 'vueperslides'
+  import axios from 'axios'
 
   export default {
     components: {
@@ -142,6 +145,8 @@ margin-top: 100px
 
     data() {
       return {
+        info : null,
+
         cat : [
 
           {
@@ -221,7 +226,11 @@ margin-top: 100px
       }
     },
 
-
+    mounted() {
+      axios
+      .get('http://127.0.0.1/test/public/api/product')
+      .then(response => (this.info = response.data));
+    },
     methods: {
       resize: function () {
         this.display = "block"

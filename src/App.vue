@@ -44,6 +44,13 @@ export default {
 </script>
 
 <style>
+  @font-face {
+    font-family: vasir;
+    src: url('/src/assets/font/Vazir.woff');
+
+    font-weight: normal;
+    font-style: normal;
+  }
 
 .fade-enter {
   opacity: 0;

@@ -60,12 +60,19 @@
 </template>
 
 <script>
+  import axios from "axios";
+
   export default {
 
     data(){
       return {
         data : ''
       }
+    },
+    mounted() {
+      axios
+        .get('http://127.0.0.1/test/public/api/store')
+        .then(response => (this.info = response.data));
     },
 
     methods : {
