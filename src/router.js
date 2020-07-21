@@ -3,7 +3,7 @@ import Contact from "./components/Contact";
 import Home from "./components/Home"
 import ProductDetail from "./components/ProductDetail";
 import Accessories from "./components/Accessories";
-
+import EditStore from "./components/Dashboard/Store/EditStore";
 
 
 export const routes = [
@@ -24,7 +24,6 @@ export const routes = [
 
   {path: '/accessories' , component: Accessories},
 
-
-
+  {path : '/dashboard/store/:id/edit' , component: EditStore}
 
 ]
