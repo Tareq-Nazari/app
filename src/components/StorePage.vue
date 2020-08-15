@@ -14,40 +14,26 @@
       </div>
 
     </div>
+    <h2 style="margin-right: 65px">جستجو در فروشگاه</h2>
+    <div style="display: flex;justify-content: center;justify-items: center">
+      <input type="text" placeholder="نام محصول ..." style="height: 33px;width: 80%;margin-left: 10px;border-radius: 5px;padding: 7px">
+      <button style="width: 10%;height: 50px;background-color: #ec1c1e;border: none;color: white;font-size: 26px;border-radius: 5px">جستجو</button>
+    </div>
+    <br>
+      <br><br><br>
     <div style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-around">
 
-      <div dir="rtl" style="border-radius: 2%" class="product-card">
+      <div v-for="i in 50" dir="rtl" style="border-radius: 2%" class="product-card">
 
         <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
         <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
         <p class="card-desc">محدوده وزن:
           کمتر از 150 گرم</p>
-        <button class="card-button" @click="addtocart($event)">اقزودن به سبد خرید</button>
+        <button class="card-button" @click="addtocart()">افزودن به سبد خرید</button>
       </div>
-      <div dir="rtl" style="border-radius: 2%" class="product-card">
 
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-      <div dir="rtl" style="border-radius: 2%" class="product-card">
 
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-      <div dir="rtl" style="border-radius: 2%" class="product-card">
 
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
 
 
     </div>
@@ -76,9 +62,9 @@
     },
 
     methods : {
-      addtocart(event) {
+      addtocart() {
 
-        console.log(event)
+        this.$store.commit('increment')
 
       }
     }
@@ -132,6 +118,7 @@
     position: relative;
     border: 1px solid  rgba(208,212,211,0.44);
     box-shadow: rgba(217,221,220,0.44) 20px;
+    margin: 12px;
 
 
   }

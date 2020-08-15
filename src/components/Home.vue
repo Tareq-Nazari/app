@@ -1,339 +1,178 @@
 <template>
 
-  <div style="!important;">
-
-    <VueSlickCarousel>
-      <div>
-        <img height="400px" width="100%" :src="slides1[0].image">
-      </div>
-      <div>
-        <img height="400px" width="100%" :src="slides1[1].image">
-      </div>
-      <div>
-        <img height="400px" width="100%" :src="slides1[2].image">
-      </div>
-
-    </VueSlickCarousel>
-    <br>
-    <h2>دسته بندی ها </h2>
+  <div style="font-family: vasir">
 
 
-
-
-    <div class="offer-container">
-
-  <div style="">
-
-      <h3>تخفیف ویژه</h3>
-      <VueSlickCarousel v-bind="setting">
-        <div dir="rtl" style="border-radius: 2%;" class="product-card">
-
-          <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-          <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-          <p class="card-desc">محدوده وزن:
-            کمتر از 150 گرم</p>
-          <button class="card-button">اقزودن به سبد خرید</button>
-        </div>
-        <div dir="rtl" style="border-radius: 2%;" class="product-card">
-
-          <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-          <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-          <p class="card-desc">محدوده وزن:
-            کمتر از 150 گرم</p>
-          <button class="card-button">اقزودن به سبد خرید</button>
-        </div>
-        <div dir="rtl" style="border-radius: 2%;" class="product-card">
-
-          <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-          <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-          <p class="card-desc">محدوده وزن:
-            کمتر از 150 گرم</p>
-          <button class="card-button">اقزودن به سبد خرید</button>
-        </div>
-      </VueSlickCarousel>
+<swiper class="swiper" :option="swiperOption.s1">
+  <swiper-slide >
+    <div>
+      <img height="400px" width="100%" src="src/img/store-header1.jpg">
     </div>
+  </swiper-slide>
+  <swiper-slide>
+    <div>
+      <img height="400px" width="100%" src="src/img/store-header2.jpg">
     </div>
+  </swiper-slide>
+  <swiper-slide>
+    <div>
+      <img height="400px" width="100%" src="src/img/store-header3.jpg">
+    </div>
+  </swiper-slide>
+</swiper>
 
 
 
-<div style="height: 50px"></div>
-    <h2>فروشگاه های پوشاک</h2>
-    <VueSlickCarousel v-bind="setting">
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
 
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
+
+      <br>
+<div style="width: 100%;height: 500px;position: relative">
+  <div class="offer-container"  style="position: absolute;top: 0px">
+
+
+    <div class="offer-logo-up">
+      <div class="offer-logo-down">
+        <h3>تخفیف ویژه</h3>
       </div>
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
 
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
+    </div>
+<swiper class="swiper" :options="swiperOption.s2">
+  <swiper-slide v-for="i in 10">
+    <div class="product-card">
+
+      <img class="card-image" src="src/img/chetoz.webp"
+           height="50%" width="98%">
+      <p class="card-title">چیپس سرکه ای چیتوز</p>
+
+      <p class="card-desc">محدوده وزن:
+        کمتر از 150 گرم</p>
+      <p class="card-price">قیمت : </p>
+      <button class="card-button" @click="increment">افزودن به سبد خرید</button>
+    </div>
+  </swiper-slide>
+  <div class="swiper-button-prev" slot="button-prev"></div>
+  <div class="swiper-button-next" slot="button-next"></div>
+</swiper>
+
+
+
+  </div>
+  <div style="height: 100%;width: 28%;display: inline-block;position: absolute;left: 6px;top: 0">
+    <div style="width: 100%;height: 50%;background-color: #b8dd3c;border-radius: 5px">
+      <img src="src/img/takhfif.png" height="100%" width="100%">
+    </div>
+    <div style="height: 2%"></div>
+    <div style="width: 100%;height: 50%;background-color: #c74d4a;border-radius: 5px;margin-top: 4px">
+      <img src="src/img/takhfif.png" height="100%" width="100%">
+    </div>
+  </div>
+</div>
+<div style="height: 30px"></div>
+    <div>
+      <div class="ac-title">
+        <div class="ac-title-side"></div>
+        <h3 >اکسسوری</h3>
+        <div class="ac-title-side"></div>
       </div>
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
+    </div>
+<swiper class="swiper" :options="swiperOption.s3">
+  <swiper-slide v-for="i in 10">
+    <div class="product-card" >
 
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-    </VueSlickCarousel>
+    <img class="card-image" src="src/img/chetoz.webp"
+         height="50%" width="98%">
+    <p class="card-title">چیپس سرکه ای چیتوز</p>
 
+    <p class="card-desc">محدوده وزن:
+      کمتر از 150 گرم</p>
+    <p class="card-price">قیمت : </p>
+    <button class="card-button" >اقزودن به سبد خرید</button>
+  </div></swiper-slide>
+</swiper>
 
-
-
-    <div style="height: 50px"></div>
-    <h2>فروشگاه های مواد غذایی</h2>
-    <VueSlickCarousel v-bind="setting">
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
-
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
-
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
-
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-    </VueSlickCarousel>
+      <div style="width: 10px"></div>
 
 
 
-    <div style="height: 50px"></div>
-    <h2>فروشگاه های اکسسوری</h2>
-    <VueSlickCarousel v-bind="setting">
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
-
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
-
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
-
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-    </VueSlickCarousel>
-
-    <div style="height: 50px"></div>
-    <h2>فروشگاه های عطر و ادکلن</h2>
-    <VueSlickCarousel v-bind="setting">
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
-
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
-
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
-
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-    </VueSlickCarousel>
 
 
 
-    <div style="height: 50px"></div>
-    <h2></h2>
-    <VueSlickCarousel v-bind="setting">
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
 
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
+  </div>
 
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-      <div dir="rtl" style="border-radius: 2%;" class="product-card">
-
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button">اقزودن به سبد خرید</button>
-      </div>
-    </VueSlickCarousel>
-
-
-
-        </div>
 
 
 </template>
 
 <script>
 
-  import VueSlickCarousel from 'vue-slick-carousel'
-  import 'vue-slick-carousel/dist/vue-slick-carousel.css'
-  // optional style for arrows & dots
-  import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+  import { Swiper, SwiperSlide , directive} from 'vue-awesome-swiper'
+
+  import 'swiper/swiper-bundle.css'
   import axios from 'axios'
   import Offer from './Search'
-
+import {mapMutations} from 'vuex'
   export default {
 
     components: {
-      VueSlickCarousel
+     Swiper,SwiperSlide
     },
-    mounted() {
-      axios
-        .get('http://127.0.0.1/test/public/api/store/1')
-        .then(response => (this.info = response.data));
-    },
+
 
     data() {
       return {
 
 
+        swiperOption: {
 
-        cat: [
-
-          {
-
-            image: require('../img/smart-watch.svg')
+          s1 : {
+            slidesPerView: 1,
+            spaceBetween: 50,
+            freeMode: true,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true
+            }},
+          s2 : {
+            slidesPerView: 4,
+            spaceBetween: 50,
+            freeMode: false,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true
+            },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
+            }
           },
-          {
-
-            image: require('../img/laptop.svg')
-          },
-          {
-
-            image: require('../img/glasses.svg')
-          },
-          {
-
-            image: require('../img/beauty-treatment.svg')
-          },
-          {
-
-            image: require('../img/shoes.svg')
-          },
-          {
-
-            image: require('../img/hawa.svg')
-          },
-          {
-
-            image: require('../img/pants.svg')
-          },
-
-          {
-
-            image: require('../img/smart-watch.svg')
-          },
-          {
-
-            image: require('../img/laptop.svg')
-          },
-          {
-
-            image: require('../img/glasses.svg')
-          },
-          {
-
-            image: require('../img/beauty-treatment.svg')
-          },
-          {
-
-            image: require('../img/shoes.svg')
-          },
-          {
-
-            image: require('../img/hawa.svg')
-          },
-          {
-
-            image: require('../img/pants.svg')
-          },
-        ]
-
-        ,
-        slides1: [
-
-          {
-            title: 'Slide #1',
-            content: 'Slide content.',
-            image: require('../img/store-header1.jpg')
-          },
-          {
-            title: 'Slide #2',
-            content: 'Slide content.',
-            image: require('../img/store-header2.jpg')
-          },
-          {
-            title: 'Slide #3',
-            content: 'Slide content.',
-            image: require('../img/store-header3.jpg')
+          s3 : {
+            slidesPerView: 6,
+            spaceBetween: 120,
+            freeMode: true,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true
+            },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
+            }
           }
-        ],
-        setting :
-      {
-        dots: true,
-        "infinite": false,
-        "speed": 200,
-        "slidesToShow": 4,
-        "slidesToScroll": 4,
-        "initialSlide": 0,
-        "arrow":true,
 
-
+}
       }
-      };
     },
+
+    directives: {
+      swiper: directive
+    },
+   methods : {
+     increment(){
+       this.$store.commit('increment')
+     }
+
+   }
   }
 
 </script>
@@ -341,65 +180,116 @@
 <style scoped>
 
 
-
   .zoom:hover {
     -ms-transform: scale(1.02); /* IE 9 */
     -webkit-transform: scale(1.02); /* Safari 3-8 */
     transform: scale(1.02);
   }
+  .ac-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .ac-title-side{
+    height: 6px;
+    width: 40%;
+    background-color: #888888;
+    border-radius: 50%;
+  }
 
   .category {
 
   }
-  .offer-container{
-    width: 100%;
+
+  .offer-container {
+    width: 70%;
     height: 500px;
-    background-color: #99c700;
-
-
-
-
+    background-color: #b8dd3c;
+    position: absolute;
+    right: 5px;
+    padding: 7px;
+    display: inline-block;
 
 
   }
-  .product-card{
 
-    height: 336px;
+  .product-card {
+
+    height: 405px;
     width: 250px;
     position: relative;
-    border: 1px solid  rgba(208,212,211,0.44);
-    box-shadow: rgba(217,221,220,0.44) 20px;
-    margin-right: auto;
+    border: 0px solid #989c9b;
+    box-shadow: rgba(217, 221, 220, 0.44) 20px;
+    border-radius: 2%;
+    background-color: #ededed;
+    margin-right: 10px;
 
 
   }
+
+  .card-image {
+    border-radius: 2%;
+    margin-right: 1%;margin-top: 1%;
+    border-radius: 2%;
+  }
+
   .card-title {
     position: absolute;
-    right: 42px;
-    top: 162px;
+    right: 2%;
+    top: 48%;
+    font-size: 20px;
 
   }
+
   .card-button {
     position: absolute;
-    right: 9px;
-    top: 282px;
+    right: 2%;
+    top: 82%;
     border-radius: 5%;
     border: none;
-    background-color: green;
+    background-color: #c74d4a;
     color: white;
     font-family: vasir;
     height: 14%;
     width: 94%;
     cursor: pointer;
   }
+
   .card-desc {
     font-size: 10px;
     position: absolute;
-    top: 223px;
-    right: 62px;
+    top: 62%;
+    right: 2%;
+  }
+
+  .card-price {
+
+    font-size: 20px;
+    position: absolute;
+    top: 66%;
+    right: 2%;
   }
 
 
+  .category-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 100px 100px;
+  }
+  .category-item{
+    width: 100%;
+    height: 100%;
+    background-color: #2f2f2f;
+  }
+  .offer-logo-up {
+    background-color: #c74d4a;width: 120px;transform: rotate(20deg);
+    border-radius: 50%;text-align: center;align-content: center
+  }
+  .offer-logo-down {
+    background-color: white;transform: rotate(-19deg);width: 120px;
 
+    border-radius: 50%;text-align: center;align-content: center
+  }
 
 </style>

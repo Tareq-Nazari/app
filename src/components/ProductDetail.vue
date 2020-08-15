@@ -9,7 +9,7 @@
         <div class="details" style="border-bottom:1px solid #e8e8e8">
           <a style="font-size: 12px">برگشت به صفحه اصلی </a>
           <h1>اسم محصول : </h1>
-          <h2>  قیمت : {{info[0].price}}</h2>
+          <h2>  قیم</h2>
           <h3>برند: </h3>
           <h4>سایز : </h4>
           <h5>رنگ : </h5>

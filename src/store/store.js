@@ -1,14 +1,23 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import user from 'module/User'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-export const store = new Vuex.store({
+Vue.use(Vuex);
+export const store = new Vuex.Store({
     state: {
-      cart : [{}],
-      style5:"border-bottom:1px solid "
+
+      style5:"border-bottom:1px solid ",
+      counter : 0
     },
-  moduls:{
-      user : user
-  }
+    getters : {
+      increase : state => {
+        return state.counter;
+      }
+    },
+    mutations : {
+      increment : state => {
+        state.counter++;
+      }
+    }
+
 
 })

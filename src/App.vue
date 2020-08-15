@@ -21,7 +21,7 @@
 <script>
 
 
-
+  import "./assets/css/style.css"
   import Footer from "./components/Footer";
   import Nav from "./components/Nav";
   import ProductDetail from "./components/ProductDetail";
@@ -44,6 +44,7 @@ export default {
 </script>
 
 <style>
+
   @font-face {
     font-family: vasir;
     src: url('/src/assets/font/Vazir.woff');
@@ -59,12 +60,12 @@ export default {
     transition: opacity 0.75s;
   }
   .fade-leave{
-
+    opacity: 1;
   }
 
   .fade-leave-active{
     transition: opacity 0.75s;
-    opacity: 0;
+opacity: 0;
   }
   #app{
     direction: rtl;
