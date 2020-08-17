@@ -5,7 +5,7 @@
         style="display: grid;grid-template-columns: 1fr;grid-row-gap: 15px;height: 150px;position: relative;top: 10%;transition:display 5s">
         <a class="menu-but" :style="style[1]" @click="turnOff('1')" v-if="showTopMenu===true" href="#">
           <div style="display: inline-block">
-            <span class="title" style="display: inline-block;padding-right: 8%">منوی اصلی</span>
+            <span class="title" style="display: inline-block;padding-right: 8%">مغازه ها</span>
           </div>
           <p style="display: inline-block;position: relative;bottom: 9px;left: -75%"> ></p>
 
@@ -14,8 +14,8 @@
 
         <div class="sub-menu" v-if="showTopMenu===true && subMenu[1]===true">
 
-          <router-link   to="/dashboard/admin/store/delete"><a href="#">صفحه نخست</a></router-link>
-          <a href="#">صفحه نخست</a>
+          <router-link to="/dashboard/admin/store/create"><a href="#"> ایجاد مغازه جدید</a></router-link>
+          <router-link to=""><a href="#"> تمام مغازه ها</a></router-link>
           <a href="#">صفحه نخست</a>
 
         </div>
@@ -122,9 +122,7 @@
     </div>
     <div class="main" :style="showTopMenu===true? style4:style1">
       <span style="font-size:30px;cursor:pointer" @click="showTopMenu=!showTopMenu , turnOff(9)">&#9776; </span>
-      <p style="width: 400px">فروشگاه اینترنتی پاساژ
-        پاساژ یک مرکز خرید و فروش آنلاین کالاست که خدمات خود را به صورت رایگان (بدون کارمزد) ارائه می نماید. هم اکنون
-        بیش از 6000 فروشگاه از سراسر ایران در حال فعالیت در پاساژ می باشند</p>
+
     </div>
   </div>
 </template>
@@ -135,6 +133,7 @@
 
   export default {
     name: "AdminHome",
+
     data() {
       return {
         showTopMenu: true,
@@ -172,7 +171,7 @@
 
   }
 
-.router-link-exat
+  .router-link-exat
   .overlay-content {
     position: relative;
     top: 10%;
@@ -220,7 +219,8 @@
     padding-right: 15%;
     padding-top: 5px
   }
-  .router-link   {
+
+  .router-link {
 
     color: #a6a5a5;
     text-decoration: none;

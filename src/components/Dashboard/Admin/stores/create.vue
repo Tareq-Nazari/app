@@ -1,64 +1,91 @@
 <template>
 
+
   <div class="main">
     <AdminHome></AdminHome>
-
-  <form
-    id="app"
-    @submit="checkForm"
-    action="https://vuejs.org/"
-    method="post"
-  >
-
-    <p v-if="errors.length">
-      <b>Please correct the following error(s):</b>
-    <ul>
-      <li v-for="error in errors">{{ error }}</li>
-    </ul>
-    </p>
-
-    <p>
-      <label for="name">Name</label>
-      <input
-        id="name"
-        v-model="name"
-        type="text"
-        name="name"
+    <div class="box">
+      <form
+        id="app"
+        @submit="checkForm"
+        action="#"
+        method="post"
       >
-    </p>
+<div>
+  <h2 style="text-align: center;color: #d63938 ">ایجاد مغازه جدید</h2>
+</div>
 
-    <p>
-      <label for="age">Age</label>
-      <input
-        id="age"
-        v-model="age"
-        type="number"
-        name="age"
-        min="0"
-      >
-    </p>
+        <div class="inp">
+          <p>نام مغازه</p>
+          <input
+            id="name"
+            type="text"
+            name="name"
+          >
 
-    <p>
-      <label for="movie">Favorite Movie</label>
-      <select
-        id="movie"
-        v-model="movie"
-        name="movie"
-      >
-        <option>Star Wars</option>
-        <option>Vanilla Sky</option>
-        <option>Atomic Blonde</option>
-      </select>
-    </p>
+        </div>
+        <div class="inp">
+          <p> توضیحات درباره مغازه </p>
 
-    <p>
-      <input
-        type="submit"
-        value="Submit"
-      >
-    </p>
+          <input
+            id="caption"
+            type="text"
+            name="caption"
+          >
 
-  </form>
+        </div>
+        <div class="inp">
+          <p> ایمیل </p>
+
+          <input
+            id="email"
+            type="email"
+            name="email"
+          >
+
+        </div>
+        <div class="inp">
+          <p> شماره تلفن </p>
+
+          <input
+            id="phone"
+            type="number"
+            name="phone"
+          >
+
+        </div>
+        <div class="inp">
+          <p>  پروفایل آی دی  </p>
+
+          <input
+            id="profile_id"
+            type="number"
+            name="profile_id"
+          >
+
+        </div>
+        <div class="inp">
+          <p> دسته بندی مغازه </p>
+          <select style="padding-right: 12%" name="cars" id="cars">
+            <option   value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+        </div>
+
+        <div style="margin-top: 15px">
+          <input
+            type="submit"
+            value="ثبت"
+            id="su"
+          >
+        </div>
+
+      </form>
+
+    </div>
+
+
   </div>
 </template>
 
@@ -68,37 +95,14 @@
   export default {
     name: "create",
     data() {
-      return {
-        errors: [],
-        name: null,
-        age: null,
-        movie: null
-      }
-    },  components: {
+      return {}
+    }, components: {
 
       AdminHome
 
 
-
     },
-    methods: {
-      checkForm: function (e) {
-        if (this.name && this.age) {
-          return true;
-        }
-
-        this.errors = [];
-
-        if (!this.name) {
-          this.errors.push('Name required.');
-        }
-        if (!this.age) {
-          this.errors.push('Age required.');
-        }
-
-        e.preventDefault();
-      }
-    }
+    methods: {}
 
   }
 
@@ -106,8 +110,78 @@
 </script>
 
 <style scoped>
-  .main{
+  .main {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+
+
+  }
+
+  .box {
+    margin-top: 20px;
+    padding-top: 15%;
     padding-right: 10%;
+    border-radius: 4px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14),
+    0 3px 1px -2px rgba(0, 0, 0, .12),
+    0 1px 5px 0 rgba(0, 0, 0, .2);
+
+    height: 945px;
+  }
+
+  input {
+
+    border-radius: 3px;
+    border: solid 1px #dcdcdc;
+    min-height: 45px;
+    font-size: 15px;
+    width: 80%;
+
+  }
+
+  input:focus {
+    outline: none;
+  }
+  select{
+    border-radius: 3px;
+    border: solid 1px #dcdcdc;
+    min-height: 45px;
+    font-size: 15px;
+    width: 40%;
+
+  }
+  select:focus{
+    outline: none;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 20px;
+  }
+
+  #su {
+    background-color: #00a8ed;
+    font-size: 13px;
+    border-radius: 2px;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    transition: all .3s;
+    text-align: center !important;
+  }
+
+  .inp {
+    display: grid;
+    grid-template-columns: 1fr;
+
+  }
+
+  .inp > p {
+    margin-right: 2%;
+  }
+  p{
+    color: #d81c1e;
   }
 
 </style>

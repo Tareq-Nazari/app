@@ -2,7 +2,7 @@
 
   <div id="app">
 
-    <Nav></Nav>
+    <Nav ></Nav>
 
     <transition name="fade">
       <router-view></router-view>
@@ -12,9 +12,12 @@
 
 
 
-    <Footer></Footer>
+    <Footer ></Footer>
 
   </div>
+
+
+
 
 </template>
 
@@ -70,5 +73,6 @@ opacity: 0;
   #app{
     direction: rtl;
   }
+
 
 </style>

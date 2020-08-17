@@ -27,8 +27,10 @@ export const store = new Vuex.Store({
       9: '',
     },
     style5: "border-bottom:1px solid ",
-    counter: 0
+    counter: 0,
+
   },
+
   getters: {
     increase: state => {
       return state.counter;
