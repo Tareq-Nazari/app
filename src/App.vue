@@ -24,7 +24,7 @@
   import "./assets/css/style.css"
   import Footer from "./components/Footer";
   import Nav from "./components/Nav";
-  import ProductDetail from "./components/ProductDetail";
+
 
 
 
@@ -35,7 +35,7 @@ export default {
 
     Footer,
     Nav,
-    ProductDetail,
+
 
 
   }
