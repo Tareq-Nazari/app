@@ -1,5 +1,5 @@
 <template>
-  <div style="font-family: vasir">
+  <div style="font-family: vasir;background-color: #d9dddc">
     <div class="container">
       <img class="header-img" height="100%" width="100%" src="src/img/store1.jpeg">
       <img style="border-radius: 50%;border: solid black 5px" src="src/img/store_profile.jpg" class="profile" >
@@ -12,6 +12,9 @@
         <p style="text-align: end">فروشگاه مواد غذایی - فروشگاه باز است</p>
 
       </div>
+      <div class="store-contact">
+        <button style="border-radius: 5px;border: solid 3px #4a61d3;width: 40%;height: 72%;background-color: white;color: #4a61d3;margin-top: 7px;"><font-awesome-icon :icon="['fas','phone']"></font-awesome-icon>&nbsp;&nbsp;تماس با ما</button>
+      </div>
 
     </div>
     <h2 style="margin-right: 65px">جستجو در فروشگاه</h2>
@@ -21,15 +24,14 @@
     </div>
     <br>
       <br><br><br>
-    <div style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-around">
+    <div style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-evenly">
 
-      <div v-for="i in 50" dir="rtl" style="border-radius: 2%" class="product-card">
+      <div @click="productpage(1)" v-for="i in 50" dir="rtl" style="background-color: white;margin: 15px;height: 400px;width: 300px;border-radius: 2%;display: flex;flex-direction: column;align-items: center;justify-content: space-around" >
 
-        <img src="src/img/chetoz.webp" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-        <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-        <p class="card-desc">محدوده وزن:
-          کمتر از 150 گرم</p>
-        <button class="card-button" @click="addtocart()">افزودن به سبد خرید</button>
+        <img src="src/img/tshirt.jpg" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="65%" width="98%">
+        <p  style="font-size: 20px;">تیشرت گوچی</p>
+        <p style="background-color: #ff2400;border-radius: 10px 5px 10px 5px;color: white;padding: 5px">127000 تومان</p>
+
       </div>
 
 
@@ -66,6 +68,9 @@
 
         this.$store.commit('increment')
 
+      },
+      productpage(id){
+        this.$router.push({path: `product/${id}`})
       }
     }
 
@@ -108,7 +113,11 @@
     justify-content: center;
     font-size: 20px;
   }
+  .store-contact{
+    grid-column: 2/4;
+    grid-row: 12/14;
 
+  }
 
   /* center container in the middle */
   .product-card{
@@ -125,7 +134,7 @@
   .card-title {
     position: absolute;
     right: 42px;
-    top: 162px;
+    top: 203px;
 
       }
   .card-button {

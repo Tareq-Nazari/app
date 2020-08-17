@@ -7,32 +7,32 @@
       <div class="description">
 
         <div class="details" style="border-bottom:1px solid #e8e8e8">
-          <a style="font-size: 12px">برگشت به صفحه اصلی </a>
           <h1>اسم محصول : </h1>
-          <h2>  قیم</h2>
+          <h2>قیمت : </h2>
           <h3>برند: </h3>
           <h4>سایز : </h4>
           <h5>رنگ : </h5>
         </div>
-        <div class="description1">
-          <button style="font-family: vasir" id="but"> اضافه کردن به سبد خرید</button>
-          <div></div>
-          <div style="display: grid;grid-template-columns: 1fr">
-            <button class="dec-but" style="">+</button>
-            <button class="dec-but" style=";border-top:0px">-</button>
+          <div style="height: 30px;width: 530px;display: grid;grid-template-columns: 30px 500px;grid-template-rows: repeat(2,15px);">
+            <button style="grid-column: 2/3;grid-row: 1/3;color: white;background-color: black;border: none"> اضافه کردن به سبد خرید</button>
+
+            <font-awesome-icon :icon="['fas','plus']" style="color: green;"></font-awesome-icon>
+            <font-awesome-icon :icon="['fas','minus']" style="color: red;margin-top: 4px;"></font-awesome-icon>
+
           </div>
-          <button class="dec-but" style="font-family: vasir;border-right:0px"> تعداد</button>
-        </div>
+
+
+
 
 
       </div>
       <div>
-        <img style="max-width: 100%;height: auto" src="src/img/product-12.jpg">
+        <img style="max-width: 100%;height: auto" src="../img/tshirt.jpg">
       </div>
 
       <div>
-        <img style="max-width: 100%;height: auto" src="src/img/product-12.jpg" @click="showSingle">
-        <img style="max-width: 100%;height: auto" src="src/img/product-151.jpg" @click="showSingle">
+        <img style="max-width: 100%;height: auto" src="../img/tshirt.jpg" @click="showSingle">
+        <img style="max-width: 100%;height: auto" src="../img/tshirt.jpg" @click="showSingle">
 
         <VueEasyLightbox
           :visible="visible"
@@ -76,54 +76,22 @@
 
         </p>
         <p v-if="moreInformationDisplay==='block'">اطلاعات بیشتر</p>
-        <p v-if="ReviewsDisplay==='block'">بازخوردها</p>
+        <div v-if="ReviewsDisplay==='block'">
+          <div style="height: 900px;width: 700px;display: flex;flex-direction: column;align-content: center;">
+            <div v-for="i in 3" style="border-radius: 10px;height: auto;max-width: 60%;margin: 10px;background-color: #d0d4d3;word-break: break-all;padding: 5px">
+          <p>wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww</p>
+
+            </div>
+
+          </div>
+        </div>
       </div>
 
     </div>
-    <div style="display: grid;
-    grid-template-columns: 1fr 2fr 1fr ;
-margin-top: 80px">
-      <div></div>
-      <img style="max-width: 100%;height: 500px" src="src/img/item-detail-1.jpg">
-    </div>
-    <div style="display: grid;
-grid-template-columns: 1fr 1.8fr 1fr ">
-      <p></p>
-      <p style="font-family: vasir;text-align: justify">قرارداد اوبامیانگ در تابستان سال 2021 به اتمام می رسد و با توجه
-        به عدم توافق طرفین برای تمدید قرارداد، احتمال جدایی این مهاجم گلزن زیاد است. اما نشریه دیلی میل امروز در گزارشی
-        مدعی شد آرسنال علیرغم علم به این موضوع، قصد ندارد اوبامیانگ را تابستان امسال با قیمتی ارزان به فروش برساند و
-        حداقل 20 میلیون پوند برای فروش او طلب کرده است.
 
 
-        بارسلونا جدی ترین مشتری اوبامیانگ محسوب می شود و در صورت ناکامی در خرید لائوتارو مارتینز برای انتقال او اقدام
-        خواهد کرد. حتی مذاکراتی نیز بین طرفین انجام شده، اما پرداخت 20 میلیون پوند برای مهاجمی که تنها یک سال قرارداد
-        دارد کار آسانی نیست و بعید است بارسلونا در این شرایط با اوبامیانگ به توافق برسد. بدین ترتیب آرسنال حتی حاضر است
-        بک سال بعد اوبامیانگ را رایگان واگذار کند، اما با قیمتی کمتر از رقم مورد نظر او را نفروشد.</p>
-    </div>
-    <div style="display: grid;
-grid-template-columns: 3fr 3fr 3fr;
-margin-top: 100px
-">
-      <div></div>
-      <p style="font-family: vasir;text-align: center;text-after-overflow: 2px">محصولات مرتبط</p>
-    </div>
-    <div>
-      <vueper-slides autoplay
 
-                     class="no-shadow"
-                     :visible-slides="10"
-                     :arrows="true"
 
-                     :slide-ratio="1 / 10"
-                     :gap="1"
-                     :bullets="false"
-                     :dragging-distance="500"
-
-                     :duration="1500"
-      >
-        <vueper-slide v-for="(slide,i) in cat" :key="i" :image="slide.image"   pauseOnHover="true" />
-      </vueper-slides>
-    </div>
   </div>
 
 
@@ -132,14 +100,13 @@ margin-top: 100px
 <script>
 
   import VueEasyLightbox from 'vue-easy-lightbox'
-  import 'vueperslides/dist/vueperslides.css'
-  import {VueperSlides, VueperSlide} from 'vueperslides'
+
   import axios from 'axios'
 
   export default {
     components: {
       VueEasyLightbox,
-      VueperSlides, VueperSlide,
+
 
     },
 
@@ -147,67 +114,8 @@ margin-top: 100px
       return {
         info : null,
 
-        cat : [
 
-          {
-
-            image : require('../img/smart-watch.svg')
-          },
-          {
-
-            image : require('../img/laptop.svg')
-          },
-          {
-
-            image : require('../img/glasses.svg')
-          },
-          {
-
-            image : require('../img/beauty-treatment.svg')
-          },
-          {
-
-            image : require('../img/shoes.svg')
-          },
-          {
-
-            image : require('../img/hawa.svg')
-          },
-          {
-
-            image : require('../img/pants.svg')
-          },
-
-          {
-
-            image : require('../img/smart-watch.svg')
-          },
-          {
-
-            image : require('../img/laptop.svg')
-          },
-          {
-
-            image : require('../img/glasses.svg')
-          },
-          {
-
-            image : require('../img/beauty-treatment.svg')
-          },
-          {
-
-            image : require('../img/shoes.svg')
-          },
-          {
-
-            image : require('../img/hawa.svg')
-          },
-          {
-
-            image : require('../img/pants.svg')
-          },
-        ],
-        src: "src/img/product-12.jpg",
+        src: "../img/product-12.jpg",
         display: "none",
         style5:"border-bottom:1px solid black;text-align:center;color:black",
         style4:"text-align:center;color:#888888",
@@ -275,30 +183,11 @@ margin-top: 100px
   }
 
 
-  .description1 {
-    display: grid;
-    grid-template-columns: 1fr 0.01fr 0.1fr 0.2fr;
-    grid-template-rows: 40px;
-    margin-top: 0;
-    padding-top: 0;
-  }
-
-  .dec-but {
-    background-color: white;
-    border: black 1px solid;
-
-    pointer-events: none;
-    border-radius: 0
-  }
-
-  #but {
-    border-radius: 0;
-    border: 0px solid black;
-    background-color: #222222;
-    color: #ffffff;
 
 
-  }
+
+
+
 
   .details {
     font-family: vasir;
