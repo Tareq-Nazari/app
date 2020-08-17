@@ -29,7 +29,7 @@ export const routes = [
   {path: '/search' , component: Search},
   {path: '' , component: Home},
   {path : '*' , component: StorePage},
-  {path: '/product' , component: ProductDetail},
+  {path: '/product/:id' , component: ProductDetail},
   {path: '/login' , component: Login},
   {path: '/stores' , component: Stores},
   {path: '/category/:id' , component: category},
