@@ -26,6 +26,14 @@ export const store = new Vuex.Store({
       8: '',
       9: '',
     },
+    stores: [
+      {name: "مغازه من", id: "21", cat_name: 'خشکشویی'},
+      {name: "مغازه او", id: "22", cat_name: 'ترشویی'},
+      {name: "مغsdازه او", id: "25", cat_name: 'ترشsdویی'},
+      {name: "مغاasزه او", id: "27", cat_name: 'ترشویsdی'},
+      {name: "مغازwه او", id: "28", cat_name: 'ترشوsdیی'},
+      {name: "as او", id: "29", cat_name: 'ترشویی'},
+    ],
     style5: "border-bottom:1px solid ",
     counter: 0,
 
@@ -36,13 +44,16 @@ export const store = new Vuex.Store({
       return state.counter;
     },
     subMenu: state => {
-      return state.subMenu ;
+      return state.subMenu;
 
     },
     style: state => {
       return state.style;
 
     },
+    stores: state => {
+      return state.stores;
+    }
 
   }
   ,
@@ -50,10 +61,13 @@ export const store = new Vuex.Store({
     increment: state => {
       state.counter++;
     },
+
     deleteFromCart(){
 
     },
-    turnOff: (state,payload) => {
+
+    turnOff: (state, payload) => {
+
       if (state.subMenu[payload] === false) {
         var i;
         for (i = 1; i <= 8; i++) {

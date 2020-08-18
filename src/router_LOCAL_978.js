@@ -1,5 +1,3 @@
-
-
 import StorePage from "./components/StorePage";
 import Contact from "./components/Contact";
 import Home from "./components/Home"
@@ -15,12 +13,8 @@ import Stores from "./components/Stores";
 import Search from "./components/Search";
 import AdminHome from "./components/Dashboard/Admin/AdminHome";
 import AdminCreateStore from "./components/Dashboard/Admin/stores/create.vue";
-
 import ShoppingCart from "./components/ShoppingCart";
 import UserDashboard from "./components/Dashboard/user/UserDashboard";
-
-
-import AdminAllStore from "./components/Dashboard/Admin/stores/all";
 
 
 export const routes = [
@@ -49,13 +43,7 @@ export const routes = [
   {path: '/dashboard/store/:id/edit/addproduct/:p_id',component: AddProduct},
   {path: '/dashboard/admin/home',component: AdminHome},
   {path: '/dashboard/admin/store/create',component: AdminCreateStore},
-
   {path: '/shoppingcart' , component: ShoppingCart},
-  {path: '/dashboard/user' , component: UserDashboard},
-
-  {path: '/dashboard/admin/store/all',component: AdminAllStore}
-
-
-
+  {path: '/dashboard/user' , component: UserDashboard}
 
 ]

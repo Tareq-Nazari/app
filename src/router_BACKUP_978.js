@@ -1,5 +1,3 @@
-
-
 import StorePage from "./components/StorePage";
 import Contact from "./components/Contact";
 import Home from "./components/Home"
