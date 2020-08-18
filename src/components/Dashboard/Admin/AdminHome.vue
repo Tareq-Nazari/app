@@ -15,7 +15,7 @@
         <div class="sub-menu" v-if="showTopMenu===true && subMenu[1]===true">
 
           <router-link to="/dashboard/admin/store/create"><a href="#"> ایجاد مغازه جدید</a></router-link>
-          <router-link to=""><a href="#"> تمام مغازه ها</a></router-link>
+          <router-link to="/dashboard/admin/store/all"><a href="#"> تمام مغازه ها</a></router-link>
           <a href="#">صفحه نخست</a>
 
         </div>

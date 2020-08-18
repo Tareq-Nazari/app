@@ -13,7 +13,7 @@ import Stores from "./components/Stores";
 import Search from "./components/Search";
 import AdminHome from "./components/Dashboard/Admin/AdminHome";
 import AdminCreateStore from "./components/Dashboard/Admin/stores/create.vue";
-
+import AdminAllStore from "./components/Dashboard/Admin/stores/all";
 
 export const routes = [
 
@@ -41,6 +41,7 @@ export const routes = [
   {path: '/dashboard/store/:id/edit/addproduct/:p_id',component: AddProduct},
   {path: '/dashboard/admin/home',component: AdminHome},
   {path: '/dashboard/admin/store/create',component: AdminCreateStore},
+  {path: '/dashboard/admin/store/all',component: AdminAllStore},
 
 
 
