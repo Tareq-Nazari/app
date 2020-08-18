@@ -50,6 +50,9 @@ export const store = new Vuex.Store({
     increment: state => {
       state.counter++;
     },
+    deleteFromCart(){
+
+    },
     turnOff: (state,payload) => {
       if (state.subMenu[payload] === false) {
         var i;
