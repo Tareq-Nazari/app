@@ -97,10 +97,7 @@
     },
     components: {AdminHome},
     methods: {
-      increase: function () {
-        return this.pull++;
 
-      },
       routerLinkToDetails: function (store_id) {
     this.$router.push({path: '/dashboard/admin/store/create',params:{store_id}});
       }
