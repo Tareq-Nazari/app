@@ -1,29 +1,49 @@
 <template>
   <div class="main">
     <admin-home></admin-home>
-    <table class="table">
-      <thead>
-      <tr>
-        <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none" v-for="(column, index) in columns1"
-            :key="index"> {{column}}
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="(item, index) in items" :key="index">
-        <td class="counter" style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none">
+    <div style="margin-bottom: 10px;display: grid;grid-template-columns: 1fr;grid-row-gap: 20px; ">
+            <table class="table">
 
-        </td>
-        <td style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
-            v-for="(column, indexColumn) in columns" :key="indexColumn">{{item[column]}}
-        </td>
-        <td style="color: #00a8ed;cursor: pointer;text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
+        <thead>
+        <tr>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+              v-for="(column, index) in columns1"
+              :key="index"> {{column}}
+          </th>
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+          >
+            -
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+              v-for="(column, index) in columns2"
+              :key="index"><input style="font-size: 58%" :name="name1(column)" :placeholder="'فیلترکردن '+column">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+          >
+            <button @click="send" style="cursor: pointer;background-color: #00a8ed;border: solid 1px" type="submit">اعمال فیلتر</button>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item, index) in items" :key="index">
+          <td class="counter" style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none">
+          </td>
+          <td style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
+              v-for="(column, indexColumn) in columns" :key="indexColumn">{{item[column]}}
+          </td>
+          <td
+            style="color: #00a8ed;cursor: pointer;text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
             @click="routerLinkToDetails(item.id)">
-          مشاهده صفحه مغازه
-        </td>
-      </tr>
-      </tbody>
-    </table>
+            مشاهده صفحه مغازه
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
 
@@ -33,6 +53,7 @@
 
   import AdminHome from "../AdminHome";
   import {mapGetters} from 'vuex';
+  import axios from "axios";
 
   export default {
     name: "all",
@@ -59,32 +80,32 @@
             'title': 'hello 2',
             'description': 'ok ok 2',
             'created_date': '2018-10-09'
-          },{
+          }, {
             'id': '2',
             'title': 'hello 2',
             'description': 'ok ok 2',
             'created_date': '2018-10-09'
-          },{
+          }, {
             'id': '2',
             'title': 'hello 2',
             'description': 'ok ok 2',
             'created_date': '2018-10-09'
-          },{
+          }, {
             'id': '2',
             'title': 'hello 2',
             'description': 'ok ok 2',
             'created_date': '2018-10-09'
-          },{
+          }, {
             'id': '2',
             'title': 'hello 2',
             'description': 'ok ok 2',
             'created_date': '2018-10-09'
-          },{
+          }, {
             'id': '2',
             'title': 'hello 2',
             'description': 'ok ok 2',
             'created_date': '2018-10-09'
-          },{
+          }, {
             'id': '2',
             'title': 'hello 2',
             'description': 'ok ok 2',
@@ -92,19 +113,38 @@
           },
         ],
         columns: ['description', 'title', 'id',],
-        columns1: ['شمارنده', 'نام مغازه', 'دسته بندی مغازه', 'id مغازه', 'جزئیات']
+        columns1: ['شمارنده', 'نام مغازه', 'دسته بندی مغازه', 'id مغازه', 'جزئیات'],
+        columns2: [ 'نام مغازه', 'دسته بندی مغازه', 'id مغازه']
       }
     },
     components: {AdminHome},
     methods: {
 
       routerLinkToDetails: function (store_id) {
-    this.$router.push({path: '/dashboard/admin/store/create',params:{store_id}});
+        this.$router.push({path: '/dashboard/admin/store/detail/'+store_id});
+      },
+      name1: function (msg) {
+        if (msg === 'نام مغازه') {
+          return 'name';
+        }
+        if (msg === 'id مغازه') {
+          return 'id';
+        }
+        if (msg === 'دسته بندی مغازه') {
+          return 'title';
+        }
+
+      },
+      send(){
+        axios.post()
       }
+
     },
 
     computed: {
-      ...mapGetters([]),
+      ...mapGetters([
+        'stores'
+      ]),
 
     }
   }
@@ -152,14 +192,26 @@
   .table:last-child {
     border-left: solid 1px #dcdcdc;
   }
-  tbody{
+
+  tbody {
 
     counter-reset: section;
 
   }
+
   .counter::before {
     counter-increment: section;
-    content:  counter(section) ;
+    content: counter(section);
+  }
+
+  .filter {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  input {
+    height: 30%;
+    width: 70%;
   }
 
 </style>

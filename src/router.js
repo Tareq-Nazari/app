@@ -15,14 +15,10 @@ import Stores from "./components/Stores";
 import Search from "./components/Search";
 import AdminHome from "./components/Dashboard/Admin/AdminHome";
 import AdminCreateStore from "./components/Dashboard/Admin/stores/create.vue";
-
 import ShoppingCart from "./components/ShoppingCart";
 import UserDashboard from "./components/Dashboard/user/UserDashboard";
-
-
 import AdminAllStore from "./components/Dashboard/Admin/stores/all";
-
-
+import AdminStoreDetail from "./components/Dashboard/Admin/stores/detail";
 export const routes = [
 
   {path : '/store' , components:{
@@ -49,11 +45,10 @@ export const routes = [
   {path: '/dashboard/store/:id/edit/addproduct/:p_id',component: AddProduct},
   {path: '/dashboard/admin/home',component: AdminHome},
   {path: '/dashboard/admin/store/create',component: AdminCreateStore},
-
   {path: '/shoppingcart' , component: ShoppingCart},
   {path: '/dashboard/user' , component: UserDashboard},
-
-  {path: '/dashboard/admin/store/all',component: AdminAllStore}
+  {path: '/dashboard/admin/store/all',component: AdminAllStore},
+  {path: '/dashboard/admin/store/detail/:store_id',component: AdminStoreDetail}
 
 
 
