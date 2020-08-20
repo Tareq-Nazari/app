@@ -38,9 +38,18 @@ export default {
 
     Footer,
     Nav,
-
-
-
+      },
+  data(){
+    return {
+      fav : true
+    }
+  },
+  methods : {
+    fav(){
+      if(document.getElementsByClassName("fa-star").classList.remove("fas")){
+        console.log(true)
+      }
+    }
   }
 
 }

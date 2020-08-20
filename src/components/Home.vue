@@ -71,26 +71,13 @@
     <div>
       <div class="ac-title">
         <div class="ac-title-side"></div>
-        <h3 >اکسسوری</h3>
+        <h3>دسته بندی</h3>
         <div class="ac-title-side"></div>
       </div>
     </div>
-<swiper class="swiper" :options="swiperOption.s3">
-  <swiper-slide v-for="i in 10">
-    <div class="product-card" >
 
-    <img class="card-image" src="src/img/chetoz.webp"
-         height="50%" width="98%">
-    <p class="card-title">چیپس سرکه ای چیتوز</p>
 
-    <p class="card-desc">محدوده وزن:
-      کمتر از 150 گرم</p>
-    <p class="card-price">قیمت : </p>
-    <button class="card-button" >اقزودن به سبد خرید</button>
-  </div></swiper-slide>
-</swiper>
-
-      <div style="width: 10px"></div>
+      <div style="display: grid;grid-template-rows: 1fr 1fr;grid-template-columns: 1fr 1fr 1fr 1fr"></div>
 
 
 

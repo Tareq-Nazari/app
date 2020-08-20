@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
+    fav : false,
     subMenu: {
       1: false,
       2: false,
@@ -61,6 +62,7 @@ export const store = new Vuex.Store({
     increment: state => {
       state.counter++;
     },
+
 
     deleteFromCart(){
 
