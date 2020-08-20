@@ -19,6 +19,7 @@ import ShoppingCart from "./components/ShoppingCart";
 import UserDashboard from "./components/Dashboard/user/UserDashboard";
 import AdminAllStore from "./components/Dashboard/Admin/stores/all";
 import AdminStoreDetail from "./components/Dashboard/Admin/stores/detail";
+import AdminStoreEdit from "./components/Dashboard/Admin/stores/edit";
 export const routes = [
 
   {path : '/store' , components:{
@@ -48,7 +49,8 @@ export const routes = [
   {path: '/shoppingcart' , component: ShoppingCart},
   {path: '/dashboard/user' , component: UserDashboard},
   {path: '/dashboard/admin/store/all',component: AdminAllStore},
-  {path: '/dashboard/admin/store/detail/:store_id',component: AdminStoreDetail}
+  {path: '/dashboard/admin/store/detail/:store_id',component: AdminStoreDetail},
+  {path: '/dashboard/admin/store/edit',component: AdminStoreEdit}
 
 
 
