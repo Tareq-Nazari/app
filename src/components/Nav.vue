@@ -2,16 +2,17 @@
 
 <div class="nav-container">
 
-  <div class="item"><router-link to="/">خانه</router-link></div>
-  <div class="item"><router-link to="/store">فروشگاه ها</router-link></div>
-  <div class="item"><router-link to="/product">محضولات</router-link></div>
-  <div class="item"><router-link to="/contact">تماس با ما</router-link></div>
-  <div class="item">درباره ما</div>
+  <div class="item" ref="t" v-on:click="currentNav($event)" id="/"><router-link to="/">خانه</router-link></div>
+  <div class="item" @click="currentNav($event)" id="/store"><router-link to="/store">فروشگاه ها</router-link></div>
+  <div class="item" @click="currentNav($event)" id="/products"><router-link to="/product">محضولات</router-link></div>
+  <div class="item" @click="currentNav($event)" id="/contact"><router-link to="/contact">تماس با ما</router-link></div>
+  <div class="item" v-on:click="currentNav($event)" id="/about">درباره ما</div>
+
   <div class="item">لوگو</div>
   <div style="cursor: pointer" v-on:click="searchClick = !searchClick"><font-awesome-icon :icon="['fas','search']" /></div>
   <div style="position:relative;cursor: pointer" v-on:click="shopClick = 1"><font-awesome-icon :icon="['fas','shopping-cart']" /><div style="position:absolute;height: 15px;width: 15px;
   background-color: red;border-radius: 50%;top: 58%;right: 14%;font-size: 12px;color: white">{{counter}}</div></div>
-  <div><font-awesome-icon :icon="['fas', 'user']" /></div>
+  <div><font-awesome-icon :icon="['fas','user']" /></div>
   <transition name="fade">
     <div v-if="searchClick" style="height: 50px;width: 400px;display: flex;align-items: center;background-color: white;border-radius: 7px;border:3px solid limegreen;position: absolute;top: 50px;left: 37px">
       <input placeholder="نام محصول ..." style="outline: none;font-size: 19px;background-color: #d9dddc;border: none;height: 40px;width: 320px;padding: 5px;display: inline-block">
@@ -71,9 +72,12 @@
     },
 
     methods : {
-      close(){
+      currentNav(event){
 
-      }
+              }
+
+
+
     },
     computed: {
       counter() {
@@ -128,6 +132,9 @@
   .nav-container > div {
     text-align: center;
     align-self: center;
+  }
+  .nav-container > div > a {
+    text-decoration: none;
   }
   .shopping-cart {
     background-color: rgb(186 209 189);

@@ -19,7 +19,11 @@ import ShoppingCart from "./components/ShoppingCart";
 import UserDashboard from "./components/Dashboard/user/UserDashboard";
 import AdminAllStore from "./components/Dashboard/Admin/stores/all";
 import AdminStoreDetail from "./components/Dashboard/Admin/stores/detail";
+<<<<<<< HEAD
 import AdminStoreEdit from "./components/Dashboard/Admin/stores/edit";
+=======
+import Sginup from "./components/Sginup";
+>>>>>>> 973a5dbb142fcd2f00792cb655eed56fe211714a
 export const routes = [
 
   {path : '/store' , components:{
@@ -31,6 +35,7 @@ export const routes = [
 
 
     ]},
+  {path: '/signup' , component: Sginup},
   {path: '/search' , component: Search},
   {path: '' , component: Home},
   {path : '*' , component: StorePage},
