@@ -16,20 +16,18 @@
 
           <router-link to="/dashboard/admin/store/create"><a href="#"> ایجاد مغازه جدید</a></router-link>
           <router-link to="/dashboard/admin/store/all"><a href="#"> تمام مغازه ها</a></router-link>
-          <a href="#">صفحه نخست</a>
+
 
         </div>
         <a class="menu-but" :style="style[2]" @click="turnOff ('2')" v-if="showTopMenu===true" href="#">
           <div style="display: inline-block">
-            <span class="title" style="display: inline-block;padding-right: 8%">طرح بندی </span>
+            <span class="title" style="display: inline-block;padding-right: 8%">محصولات  </span>
           </div>
           <p style="display: inline-block;position: relative;bottom: 9px;left: -75%"> ></p>
         </a>
         <div class="sub-menu" v-if="showTopMenu===true && subMenu[2]===true">
 
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
+          <router-link to="/dashboard/admin/product/all"><a href="#"> تمام محصولات</a></router-link>
 
 
         </div>

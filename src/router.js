@@ -19,9 +19,10 @@ import ShoppingCart from "./components/ShoppingCart";
 import UserDashboard from "./components/Dashboard/user/UserDashboard";
 import AdminAllStore from "./components/Dashboard/Admin/stores/all";
 import AdminStoreDetail from "./components/Dashboard/Admin/stores/detail";
-
 import AdminStoreEdit from "./components/Dashboard/Admin/stores/edit";
-
+import AdminAllProduct from "./components/Dashboard/Admin/products/all";
+import AdminProductDetail from "./components/Dashboard/Admin/products/detail";
+import AdminProductEdit from "./components/Dashboard/Admin/products/edit";
 import Sginup from "./components/Sginup";
 export const routes = [
   {path : '/store' , components:{
@@ -52,8 +53,11 @@ export const routes = [
   {path: '/shoppingcart' , component: ShoppingCart},
   {path: '/dashboard/user' , component: UserDashboard},
   {path: '/dashboard/admin/store/all',component: AdminAllStore},
-  {path: '/dashboard/admin/store/detail/:store_id',component: AdminStoreDetail},
-  {path: '/dashboard/admin/store/edit',component: AdminStoreEdit}
+  {path: '/dashboard/admin/store/detail',component: AdminStoreDetail},
+  {path: '/dashboard/admin/store/edit',component: AdminStoreEdit},
+  {path: '/dashboard/admin/product/all',component: AdminAllProduct},
+  {path: '/dashboard/admin/product/detail',component: AdminProductDetail},
+  {path: '/dashboard/admin/product/edit',component: AdminProductEdit},
 
 
 

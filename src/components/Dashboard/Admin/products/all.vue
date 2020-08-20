@@ -2,7 +2,7 @@
   <div class="main">
     <admin-home></admin-home>
     <div style="margin-bottom: 10px;display: grid;grid-template-columns: 1fr;grid-row-gap: 20px; ">
-            <table class="table">
+      <table class="table">
 
         <thead>
         <tr>
@@ -24,20 +24,22 @@
           </th>
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
           >
-            <button @click="send" style="cursor: pointer;background-color: #00a8ed;border: solid 1px" type="submit">اعمال فیلتر</button>
+            <button @click="send" style="cursor: pointer;background-color: #00a8ed;border: solid 1px" type="submit">
+              اعمال فیلتر
+            </button>
           </th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(store, index) in stores" :key="index">
+        <tr v-for="(product, index) in products" :key="index">
           <td class="counter" style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none">
           </td>
           <td style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
-              v-for="(column, indexColumn) in columns" :key="indexColumn">{{store[column]}}
+              v-for="(column, indexColumn) in columns" :key="indexColumn">{{product[column]}}
           </td>
           <td
             style="color: #00a8ed;cursor: pointer;text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
-            @click="routerLinkToDetails(store)">
+            @click="routerLinkToDetails(product)">
             مشاهده صفحه مغازه
           </td>
         </tr>
@@ -60,75 +62,42 @@
     data() {
       return {
         pull: 0,
-        stores:
-          [
-            {
-              name: "مغازه من",
-              id: "21",
-              cat_name: "خشکشویی",
-              email: "@",
-              caption: "خشکشویی",
-              phone: "225588",
-              profile_id: "8",
-              address: "asasasas",
-            },
-            {
-              name: "مغازه من",
-              id: "22",
-              cat_name: "خشکشویی",
-              email: "@",
-              caption: "خشکشویی",
-              phone: "225588",
-              profile_id: "8",
-              address: "asasasas",
-            },
-            {
-              name: "مغازه من",
-              id: "23",
-              cat_name: "خشکشویی",
-              email: "@",
-              caption: "خشکشویی",
-              phone: "225588",
-              profile_id: "8",
-              address: "asasasas",
-            },
-            {
-              name: "مغازه من",
-              id: "24",
-              cat_name: "خشکشویی",
-              email: "@",
-              caption: "خشکشویی",
-              phone: "225588",
-              profile_id: "8",
-              address: "asasasas",
-            }
+        products: [
+          {name: "t-shirt", id: "21", cat_name: 'لباس تابستانه', caption: "خوب است زیباست", price: 22000,store_id:"24",pic:'product-12.jpg'},
+          {name: "t-shirt", id: "22", cat_name: 'لباس تابستانه', caption: "خوب است زیباست", price: 22000,store_id:"24",pic:'product-12.jpg'},
+          {name: "t-shirt", id: "23", cat_name: 'لباس تابستانه', caption: "خوب است زیباست", price: 22000,store_id:"24",pic:'product-12.jpg'},
+        ],
 
-          ]
-        ,
-        columns: ['name', 'id', 'cat_name',],
-        columns1: ['شمارنده', 'نام مغازه',  'id مغازه', 'دسته بندی مغازه','جزئیات'],
-        columns2: [ 'نام مغازه', 'دسته بندی مغازه', 'id مغازه']
+        columns: ['name', 'cat_name', 'id', 'price', 'caption'],
+        columns1: ['شمارنده', 'نام محصول', 'دسته بندی', 'id محصول', 'قیمت', 'توضیحات', 'جزئیات'],
+        columns2: ['نام محصول', 'دسته بندی', 'id محصول', 'قیمت', 'توضیحات']
       }
     },
     components: {AdminHome},
     methods: {
 
-      routerLinkToDetails: function (store) {
-        this.$router.push({path: '/dashboard/admin/store/detail',query:{store}});
+      routerLinkToDetails: function (product) {
+        this.$router.push({path: '/dashboard/admin/product/detail', query: {product}});
       },
       name1: function (msg) {
-        if (msg === 'نام مغازه') {
+        if (msg === 'نام محصول') {
           return 'name';
         }
-        if (msg === 'id مغازه') {
+        if (msg === 'id محصول') {
           return 'id';
         }
-        if (msg === 'دسته بندی مغازه') {
-          return 'title';
+        if (msg === 'دسته بندی') {
+          return 'cat_name';
+        }
+        if (msg === 'قیمت') {
+          return 'price';
+        }
+        if (msg === 'توضیحات') {
+          return 'caption';
         }
 
       },
-      send(){
+      send() {
         axios.post()
       }
 

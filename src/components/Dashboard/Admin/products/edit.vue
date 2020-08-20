@@ -12,86 +12,67 @@
         method="post"
       >
         <div>
-          <h2 style="text-align: center;color: #d63938 "> ادیت کردن مغازه </h2>
+          <h2 style="text-align: center;color: #d63938 "> ادیت کردن محصول </h2>
         </div>
 
         <div class="inp">
-          <p>نام مغازه</p>
+          <p>نام محصول</p>
           <input
             id="name"
             type="text"
             name="name"
-            :placeholder="$route.query.store.name"
+            :placeholder="$route.query.product.name"
           >
 
         </div>
         <div class="inp">
-          <p> توضیحات درباره مغازه </p>
+          <p> توضیحات درباره محصول </p>
 
           <input
             id="caption"
             type="text"
             name="caption"
-            :placeholder="$route.query.store.caption"
+            :placeholder="$route.query.product.caption"
           >
 
         </div>
-        <div class="inp">
-          <p> ایمیل </p>
 
-          <input
-            id="email"
-            type="email"
-            name="email"
-            :placeholder="$route.query.store.email"
-          >
-
-        </div>
         <div class="inp">
-          <p> شماره تلفن </p>
+          <p> قیمت محصول </p>
 
           <input
             id="phone"
             type="number"
-            name="phone"
-            :placeholder="$route.query.store.phone"
+            name="price"
+            :placeholder="$route.query.product.price"
           >
 
         </div>
+
         <div class="inp">
-          <p> پروفایل آی دی </p>
+          <p> id مغازه </p>
 
           <input
-            id="profile_id"
+            id="store_id"
             type="number"
-            name="profile_id"
-            :placeholder="$route.query.store.profile_id"
+            name="store_id"
+            :placeholder="$route.query.product.store_id"
           >
 
         </div>
         <div >
-          <p>  عکس پروفایل </p>
+          <p>  عکس محصول </p>
 
           <input style="border: none"
-            id="profile_pic"
-            type="file"
-            name="profile_id"
-            :placeholder="$route.query.store.profile_pic"
+                 id="profile_pic"
+                 type="file"
+                 name="profile_id"
+                 :placeholder="$route.query.product.pic"
 
           >
 
         </div>
-        <div >
-          <p> عکس هدر </p>
 
-          <input style="border: none"
-            id="header_pic"
-            type="file"
-            name="profile_id"
-            :placeholder="$route.query.store.header_pic"
-          >
-
-        </div>
         <div class="inp">
           <p> دسته بندی مغازه </p>
           <select style="padding-right: 12%" name="cat_id" id="cars">
@@ -123,11 +104,11 @@
 
   export default {
     name: "edit",
-    components: {AdminHome},
+
     data() {
       return {
         cat_names: this.$route.query.cat_names,
-        test: this.$route.query.store.cat_name
+        test: this.$route.query.product.cat_name
       }
 
     }, methods: {
@@ -135,7 +116,8 @@
         axios.post()
       }
 
-    }
+    },
+    components: {AdminHome},
   }
 </script>
 
