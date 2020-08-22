@@ -23,6 +23,18 @@ import AdminStoreEdit from "./components/Dashboard/Admin/stores/edit";
 import AdminAllProduct from "./components/Dashboard/Admin/products/all";
 import AdminProductDetail from "./components/Dashboard/Admin/products/detail";
 import AdminProductEdit from "./components/Dashboard/Admin/products/edit";
+import AdminCreateProduct from "./components/Dashboard/Admin/products/create";
+import AdminAllCategoryProduct from "./components/Dashboard/Admin/categories/product/all";
+import AdminAddCategoryProduct from "./components/Dashboard/Admin/categories/product/add";
+import AdminAllCategoryStore from "./components/Dashboard/Admin/categories/store/all";
+import AdminAddCategoryStore from "./components/Dashboard/Admin/categories/store/add";
+import AdminAllFactors from "./components/Dashboard/Admin/factors/all";
+import AdminAllUsers from "./components/Dashboard/Admin/users/all";
+import AdminDetailUsers from "./components/Dashboard/Admin/users/detail";
+import AdminEditUsers from "./components/Dashboard/Admin/users/edit";
+import AdminAddUsers from "./components/Dashboard/Admin/users/add";
+import AdminProfileShow from "./components/Dashboard/Admin/profile/show";
+import AdminProfileEdit from "./components/Dashboard/Admin/profile/edit";
 import Sginup from "./components/Sginup";
 export const routes = [
   {path : '/store' , components:{
@@ -58,6 +70,18 @@ export const routes = [
   {path: '/dashboard/admin/product/all',component: AdminAllProduct},
   {path: '/dashboard/admin/product/detail',component: AdminProductDetail},
   {path: '/dashboard/admin/product/edit',component: AdminProductEdit},
+  {path: '/dashboard/admin/product/create',component: AdminCreateProduct},
+  {path: '/dashboard/admin/storeCategory/create',component: AdminAddCategoryStore},
+  {path: '/dashboard/admin/storeCategory/all',component: AdminAllCategoryStore},
+  {path: '/dashboard/admin/productCategory/create',component: AdminAddCategoryProduct},
+  {path: '/dashboard/admin/productCategory/all',component: AdminAllCategoryProduct},
+  {path: '/dashboard/admin/factors/all',component: AdminAllFactors},
+  {path: '/dashboard/admin/users/all',component: AdminAllUsers},
+  {path: '/dashboard/admin/user/edit',component: AdminEditUsers},
+  {path: '/dashboard/admin/user/detail',component: AdminDetailUsers},
+  {path: '/dashboard/admin/user/add',component: AdminAddUsers},
+  {path: '/dashboard/admin/profile/show',component: AdminProfileShow},
+  {path: '/dashboard/admin/profile/edit',component: AdminProfileEdit},
 
 
 

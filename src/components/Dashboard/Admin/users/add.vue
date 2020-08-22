@@ -10,12 +10,12 @@
         action="#"
         method="post"
       >
-<div>
-  <h2 style="text-align: center;color: #d63938 ">ایجاد مغازه جدید</h2>
-</div>
+        <div>
+          <h2 style="text-align: center;color: #d63938 ">اضافه کردن کاربرجدید</h2>
+        </div>
 
         <div class="inp">
-          <p>نام مغازه</p>
+          <p>نام کاربر</p>
           <input
             id="name"
             type="text"
@@ -24,22 +24,22 @@
 
         </div>
         <div class="inp">
-          <p> توضیحات درباره مغازه </p>
-
-          <input
-            id="caption"
-            type="text"
-            name="caption"
-          >
-
-        </div>
-        <div class="inp">
           <p> ایمیل </p>
 
           <input
             id="email"
-            type="email"
+            type="text"
             name="email"
+          >
+
+        </div>
+        <div class="inp">
+          <p> رمزعبور </p>
+
+          <input
+            id="password"
+            type="password"
+            name="password"
           >
 
         </div>
@@ -54,19 +54,19 @@
 
         </div>
         <div class="inp">
-          <p>  پروفایل آی دی  </p>
+          <p> آدرس  </p>
 
           <input
-            id="profile_id"
-            type="number"
-            name="profile_id"
+            id="address"
+            type="text"
+            name="address"
           >
 
         </div>
         <div class="inp">
-          <p> دسته بندی مغازه </p>
+          <p>نقش </p>
           <select style="padding-right: 12%" name="categories" id="categories">
-            <option v-for="cat in cat_names"  :value="cat.id">{{cat.name}}</option>
+            <option v-for="role in roles"  :value="role.id">{{role.name}}</option>
 
           </select>
         </div>
@@ -91,21 +91,21 @@
   import AdminHome from "../AdminHome";
 
   export default {
-    name: "create",
+    name: "add",
     data() {
       return {
-        cat_names: [
+        roles: [
           {
             id: 1,
-            name: "sdsd"
+            name: "admin"
           },
           {
             id: 2,
-            name: "لباس تابستانه"
+            name: "shopOwner"
           },
           {
             id: 3,
-            name: "aa"
+            name: "author"
           }]
       }
     }, components: {
@@ -114,7 +114,11 @@
 
 
     },
-    methods: {}
+    methods: {
+      checkForm:function () {
+
+      }
+    }
 
   }
 

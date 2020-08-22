@@ -1,8 +1,9 @@
 <template>
-
-
   <div class="main">
-    <AdminHome></AdminHome>
+    <div>
+
+      <admin-home></admin-home>
+    </div>
     <div class="box">
       <form
         id="app"
@@ -10,26 +11,18 @@
         action="#"
         method="post"
       >
-<div>
-  <h2 style="text-align: center;color: #d63938 ">ایجاد مغازه جدید</h2>
-</div>
+        <div>
+          <h2 style="text-align: center;color: #d63938 "> ادیت کردن پروفایل</h2>
+        </div>
 
         <div class="inp">
-          <p>نام مغازه</p>
+          <p>نام </p>
           <input
             id="name"
             type="text"
             name="name"
-          >
-
-        </div>
-        <div class="inp">
-          <p> توضیحات درباره مغازه </p>
-
-          <input
-            id="caption"
-            type="text"
-            name="caption"
+            :placeholder="this.user_name"
+            :value="this.user_name"
           >
 
         </div>
@@ -40,6 +33,8 @@
             id="email"
             type="email"
             name="email"
+            :placeholder="this.user_email"
+            :value="this.user_email"
           >
 
         </div>
@@ -50,31 +45,41 @@
             id="phone"
             type="number"
             name="phone"
+            :placeholder="this.user_phone"
+            :value="this.user_phone"
           >
 
         </div>
         <div class="inp">
-          <p>  پروفایل آی دی  </p>
+          <p> آدرس </p>
 
           <input
-            id="profile_id"
-            type="number"
-            name="profile_id"
+            id="address"
+            type="text"
+            name="address"
+            :placeholder="this.user_address"
+            :value="this.user_address"
           >
 
         </div>
-        <div class="inp">
-          <p> دسته بندی مغازه </p>
-          <select style="padding-right: 12%" name="categories" id="categories">
-            <option v-for="cat in cat_names"  :value="cat.id">{{cat.name}}</option>
 
-          </select>
+        <div >
+          <p> عکس پروفایل </p>
+
+          <input style="border: none"
+                 id="pic"
+                 type="file"
+                 name="pic"
+                 v-on:value="user_pic"
+
+          >
+
         </div>
 
         <div style="margin-top: 15px">
           <input
             type="submit"
-            value="ثبت"
+            value=" ثبت تغیرات"
             id="su"
           >
         </div>
@@ -85,40 +90,35 @@
 
 
   </div>
+
 </template>
 
 <script>
   import AdminHome from "../AdminHome";
+  import axios from "axios";
 
   export default {
-    name: "create",
+    name: "edit",
+    components: {AdminHome},
     data() {
       return {
-        cat_names: [
-          {
-            id: 1,
-            name: "sdsd"
-          },
-          {
-            id: 2,
-            name: "لباس تابستانه"
-          },
-          {
-            id: 3,
-            name: "aa"
-          }]
+
+        user_name:"sd",
+        user_phone:"22",
+        user_pic:"sd",
+        user_email:"dd@hmail",
+        user_address:"sd",
+
+
       }
-    }, components: {
 
-      AdminHome
+    }, methods: {
+      checkForm: function () {
 
+      }
 
-    },
-    methods: {}
-
+    }
   }
-
-
 </script>
 
 <style scoped>
@@ -138,7 +138,7 @@
     0 3px 1px -2px rgba(0, 0, 0, .12),
     0 1px 5px 0 rgba(0, 0, 0, .2);
 
-    height: 945px;
+    height: 800px;
   }
 
   input {
@@ -154,7 +154,8 @@
   input:focus {
     outline: none;
   }
-  select{
+
+  select {
     border-radius: 3px;
     border: solid 1px #dcdcdc;
     min-height: 45px;
@@ -162,7 +163,8 @@
     width: 40%;
 
   }
-  select:focus{
+
+  select:focus {
     outline: none;
   }
 
@@ -192,23 +194,10 @@
   .inp > p {
     margin-right: 2%;
   }
-  p{
+
+  p {
     color: #d81c1e;
   }
 
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+user

@@ -21,7 +21,7 @@
             id="name"
             type="text"
             name="name"
-            :placeholder="$route.query.store.name"
+            :value="$route.query.store.name"
           >
 
         </div>
@@ -32,7 +32,7 @@
             id="caption"
             type="text"
             name="caption"
-            :placeholder="$route.query.store.caption"
+            :value="$route.query.store.caption"
           >
 
         </div>
@@ -43,7 +43,7 @@
             id="email"
             type="email"
             name="email"
-            :placeholder="$route.query.store.email"
+            :value="$route.query.store.email"
           >
 
         </div>
@@ -54,7 +54,7 @@
             id="phone"
             type="number"
             name="phone"
-            :placeholder="$route.query.store.phone"
+            :value="$route.query.store.phone"
           >
 
         </div>
@@ -65,7 +65,7 @@
             id="profile_id"
             type="number"
             name="profile_id"
-            :placeholder="$route.query.store.profile_id"
+            :value="$route.query.store.profile_id"
           >
 
         </div>
@@ -76,7 +76,7 @@
             id="profile_pic"
             type="file"
             name="profile_id"
-            :placeholder="$route.query.store.profile_pic"
+           v-on:value="$route.query.store.profile_pic"
 
           >
 
@@ -88,7 +88,7 @@
             id="header_pic"
             type="file"
             name="profile_id"
-            :placeholder="$route.query.store.header_pic"
+            v-on:value="$route.query.store.header_pic"
           >
 
         </div>
@@ -133,7 +133,12 @@
     }, methods: {
       checkForm: function () {
         axios.post()
-      }
+      },onFileChange(e) {
+        var files = e.target.files || e.dataTransfer.files;
+        if (!files.length)
+          return;
+        this.createImage(files[0]);
+      },
 
     }
   }

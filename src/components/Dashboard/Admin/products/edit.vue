@@ -21,7 +21,8 @@
             id="name"
             type="text"
             name="name"
-            :placeholder="$route.query.product.name"
+
+            :value="$route.query.product.name"
           >
 
         </div>
@@ -32,7 +33,8 @@
             id="caption"
             type="text"
             name="caption"
-            :placeholder="$route.query.product.caption"
+
+            :value="$route.query.product.caption"
           >
 
         </div>
@@ -44,7 +46,8 @@
             id="phone"
             type="number"
             name="price"
-            :placeholder="$route.query.product.price"
+
+            :value="$route.query.product.price"
           >
 
         </div>
@@ -56,7 +59,8 @@
             id="store_id"
             type="number"
             name="store_id"
-            :placeholder="$route.query.product.store_id"
+
+            :value="$route.query.product.store_id"
           >
 
         </div>
@@ -64,10 +68,10 @@
           <p>  عکس محصول </p>
 
           <input style="border: none"
-                 id="profile_pic"
+                 id="pic"
                  type="file"
-                 name="profile_id"
-                 :placeholder="$route.query.product.pic"
+                 name="pic"
+                 v-on:value="this.$route.query.product.pic"
 
           >
 
@@ -108,13 +112,19 @@
     data() {
       return {
         cat_names: this.$route.query.cat_names,
-        test: this.$route.query.product.cat_name
+        test: this.$route.query.product.cat_name,
+
       }
 
     }, methods: {
       checkForm: function () {
         axios.post()
-      }
+      },onFileChange(e) {
+        var files = e.target.files || e.dataTransfer.files;
+        if (!files.length)
+          return;
+        this.createImage(files[0]);
+      },
 
     },
     components: {AdminHome},

@@ -10,65 +10,18 @@
         action="#"
         method="post"
       >
-<div>
-  <h2 style="text-align: center;color: #d63938 ">ایجاد مغازه جدید</h2>
-</div>
+        <div>
+          <h2 style="text-align: center;color: #d63938;font-size: 17px "> اضافه کردن دسته بندی جدید به مغازه ها</h2>
+        </div>
 
         <div class="inp">
-          <p>نام مغازه</p>
+          <p>نام کتگوری</p>
           <input
             id="name"
             type="text"
             name="name"
           >
 
-        </div>
-        <div class="inp">
-          <p> توضیحات درباره مغازه </p>
-
-          <input
-            id="caption"
-            type="text"
-            name="caption"
-          >
-
-        </div>
-        <div class="inp">
-          <p> ایمیل </p>
-
-          <input
-            id="email"
-            type="email"
-            name="email"
-          >
-
-        </div>
-        <div class="inp">
-          <p> شماره تلفن </p>
-
-          <input
-            id="phone"
-            type="number"
-            name="phone"
-          >
-
-        </div>
-        <div class="inp">
-          <p>  پروفایل آی دی  </p>
-
-          <input
-            id="profile_id"
-            type="number"
-            name="profile_id"
-          >
-
-        </div>
-        <div class="inp">
-          <p> دسته بندی مغازه </p>
-          <select style="padding-right: 12%" name="categories" id="categories">
-            <option v-for="cat in cat_names"  :value="cat.id">{{cat.name}}</option>
-
-          </select>
         </div>
 
         <div style="margin-top: 15px">
@@ -88,25 +41,13 @@
 </template>
 
 <script>
-  import AdminHome from "../AdminHome";
+  import AdminHome from "../../AdminHome";
 
   export default {
-    name: "create",
+    name: "add",
     data() {
       return {
-        cat_names: [
-          {
-            id: 1,
-            name: "sdsd"
-          },
-          {
-            id: 2,
-            name: "لباس تابستانه"
-          },
-          {
-            id: 3,
-            name: "aa"
-          }]
+
       }
     }, components: {
 
@@ -114,7 +55,12 @@
 
 
     },
-    methods: {}
+    methods: {
+      checkForm:function () {
+
+      }
+
+    }
 
   }
 

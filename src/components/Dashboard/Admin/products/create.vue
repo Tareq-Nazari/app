@@ -10,12 +10,12 @@
         action="#"
         method="post"
       >
-<div>
-  <h2 style="text-align: center;color: #d63938 ">ایجاد مغازه جدید</h2>
-</div>
+        <div>
+          <h2 style="text-align: center;color: #d63938 ">ایجاد محصول جدید</h2>
+        </div>
 
         <div class="inp">
-          <p>نام مغازه</p>
+          <p>نام محصول</p>
           <input
             id="name"
             type="text"
@@ -24,7 +24,7 @@
 
         </div>
         <div class="inp">
-          <p> توضیحات درباره مغازه </p>
+          <p> توضیحات درباره محصول </p>
 
           <input
             id="caption"
@@ -34,39 +34,39 @@
 
         </div>
         <div class="inp">
-          <p> ایمیل </p>
+          <p> قیمت محصول </p>
 
           <input
-            id="email"
-            type="email"
-            name="email"
-          >
-
-        </div>
-        <div class="inp">
-          <p> شماره تلفن </p>
-
-          <input
-            id="phone"
+            id="price"
             type="number"
-            name="phone"
+            name="price"
           >
 
         </div>
         <div class="inp">
-          <p>  پروفایل آی دی  </p>
+          <p> ایدی مغازه </p>
 
           <input
-            id="profile_id"
+            id="store_id"
             type="number"
-            name="profile_id"
+            name="store_id"
           >
 
         </div>
         <div class="inp">
-          <p> دسته بندی مغازه </p>
+          <p> عکس محصول </p>
+
+          <input
+            id="pic"
+            type="file"
+            name="pic"
+          >
+
+        </div>
+        <div class="inp">
+          <p> دسته بندی محصول </p>
           <select style="padding-right: 12%" name="categories" id="categories">
-            <option v-for="cat in cat_names"  :value="cat.id">{{cat.name}}</option>
+            <option v-for="cat in cat_names" :value="cat.id">{{cat.name}}</option>
 
           </select>
         </div>
@@ -107,6 +107,7 @@
             id: 3,
             name: "aa"
           }]
+
       }
     }, components: {
 
@@ -154,7 +155,8 @@
   input:focus {
     outline: none;
   }
-  select{
+
+  select {
     border-radius: 3px;
     border: solid 1px #dcdcdc;
     min-height: 45px;
@@ -162,7 +164,8 @@
     width: 40%;
 
   }
-  select:focus{
+
+  select:focus {
     outline: none;
   }
 
@@ -192,7 +195,8 @@
   .inp > p {
     margin-right: 2%;
   }
-  p{
+
+  p {
     color: #d81c1e;
   }
 

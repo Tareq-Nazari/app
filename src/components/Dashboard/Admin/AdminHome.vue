@@ -28,34 +28,36 @@
         <div class="sub-menu" v-if="showTopMenu===true && subMenu[2]===true">
 
           <router-link to="/dashboard/admin/product/all"><a href="#"> تمام محصولات</a></router-link>
+          <router-link to="/dashboard/admin/product/create"><a href="#"> اضافه کردن محصول جدید</a></router-link>
 
 
         </div>
         <a class="menu-but" :style="style[3]" @click="turnOff('3')" v-if="showTopMenu===true" href="#">
           <div style="display: inline-block">
-            <span class="title" style="display: inline-block;padding-right: 8%"> مغازه ها</span>
+            <span class="title" style="display: inline-block;padding-right: 8%"> دسته بندی ها</span>
           </div>
           <p style="display: inline-block;position: relative;bottom: 9px;left: -75%"> ></p>
         </a>
         <div class="sub-menu" v-if="turnOff ,showTopMenu===true && subMenu[3]===true">
 
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
+          <router-link to="/dashboard/admin/storeCategory/all"><a href="#"> تمام دسته بندی های مغازه </a></router-link>
+          <router-link to="/dashboard/admin/storeCategory/create"><a href="#"> اضافه کردن دسته بندی جدید مغازه </a></router-link>
+          <router-link to="/dashboard/admin/productCategory/all"><a href="#"> تمام دسته بندی های محصولات </a></router-link>
+          <router-link to="/dashboard/admin/productCategory/create"><a href="#"> اضافه کردن دسته بندی جدید محصول </a></router-link>
+
 
 
         </div>
         <a class="menu-but" :style="style[4]" @click="turnOff ('4')" v-if="showTopMenu===true" href="#">
           <div style="display: inline-block">
-            <span class="title" style="display: inline-block;padding-right: 8%"> محصولات</span>
+            <span class="title" style="display: inline-block;padding-right: 8%"> فاکتورهای فروش</span>
           </div>
           <p style="display: inline-block;position: relative;bottom: 9px;left: -75%"> ></p>
         </a>
         <div class="sub-menu" v-if="showTopMenu===true && subMenu[4]===true">
 
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
+          <router-link to="/dashboard/admin/factors/all"><a href="#"> همه ی فاکتورها </a></router-link>
+
 
 
         </div>
@@ -67,54 +69,29 @@
         </a>
         <div class="sub-menu" v-if="showTopMenu===true && subMenu[5]===true">
 
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
+          <router-link to="/dashboard/admin/user/add"><a href="#"> اضافه کردن کاربر </a></router-link>
+          <router-link to="/dashboard/admin/users/all"><a href="#"> همه ی کاربران </a></router-link>
 
 
         </div>
         <a class="menu-but" :style="style[6]" @click="turnOff('6') " v-if="showTopMenu===true" href="#">
           <div style="display: inline-block">
-            <span class="title" style="display: inline-block;padding-right: 8%"> فاکتورها</span>
+            <span class="title" style="display: inline-block;padding-right: 8%"> پروفایل من</span>
           </div>
           <p style="display: inline-block;position: relative;bottom: 9px;left: -75%"> ></p>
         </a>
         <div class="sub-menu" v-if="showTopMenu===true && subMenu[6]===true">
-
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
-
+          <router-link to="/dashboard/admin/profile/show"><a href="#"> نمایش پروفایل من </a></router-link>
+          <router-link to="/dashboard/admin/profile/edit"><a href="#"> تغیر دادن پروفایل من </a></router-link>
 
         </div>
         <a class="menu-but" :style="style[7]" @click="turnOff('7') " v-if="showTopMenu===true" href="#">
           <div style="display: inline-block">
-            <span class="title" style="display: inline-block;padding-right: 8%"> کامنت ها</span>
+            <span @click="logOut" class="title" style="display: inline-block;padding-right: 8%"> خروج</span>
           </div>
-          <p style="display: inline-block;position: relative;bottom: 9px;left: -75%"> ></p>
+
         </a>
-        <div class="sub-menu" v-if="showTopMenu===true && subMenu[7]===true">
 
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
-
-
-        </div>
-        <a class="menu-but" :style="style[8]" @click="turnOff('8') " v-if="showTopMenu===true" href="#">
-          <div style="display: inline-block">
-            <span class="title" style="display: inline-block;padding-right: 8%;"> پروفایل من</span>
-          </div>
-          <p style="display: inline-block;position: relative;bottom: 9px;left: -75%"> ></p>
-        </a>
-        <div class="sub-menu" v-if="showTopMenu===true && subMenu[8]===true">
-
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
-          <a href="#">صفحه نخست</a>
-
-
-        </div>
       </div>
 
     </div>
@@ -128,6 +105,7 @@
 <script>
   import {mapMutations} from 'vuex';
   import {mapGetters} from 'vuex';
+  import axios from 'axios';
 
   export default {
     name: "AdminHome",
@@ -148,7 +126,10 @@
     methods: {
       ...mapMutations([
         "turnOff"
-      ])
+      ]),
+      logOut:function () {
+axios.post();
+      }
 
     },
     computed: {
