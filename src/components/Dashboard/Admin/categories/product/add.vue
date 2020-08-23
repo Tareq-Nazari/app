@@ -20,7 +20,7 @@
             id="name"
             type="text"
             name="name"
-            v-on="name"
+            v-model="name"
 
           >
 
@@ -31,7 +31,7 @@
             id="store_id"
             type="number"
             name="store_id"
-            v-on="store_id"
+            v-model="store_id"
 
           >
 
@@ -62,8 +62,8 @@
     name: "add",
     data() {
       return {
-        name:this.name,
-        store_id:this.store_id
+        name:'',
+        store_id:''
 
       }
     }, components: {
