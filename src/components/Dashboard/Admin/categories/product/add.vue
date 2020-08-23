@@ -6,12 +6,12 @@
     <div class="box">
       <form
         id="app"
-        @submit="checkForm"
-        action="#"
-        method="post"
+
+
       >
-        <div >
-          <h2 style="text-align: center;color: #d63938 ;padding-right: 0!important;font-size: 17px"> اضافه کردن دسته بندی جدید به محصولات</h2>
+        <div>
+          <h2 style="text-align: center;color: #d63938 ;padding-right: 0!important;font-size: 17px"> اضافه کردن دسته
+            بندی جدید به محصولات</h2>
         </div>
 
         <div class="inp">
@@ -20,16 +20,30 @@
             id="name"
             type="text"
             name="name"
+            v-on="name"
+
+          >
+
+        </div>
+        <div class="inp">
+          <p> store_id</p>
+          <input
+            id="store_id"
+            type="number"
+            name="store_id"
+            v-on="store_id"
+
           >
 
         </div>
 
         <div style="margin-top: 15px">
-          <input
+          <button
             type="submit"
-            value="ثبت"
             id="su"
-          >
+            v-on:click="checkForm"
+          >Sd
+          </button>
         </div>
 
       </form>
@@ -42,11 +56,14 @@
 
 <script>
   import AdminHome from "../../AdminHome";
+  import axios from 'axios';
 
   export default {
     name: "add",
     data() {
       return {
+        name:this.name,
+        store_id:this.store_id
 
       }
     }, components: {
@@ -56,8 +73,15 @@
 
     },
     methods: {
-      checkForm:function () {
 
+      checkForm: function () {
+
+        axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/add',
+          {
+            name: this.name,
+            store_id: this.store_id
+          }
+        )
       }
 
     }
@@ -101,7 +125,8 @@
   input:focus {
     outline: none;
   }
-  select{
+
+  select {
     border-radius: 3px;
     border: solid 1px #dcdcdc;
     min-height: 45px;
@@ -109,7 +134,8 @@
     width: 40%;
 
   }
-  select:focus{
+
+  select:focus {
     outline: none;
   }
 
@@ -139,7 +165,8 @@
   .inp > p {
     margin-right: 2%;
   }
-  p{
+
+  p {
     color: #d81c1e;
   }
 

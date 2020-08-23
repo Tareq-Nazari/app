@@ -30,11 +30,11 @@
           </th>
         </tr>
         </thead>
-        <tbody>
-        <tr v-for="(category, index) in categories" :key="index">
+        <tbody v-for="p in cats">
+        <tr v-for="(category, index) in p" :key="index">
           <td class="counter" style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none">
           </td>
-          <td style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
+          <td  style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
               v-for="(column, indexColumn) in columns" :key="indexColumn">{{category[column]}}
           </td>
           <td
@@ -61,7 +61,7 @@
     name: "all",
     data() {
       return {
-        pull: 0,
+        cats:'',
         categories: [
           {name: "t-shirt", id: "21"},
           {name: "t-shirt", id: "21"},
@@ -69,9 +69,9 @@
           {name: "t-shirt", id: "21"},
         ],
 
-        columns: ['name', 'id'],
-        columns1: ['شمارنده', 'نام دسته بندی', 'id', 'جزئیات'],
-        columns2: [ 'دسته بندی', 'id']
+        columns: ['name', 'id','store_id'],
+        columns1: ['شمارنده', 'نام دسته بندی', 'id','idمغازه', 'جزئیات'],
+        columns2: [ 'دسته بندی', 'id','idمغازه']
       }
     },
     components: {AdminHome},
@@ -79,8 +79,9 @@
 
       delete1: function (id) {
         if (confirm("آیا می خواهید دسته بندی را حذف کنید؟")) {
-          axios.post()
-
+          axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/delete'+id)
+            .then(response=>console.log(response)
+            ).catch(error=>console.log(error))
         }
       },
       name1: function (msg) {
@@ -89,12 +90,19 @@
         }
         if (msg === 'دسته بندی') {
           return 'name';
+        }  if (msg === 'idمغازه') {
+          return 'store_id';
         }
       },
       send() {
         axios.post()
       }
 
+    },
+   mounted() {
+      axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/all')
+        .then(response=>(this.cats=response.data)
+        ).catch(error=>console.log(error))
     },
 
     computed: {
