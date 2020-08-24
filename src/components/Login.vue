@@ -1,48 +1,86 @@
 <template>
   <section class="sign-in">
+
     <div class="container">
       <div class="signin-content">
         <div class="signin-image">
-          <figure><img src="images/signin-image.jpg" alt="sing up image"></figure>
-          <a href="#" class="signup-image-link">Create an account</a>
+          <figure><img src="../img/buyer.png" alt="sing up image"></figure>
+         <router-link to="/Signup" class="signup-image-link" >ثبت نام نکرده اید؟ثبت نام</router-link>
         </div>
 
         <div class="signin-form">
-          <h2 class="form-title">Sign up</h2>
-          <form method="POST" class="register-form" id="login-form">
+          <h2 class="form-title">ورود</h2>
+          <form class="register-form" id="login-form" v-on:submit.prevent="submit">
             <div class="form-group">
               <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-              <input type="text" name="your_name" id="your_name" placeholder="Your Name"/>
+              <input v-model="user.email" type="text" name="your_name" id="your_name" placeholder="ایمیل"/>
             </div>
             <div class="form-group">
               <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-              <input type="password" name="your_pass" id="your_pass" placeholder="Password"/>
+              <input v-model="user.password" type="password" name="your_pass" id="your_pass" placeholder="رمزعبور"/>
             </div>
             <div class="form-group">
               <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-              <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+              <label for="remember-me" class="label-agree-term"><span><span></span></span>بخاطر سپردن</label>
             </div>
             <div class="form-group form-button">
-              <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+              <div v-on:click="login" class="form-submit"> ورود </div>
             </div>
           </form>
-          <div class="social-login">
-            <span class="social-label">Or login with</span>
-            <ul class="socials">
-              <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-              <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-              <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
-            </ul>
-          </div>
+<!--          <div class="social-login">-->
+<!--            <span class="social-label">Or login with</span>-->
+<!--            <ul class="socials">-->
+<!--              <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>-->
+<!--              <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>-->
+<!--              <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>-->
+<!--            </ul>-->
+<!--          </div>-->
         </div>
       </div>
     </div>
+
   </section>
 </template>
 <script>
+  import axios from 'axios'
+  import * as auth from '../services/auth_service'
+
+  export default {
+
+  data(){
+    return {
+      email : '',
+      password : '',
+      response : '',
+      user : {
+        email : '',
+        password : ''
+      }
+    }
+  }
+  ,
+  methods : {
+    submit (){
+      this.$store.dispatch('login' , {
+        email : this.email,
+        password : this.password
+      })
+    },
+    login: async function(){
+      try {
+        const response = await auth.login(this.user)
+        console.log(response)
+      }catch (e) {
+
+      }
+    }
+  }
+}
+
+
 
 </script>
-<style>
+<style scoped>
 
   display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
     display: flex;
@@ -120,7 +158,7 @@
     padding: 0;
     font-weight: bold;
     color: #222;
-    font-family: Poppins;
+    font-family: vasir;
     font-size: 36px; }
 
   .main {
@@ -136,7 +174,7 @@
     color: #222;
     background: #f8f8f8;
     font-weight: 400;
-    font-family: Poppins; }
+    font-family: vasir; }
 
   .container {
     width: 900px;
@@ -261,7 +299,7 @@
     border: none;
     border-bottom: 1px solid #999;
     padding: 6px 30px;
-    font-family: Poppins;
+    font-family: vasir;
     box-sizing: border-box; }
   input::-webkit-input-placeholder {
     color: #999; }
@@ -328,7 +366,7 @@
     font-size: 11px;
     line-height: 1.2;
     text-align: center;
-    font-family: 'Material-Design-Iconic-Font';
+    font-family: vasir;
     font-weight: bold; }
 
   .agree-term {
@@ -367,7 +405,7 @@
     height: 20px;
     background: transparent; }
   label.valid:after {
-    font-family: 'Material-Design-Iconic-Font';
+    font-family: vasir;
     content: '\f269';
     width: 100%;
     height: 100%;

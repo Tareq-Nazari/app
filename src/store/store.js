@@ -1,9 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 
 Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
+    idToken : null,
+    userId : null,
     fav : false,
     subMenu: {
       1: false,
@@ -62,8 +65,11 @@ export const store = new Vuex.Store({
     increment: state => {
       state.counter++;
     },
-
-
+    authUser(state , userData){
+      state.idToken = userData.token;
+      state.userId = userData.userId
+    }
+,
     deleteFromCart(){
 
     },
@@ -83,6 +89,54 @@ export const store = new Vuex.Store({
         state.subMenu[payload] = false;
         state.style[payload] = 'background-color:black';
       }
+    }
+  },
+  actions : {
+    signup({commit} , authData){
+      axios.post('users/register',{
+        name : authData.name,
+        email : authData.email,
+        password : authData.password,
+        address : authData.address,
+        phone : authData.phone,
+        role : authData.role,
+        returnSecureToken: true
+
+
+      }).then(response => {
+        alert(response.data.idToken)
+        commit('authUser' , {
+
+          token : response.data.idToken,
+          userId : response.data.userId,
+
+
+        })
+      })
+        .catch(e => {})
+    }
+    ,
+    login({commit} , authData){
+
+      axios.post('users/login' , {
+        email : authData.email,
+        password : authData.password,
+
+      }).then(function (response) {
+        commit('authUser' , {
+          token : response.data.access_token,
+          userId: response.data.id
+
+        })
+
+
+
+      })
+        .catch(function (error) {
+          // handle error
+          console.log(error[0])
+        })
+
     }
   }
 

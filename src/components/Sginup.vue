@@ -2,50 +2,45 @@
   <div class="main">
 
 
-
-
-    <div style="height: 65px;margin-left: auto;margin-right: auto;width: 330px;background-color: pink;display: flex;align-items: center;justify-content: space-around">
-      <div style="height: 55px;width: 90px;border: 1px solid #d0d4d3;font-size: 1em;border-radius: 5px;background-color: white;text-align: center;">فروشنده</div>
-      <div style="height: 55px;width: 90px;border: 1px solid #d0d4d3;font-size: 1em;border-radius: 5px;background-color: white;text-align: center">کاربر</div>
-
-
-    </div>
-
     <!-- Sign up form -->
     <section class="signup">
       <div class="container">
         <div class="signup-content">
           <div class="signup-form">
-            <h2 class="form-title">Sign up</h2>
+            <h2 class="form-title">ثبت نام</h2>
             <form  class="register-form" id="register-form">
               <div class="form-group">
                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                <input type="text" v-model="name" name="name" id="name" placeholder="Your Name"/>
+                <input type="text" v-model="name" name="name" id="name" placeholder="نام و نام خانوادگی"/>
               </div>
               <div class="form-group">
                 <label for="email"><i class="zmdi zmdi-email"></i></label>
-                <input type="email" v-model="email" name="email" id="email" placeholder="Your Email"/>
+                <input type="email" v-model="email" name="email" id="email" placeholder="ایمیل"/>
+              </div>
+              <div class="form-group">
+                <label for="cp"><i class="zmdi zmdi-email"></i></label>
+                <input type="number" v-model="phone" name="cp" id="cp" placeholder="09xx xxx xxxx" />
+              </div>
+              <div class="form-group">
+                <label for="address"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                <textarea style="font-family: vasir;height: 100%;width: 95%%;padding: 5px" v-model="address" name="address"  id="address" placeholder="آدرس"> </textarea>
               </div>
               <div class="form-group">
                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                <input type="password" v-model="password" name="pass" id="pass" placeholder="Password"/>
-              </div>
-              <div class="form-group">
-                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                <input type="password"  v-model="password" name="pass" id="pass" placeholder="پسورد"/>
               </div>
               <div class="form-group">
                 <input type="checkbox"  name="agree-term" id="agree-term" class="agree-term" />
-                <label for="agree-term"  class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                <label for="agree-term"  class="label-agree-term"><span><span></span></span>قوانین را مطالعه کرده ام و قبول دارم</label>
               </div>
               <div class="form-group form-button">
-                <div v-on:click="send" class="form-submit">  sssssss </div>
+                <div v-on:click="register" class="form-submit">  ثبت نام </div>
               </div>
             </form>
           </div>
           <div class="signup-image">
             <figure><img src="./../img/seller.jpg" alt="sing up image"></figure>
-            <a href="#" class="signup-image-link">I am already member</a>
+            <router-link to="/Login" class="signup-image-link">ثبت نام کرده اید؟ورود</router-link>
           </div>
         </div>
       </div>
@@ -61,6 +56,8 @@
 <script>
   import axios from 'axios'
   import "../assets/css/signup.css"
+  import * as auth from '../services/auth_service'
+
     export default {
         name: "Sginup",
       data(){
@@ -68,29 +65,56 @@
             name : '',
             email : '',
             password : '',
-            re_password : ''
+            address : '',
+            phone : 0,
+            role : 1,
+            user : {
+              name : '',
+              email : '',
+              password : '',
+              address : '',
+              phone : 0,
+              role : 1
+            },
+
           }
       },
       methods : {
           send(){
-            axios.post('http://127.0.0.1/storeBackend/public/api/users/register',{
-              name : 'test1',
-              email : 'test1@gmail.com',
-              password : 'test1234',
-              address : 'bbbbb',
-              phone : 1234566,
-              role : 1
 
+            this.$store.dispatch('signup' , {name : this.name,email : this.email , password : this.password
+            , address : this.address, phone : this.phone , role : this.role})
 
-            }).then(response => {})
-            .catch(e => {})
+          }
+          ,
+          register : async function(){
+            try {
+              await auth.register(this.user);
+              this.$router.push('/login')
+            } catch (e) {
+              switch (e.response.status) {
+                case 422 :
+                  this.errors = e.response.data.errors;
+                  break;
+                case 500 :
+                  this.errors = e.response.data.errors;
+                  break;
+                case 201 :
+                  this.errors = e.response.data.errors;
+                  break;
+                default :
+                  this.errors = e.response.data.errors;
+                  break;
 
+              }
+            }
           }
       }
     }
 </script>
 
 <style scoped>
+
   display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
     display: flex;
     display: -webkit-flex; }
@@ -117,7 +141,8 @@
     -moz-appearance: unset !important;
     -webkit-appearance: unset !important;
     -o-appearance: unset !important;
-    -ms-appearance: unset !important; }
+    -ms-appearance: unset !important;
+    }
 
   input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     appearance: none !important;
@@ -167,7 +192,7 @@
     padding: 0;
     font-weight: bold;
     color: #222;
-    font-family: Poppins;
+    font-family: vasir;
     font-size: 36px; }
 
   .main {
@@ -183,7 +208,7 @@
     color: #222;
     background: #f8f8f8;
     font-weight: 400;
-    font-family: Poppins; }
+    font-family: vasir; }
 
   .container {
     width: 900px;
@@ -236,7 +261,9 @@
 
   .signup {
     margin-bottom: 150px; }
-
+  ::placeholder {
+    color: #c3c7c6;
+  }
   .signup-content {
     padding: 75px 0; }
 
@@ -308,7 +335,7 @@
     border: none;
     border-bottom: 1px solid #999;
     padding: 6px 30px;
-    font-family: Poppins;
+    font-family: vasir;
     box-sizing: border-box; }
   input::-webkit-input-placeholder {
     color: #999; }
@@ -375,7 +402,7 @@
     font-size: 11px;
     line-height: 1.2;
     text-align: center;
-    font-family: 'Material-Design-Iconic-Font';
+    font-family: vasir;
     font-weight: bold; }
 
   .agree-term {
@@ -414,7 +441,7 @@
     height: 20px;
     background: transparent; }
   label.valid:after {
-    font-family: 'Material-Design-Iconic-Font';
+    font-family: vasir;
     content: '\f269';
     width: 100%;
     height: 100%;
