@@ -10,7 +10,7 @@
 
         <div class="signin-form">
           <h2 class="form-title">ورود</h2>
-          <form class="register-form" id="login-form" v-on:submit.prevent="submit">
+          <form class="register-form" id="login-form" >
             <div class="form-group">
               <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
               <input v-model="user.email" type="text" name="your_name" id="your_name" placeholder="ایمیل"/>
@@ -68,8 +68,8 @@
     },
     login: async function(){
       try {
-        const response = await auth.login(this.user)
-        console.log(response)
+        const response = await auth.login(this.user);
+        this.$router.push('/home')
       }catch (e) {
 
       }

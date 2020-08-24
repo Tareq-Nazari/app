@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import jwt from 'jsonwebtoken'
 export function register(user) {
 
     axios.post('users/register',{
@@ -22,6 +22,21 @@ export function login(user) {
 
     email : user.email,
     password : user.password,
+  }).then(response => {
+    if (response.status === 200) {
+      const token = jwt.sign({user : user}, 'secret')
+      localStorage.setItem('token' , token)
+    }
+    return response.data
+
   })
+
+}
+
+export function isLoggedIn() {
+
+const token = localStorage.getItem('token');
+return token != null
+
 
 }

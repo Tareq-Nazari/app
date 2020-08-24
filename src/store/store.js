@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
+import '../services/auth_service'
+import {isLoggedIn} from "../services/auth_service";
 
 Vue.use(Vuex);
 export const store = new Vuex.Store({
@@ -57,6 +59,9 @@ export const store = new Vuex.Store({
     },
     stores: state => {
       return state.stores;
+    },
+    isLoggedIn(){
+      return isLoggedIn();
     }
 
   }
@@ -89,7 +94,8 @@ export const store = new Vuex.Store({
         state.subMenu[payload] = false;
         state.style[payload] = 'background-color:black';
       }
-    }
+    },
+
   },
   actions : {
     signup({commit} , authData){

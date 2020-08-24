@@ -36,6 +36,8 @@ import AdminAddUsers from "./components/Dashboard/Admin/users/add";
 import AdminProfileShow from "./components/Dashboard/Admin/profile/show";
 import AdminProfileEdit from "./components/Dashboard/Admin/profile/edit";
 import Sginup from "./components/Sginup";
+import * as auth from './services/auth_service';
+
 export const routes = [
   {path : '/store' , components:{
     default: StorePage,
@@ -46,13 +48,19 @@ export const routes = [
 
 
     ]},
+
   {path: '/signup' , component: Sginup},
   {path: '/search' , component: Search},
   {path: '' , component: Home},
   {path : '*' , component: StorePage},
   {path: '/product/:id' , component: ProductDetail},
   {path: '/login' , component: Login},
-  {path: '/stores' , component: Stores},
+  {path: '/stores' ,
+    component: Stores,
+    beforeEnter: (to,from,next) => {
+        auth.isLoggedIn() ? next():next('/login')
+    }},
+  {path: '/shoppingcart' , component: ShoppingCart},
   {path: '/category/:id' , component: category},
   {path: '/shopregister' , component: ShopRegister},
   {path : '/dashboard/store/:id/edit' , component: EditStore},
@@ -60,28 +68,40 @@ export const routes = [
   {path: '/dashboard/store/:id/edit/addproduct',component: AddProduct},
   {path: '/dashboard/store/:id/edit/editproduct',component: EditProduct},
   {path: '/dashboard/store/:id/edit/addproduct/:p_id',component: AddProduct},
-  {path: '/dashboard/admin/home',component: AdminHome},
-  {path: '/dashboard/admin/store/create',component: AdminCreateStore},
-  {path: '/shoppingcart' , component: ShoppingCart},
+
+
+
   {path: '/dashboard/user' , component: UserDashboard},
-  {path: '/dashboard/admin/store/all',component: AdminAllStore},
-  {path: '/dashboard/admin/store/detail',component: AdminStoreDetail},
-  {path: '/dashboard/admin/store/edit',component: AdminStoreEdit},
-  {path: '/dashboard/admin/product/all',component: AdminAllProduct},
-  {path: '/dashboard/admin/product/detail',component: AdminProductDetail},
-  {path: '/dashboard/admin/product/edit',component: AdminProductEdit},
-  {path: '/dashboard/admin/product/create',component: AdminCreateProduct},
-  {path: '/dashboard/admin/storeCategory/create',component: AdminAddCategoryStore},
-  {path: '/dashboard/admin/storeCategory/all',component: AdminAllCategoryStore},
-  {path: '/dashboard/admin/productCategory/create',component: AdminAddCategoryProduct},
-  {path: '/dashboard/admin/productCategory/all',component: AdminAllCategoryProduct},
-  {path: '/dashboard/admin/factors/all',component: AdminAllFactors},
-  {path: '/dashboard/admin/users/all',component: AdminAllUsers},
-  {path: '/dashboard/admin/user/edit',component: AdminEditUsers},
-  {path: '/dashboard/admin/user/detail',component: AdminDetailUsers},
-  {path: '/dashboard/admin/user/add',component: AdminAddUsers},
-  {path: '/dashboard/admin/profile/show',component: AdminProfileShow},
-  {path: '/dashboard/admin/profile/edit',component: AdminProfileEdit},
+
+
+  //Admin dashboard routes
+  {path: '/dashboard/admin/',component: AdminHome,
+  children: [
+    {path: 'store/all',component: AdminAllStore},
+    {path: 'store/detail',component: AdminStoreDetail},
+    {path: 'store/edit',component: AdminStoreEdit},
+    {path: 'product/all',component: AdminAllProduct},
+    {path: 'product/detail',component: AdminProductDetail},
+    {path: 'product/edit',component: AdminProductEdit},
+    {path: 'home/store/create',component: AdminCreateStore},
+    {path: 'product/create',component: AdminCreateProduct},
+    {path: 'storeCategory/create',component: AdminAddCategoryStore},
+    {path: 'storeCategory/all',component: AdminAllCategoryStore},
+    {path: 'productCategory/create',component: AdminAddCategoryProduct},
+    {path: 'productCategory/all',component: AdminAllCategoryProduct},
+    {path: 'factors/all',component: AdminAllFactors},
+    {path: 'users/all',component: AdminAllUsers},
+    {path: 'user/edit',component: AdminEditUsers},
+    {path: 'user/detail',component: AdminDetailUsers},
+    {path: 'user/add',component: AdminAddUsers},
+    {path: 'profile/show',component: AdminProfileShow},
+    {path: 'profile/edit',component: AdminProfileEdit},
+  ],beforeEnter: (to,from,next) => {
+    auth.isLoggedIn() ? next():next('/login')
+}
+
+  },
+
 
 
 

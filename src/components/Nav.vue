@@ -12,7 +12,8 @@
   <div style="cursor: pointer" v-on:click="searchClick = !searchClick"><font-awesome-icon :icon="['fas','search']" /></div>
   <div style="position:relative;cursor: pointer" v-on:click="shopClick = 1"><font-awesome-icon :icon="['fas','shopping-cart']" /><div style="position:absolute;height: 15px;width: 15px;
   background-color: red;border-radius: 50%;top: 58%;right: 14%;font-size: 12px;color: white">{{counter}}</div></div>
-  <div><font-awesome-icon :icon="['fas','user']" /></div>
+  <div><font-awesome-icon v-if="prof == false" :icon="['fas','user']" />
+  <img v-if="prof == true" src="src/img/seller.jpg" style="height: 100%;width: 100%"></div>
   <transition name="fade">
     <div v-if="searchClick" style="height: 50px;width: 400px;display: flex;align-items: center;background-color: white;border-radius: 7px;border:3px solid limegreen;position: absolute;top: 50px;left: 37px">
       <input placeholder="نام محصول ..." style="outline: none;font-size: 19px;background-color: #d9dddc;border: none;height: 40px;width: 320px;padding: 5px;display: inline-block">
@@ -20,6 +21,7 @@
         <font-awesome-icon :icon="['fas','search']" :style="{color : 'white',width: '28px',height: '28px',marginTop: '10px'}"></font-awesome-icon>
 
       </div>
+
     </div>
   </transition>
 
@@ -60,13 +62,20 @@
 <script>
 
 
+  import {isLoggedIn} from "../services/auth_service";
+
   export default {
     name: "Nav",
     data(){
       return {
           shopClick : 0,
           searchClick: false,
-          forc : 10
+          forc : 10,
+        user: {
+            isLoggedIn: 1
+
+
+        }
       }
 
     },
@@ -82,6 +91,10 @@
     computed: {
       counter() {
         return this.$store.getters.increase;
+      },
+      prof () {
+
+        return this.$store.getters.isLoggedIn
       }
     }
 

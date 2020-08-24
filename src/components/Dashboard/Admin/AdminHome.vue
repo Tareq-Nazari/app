@@ -15,7 +15,7 @@
         <div class="sub-menu" v-if="showTopMenu===true && subMenu[1]===true">
 
           <router-link to="/dashboard/admin/store/create"><a href="#"> ایجاد مغازه جدید</a></router-link>
-          <router-link to="/dashboard/admin/store/all"><a href="#"> تمام مغازه ها</a></router-link>
+          <router-link to="/dashboard/admin/store/all"> تمام مغازه ها</router-link>
 
 
         </div>
@@ -99,8 +99,9 @@
       <span style="font-size:30px;cursor:pointer" @click="showTopMenu=!showTopMenu , turnOff(9)">&#9776; </span>
 
     </div>
-
+<router-view></router-view>
   </div>
+
 </template>
 
 <script>
