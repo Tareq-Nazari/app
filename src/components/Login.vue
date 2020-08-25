@@ -25,6 +25,7 @@
             </div>
             <div class="form-group form-button">
               <div v-on:click="login" class="form-submit"> ورود </div>
+
             </div>
           </form>
 <!--          <div class="social-login">-->
@@ -69,11 +70,11 @@
     login: async function(){
       try {
         const response = await auth.login(this.user);
-        this.$router.push('/home')
+
       }catch (e) {
 
       }
-    }
+    },
   }
 }
 

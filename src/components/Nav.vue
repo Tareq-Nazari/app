@@ -3,8 +3,8 @@
 <div class="nav-container">
 
   <div class="item" ref="t" v-on:click="currentNav($event)" id="/"><router-link to="/">خانه</router-link></div>
-  <div class="item" @click="currentNav($event)" id="/store"><router-link to="/store">فروشگاه ها</router-link></div>
-  <div class="item" @click="currentNav($event)" id="/products"><router-link to="/product">محضولات</router-link></div>
+  <div class="item" @click="currentNav($event)" id="/store"><router-link to="/stores">فروشگاه ها</router-link></div>
+  <div class="item" @click="currentNav($event)" id="/products"><router-link to="/products">محضولات</router-link></div>
   <div class="item" @click="currentNav($event)" id="/contact"><router-link to="/contact">تماس با ما</router-link></div>
   <div class="item" v-on:click="currentNav($event)" id="/about">درباره ما</div>
 
