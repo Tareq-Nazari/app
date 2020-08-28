@@ -52,10 +52,11 @@
     return {
       email : '',
       password : '',
-      response : '',
+
       user : {
         email : '',
-        password : ''
+        password : '',
+        response: null
       }
     }
   }
@@ -68,13 +69,20 @@
       })
     },
     login: async function(){
-      try {
-        const response = await auth.login(this.user);
 
-      }catch (e) {
+       try {
+        await auth.login(this.user)
+         this.$router.push('/')
 
-      }
+
+       }catch (e) {
+
+       }
+
+
     },
+
+
   }
 }
 

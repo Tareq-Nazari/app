@@ -85,7 +85,7 @@
           <router-link to="/dashboard/admin/profile/edit"><a href="#"> تغیر دادن پروفایل من </a></router-link>
 
         </div>
-        <a class="menu-but" :style="style[7]" @click="turnOff('7') " v-if="showTopMenu===true" href="#">
+        <a class="menu-but" :style="style[7]" @click="turnOff('7') " v-if="showTopMenu===true" >
           <div style="display: inline-block">
             <span @click="logOut" class="title" style="display: inline-block;padding-right: 8%"> خروج</span>
           </div>
@@ -134,8 +134,10 @@
       ]),
       logOut: async function () {
 
-          auth.logout();
-          //this.$router.push('/login');
+
+           auth.logout();
+           this.$router.push('/login');
+
 
 
       }

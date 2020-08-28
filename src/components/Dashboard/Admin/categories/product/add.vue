@@ -2,7 +2,7 @@
 
 
   <div class="main">
-    <AdminHome></AdminHome>
+
     <div class="box">
       <form
         id="app"

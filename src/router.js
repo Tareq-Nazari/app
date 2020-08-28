@@ -54,7 +54,13 @@ export const routes = [
   {path: '' , component: Home},
   {path : '*' , component: StorePage},
   {path: '/product/:id' , component: ProductDetail},
-  {path: '/login' , component: Login},
+  {path: '/login' , component: Login,beforeEnter: (to,from,next)=>{
+      if (!auth.isLoggedIn()) {
+        next()
+      }else {
+        next('/home')
+      }
+    }},
   {path: '/stores' ,
     component: Stores,
     beforeEnter: (to,from,next) => {
@@ -97,7 +103,7 @@ export const routes = [
     {path: 'profile/show',component: AdminProfileShow},
     {path: 'profile/edit',component: AdminProfileEdit},
   ],beforeEnter: (to,from,next) => {
-   if(auth.isLoggedIn() == 'admin')  {
+   if(auth.isLoggedIn())  {
 
      next()
    } else {
