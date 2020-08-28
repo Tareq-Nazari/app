@@ -10,9 +10,11 @@
       <h5>ایدی مغازه : :{{this.$route.query.product.store_id}} </h5>
 
       <div style="display: grid;grid-template-columns: 1fr 1fr;grid-column-gap: 5px">
-        <button @click="edit(product,cat_names)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">ادیت کردن
+        <button @click="edit(product,cat_names)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">ادیت
+          کردن
         </button>
-        <button @click="deleteProduct(id)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">حذف کردن
+        <button @click="deleteProduct(product.id)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">
+          حذف کردن
         </button>
 
       </div>
@@ -20,8 +22,6 @@
     <div style="display: grid;grid-template-columns: 1fr;">
       <p style="font-family: vasir">عکس محصول</p>
       <img style="height: 420px" v-bind:src="'/src/img/'+this.$route.query.product.pic">
-
-
 
 
     </div>
@@ -53,18 +53,17 @@
           }
 
         ],
-        product:{
+        product: {
 
           pic: this.$route.query.product.pic,
           store_id: this.$route.query.product.store_id,
           price: this.$route.query.product.price,
           caption: this.$route.query.product.caption,
           id: this.$route.query.product.id,
-          cat_name: this.$route.query.product.cat_name,
+          cat_id: this.$route.query.product.cat_id,
           name: this.$route.query.product.name,
 
         },
-
 
 
       }
@@ -80,11 +79,16 @@
     methods: {
       deleteProduct: function (id) {
         if (confirm("آیا می خواهید مغازه را حذف کنید؟")) {
-          axios.post()
+          axios.post('http://127.0.0.1/laravel/public/api/admin/product/delete' + id)
+            .then(resp => console.log(resp)).catch(error => console.log(error))
+
+          this.$router.push({path: '/dashboard/admin/product/all'})
+
         }
       },
-      edit: function (product,cat_names) {
-        this.$router.push({path: '/dashboard/admin/product/edit', query: {product,cat_names}});
+
+      edit: function (product, cat_names) {
+        this.$router.push({path: '/dashboard/admin/product/edit', query: {product, cat_names}});
       }
     }
   }

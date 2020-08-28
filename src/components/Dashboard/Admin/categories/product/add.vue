@@ -7,7 +7,7 @@
       <form
         id="app"
 
-
+v-on:submit.prevent="submit"
       >
         <div>
           <h2 style="text-align: center;color: #d63938 ;padding-right: 0!important;font-size: 17px"> اضافه کردن دسته
@@ -39,8 +39,9 @@
 
         <div style="margin-top: 15px">
           <button
+            name="submit"
             type="submit"
-            id="su"
+            id="submit"
             v-on:click="checkForm"
           >Sd
           </button>
@@ -75,12 +76,12 @@
     methods: {
 
       checkForm: function () {
+        let formData = new FormData();
+        formData.append('name', this.name)
+        formData.append('store_id', this.store_id)
 
         axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/add',
-          {
-            name: this.name,
-            store_id: this.store_id
-          }
+         formData
         )
       }
 

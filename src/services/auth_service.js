@@ -37,8 +37,9 @@ export function login(user) {
 
 export function isLoggedIn() {
 
-const token = localStorage.getItem('token');
-return token.data.scope[0]
+let token = localStorage.getItem('token');
+token = JSON.parse(token);
+return token.data.scope
 
 }
 
@@ -69,3 +70,4 @@ export function logout() {
   //return tokenData;
 
 }
+

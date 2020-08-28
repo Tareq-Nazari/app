@@ -5,10 +5,8 @@
     <AdminHome></AdminHome>
     <div class="box">
       <form
-        id="app"
-        @submit="checkForm"
-        action="#"
-        method="post"
+        v-on:submit.prevent="submit"
+        enctype="multipart/form-data"
       >
         <div>
           <h2 style="text-align: center;color: #d63938 ">ایجاد محصول جدید</h2>
@@ -20,6 +18,7 @@
             id="name"
             type="text"
             name="name"
+            v-model="name"
           >
 
         </div>
@@ -30,6 +29,7 @@
             id="caption"
             type="text"
             name="caption"
+            v-model="caption"
           >
 
         </div>
@@ -40,6 +40,8 @@
             id="price"
             type="number"
             name="price"
+            v-model="price"
+
           >
 
         </div>
@@ -50,6 +52,7 @@
             id="store_id"
             type="number"
             name="store_id"
+            v-model="store_id"
           >
 
         </div>
@@ -59,14 +62,17 @@
           <input
             id="pic"
             type="file"
-            name="pic"
+            name="file"
+            ref="file"
+            v-on:change="handle"
+
           >
 
         </div>
         <div class="inp">
           <p> دسته بندی محصول </p>
-          <select style="padding-right: 12%" name="categories" id="categories">
-            <option v-for="cat in cat_names" :value="cat.id">{{cat.name}}</option>
+          <select  v-model="selected" style="padding-right: 12%" name="categories" id="categories">
+            <option v-for="cat in cats" :value="cat.id">{{cat.name}}</option>
 
           </select>
         </div>
@@ -76,6 +82,7 @@
             type="submit"
             value="ثبت"
             id="su"
+            v-on:click="checkForm"
           >
         </div>
 
@@ -89,25 +96,20 @@
 
 <script>
   import AdminHome from "../AdminHome";
+  import axios from "axios";
 
   export default {
     name: "create",
     data() {
       return {
-        cat_names: [
-          {
-            id: 1,
-            name: "sdsd"
-          },
-          {
-            id: 2,
-            name: "لباس تابستانه"
-          },
-          {
-            id: 3,
-            name: "aa"
-          }]
 
+        store_id: '',
+        price: '',
+        caption: '',
+        name: '',
+        selected: '',
+        file: '',
+        cats: ''
       }
     }, components: {
 
@@ -115,7 +117,41 @@
 
 
     },
-    methods: {}
+    methods: {
+      handle: function () {
+        this.file = this.$refs.file.files[0];
+
+      },
+      checkForm: function () {
+        let formData = new FormData();
+        formData.append('file', this.file)
+        formData.append('store_id', this.store_id)
+        formData.append('price', this.price)
+        formData.append('caption', this.caption)
+        formData.append('name', this.name)
+        formData.append('cat_id', this.selected)
+        axios.post('http://127.0.0.1/laravel/public/api/admin/product/create',
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        ).then(function () {
+          console.log('SUCCESS!!');
+        })
+          .catch(function () {
+            console.log('FAILURE!!');
+          });
+
+      }
+    },
+    created() {
+      axios.post('http://127.0.0.1/laravel/public/api/category/product_all')
+        .then(response => (this.cats = response.data)
+        ).catch(error => console.log(error))
+    },
+
 
   }
 

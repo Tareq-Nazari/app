@@ -19,9 +19,42 @@
             -
           </th>
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
-              v-for="(column, index) in columns2"
-              :key="index"><input style="font-size: 58%" :name="name1(column)" :placeholder="'فیلترکردن '+column">
+
+          ><input style="font-size: 58%" v-model="id" name="id" placeholder="فیلترکردن ">
           </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="product_name" name="product_name" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="store_name" name="store_name" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="price" name="price" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="payment_receipt" name="payment_receipt" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="created_at" name="created_at" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="store_id" name="store_id" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="product_id" name="product_id" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="profile_id" name="profile_id" placeholder="فیلترکردن ">
+          </th>
+
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
           >
             <button @click="send" style="cursor: pointer;background-color: #00a8ed;border: solid 1px" type="submit">
@@ -30,7 +63,7 @@
           </th>
         </tr>
         </thead>
-        <tbody>
+        <tbody >
         <tr v-for="(product, index) in factors" :key="index">
           <td class="counter" style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none">
           </td>
@@ -39,7 +72,7 @@
           </td>
           <td
             style="color: #00a8ed;text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
-            >
+          >
             -
           </td>
         </tr>
@@ -61,43 +94,16 @@
     name: "all",
     data() {
       return {
-        pull: 0,
-        factors: [
-          {
-            id: "21",
-            store_name: 'ساحل',
-            product_name: "تی شرت ",
-            price: 22000,
-            payment_receipt: "24",
-            created_at: '14-4-98',
-            store_id: '11',
-            product_id: '11',
-            profile_id: '11'
-          },
-          {
-            id: "21",
-            store_name: 'لباس تابستانه',
-            product_name: "خوب است زیباست",
-            price: 22000,
-            payment_receipt: "24",
-            created_at: 'product-12.jpg',
-            store_id: 'product-12.jpg',
-            product_id: 'product-12.jpg',
-            profile_id: 'product-12.jpg'
-          },
-          {
-            id: "21",
-            store_name: 'لباس تابستانه',
-            product_name: "خوب است زیباست",
-            price: 22000,
-            payment_receipt: "24",
-            created_at: 'product-12.jpg',
-            store_id: 'product-12.jpg',
-            product_id: 'product-12.jpg',
-            profile_id: 'product-12.jpg'
-          },
-        ],
-
+        id: '',
+        product_name: '',
+        product_id: '',
+        store_name: '',
+        store_id: '',
+        payment_receipt: '',
+        created_at: '',
+        profile_id: '',
+        price: '',
+        factors: '',
         columns: ['id', 'product_name', 'store_name', 'price', 'payment_receipt', 'created_at', 'store_id', 'product_id', 'profile_id'],
         columns1: ['شمارنده', 'id', 'نام محصول', 'نام مغازه', 'قیمت', 'شماره پرداخت', 'تاریخ پرداخت', 'idمغازه', 'idمحصول', 'idپروفابل خریدار', 'جزئیات'],
         columns2: ['id', 'نام محصول', 'نام مغازه', 'قیمت', 'شماره پرداخت', 'تاریخ پرداخت', 'idمغازه', 'idمحصول', 'idپروفابل خریدار',]
@@ -139,10 +145,25 @@
         }
 
       },
-      send() {
-        axios.post()
-      }
+      send: function () {
+        axios.post('http://127.0.0.1/laravel/public/api/admin/factors/search', {
+          id: this.id,
+          product_name: this.product_name,
+          product_id: this.product_id,
+          store_name: this.store_name,
+          store_id: this.store_id,
+          payment_receipt: this.payment_receipt,
+          created_at: this.created_at,
+          profile_id: this.product_id,
+          price: this.price,
+        }).then(response => (this.factors = response.data))
 
+      },
+    },
+    created() {
+      axios.post('http://127.0.0.1/laravel/public/api/admin/factors/all')
+        .then(response => (this.factors = response.data)
+        ).catch(error => console.log(error))
     },
 
     computed: {

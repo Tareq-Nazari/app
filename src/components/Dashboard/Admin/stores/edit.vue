@@ -7,9 +7,7 @@
     <div class="box">
       <form
         id="app"
-        @submit="checkForm"
-        action="#"
-        method="post"
+        v-on:submit.prevent="submit"
       >
         <div>
           <h2 style="text-align: center;color: #d63938 "> ادیت کردن مغازه </h2>
@@ -21,7 +19,7 @@
             id="name"
             type="text"
             name="name"
-            :value="$route.query.store.name"
+            v-model="name"
           >
 
         </div>
@@ -32,7 +30,7 @@
             id="caption"
             type="text"
             name="caption"
-            :value="$route.query.store.caption"
+            v-model="caption"
           >
 
         </div>
@@ -43,7 +41,7 @@
             id="email"
             type="email"
             name="email"
-            :value="$route.query.store.email"
+            v-model="email"
           >
 
         </div>
@@ -54,7 +52,7 @@
             id="phone"
             type="number"
             name="phone"
-            :value="$route.query.store.phone"
+            v-model="phone"
           >
 
         </div>
@@ -65,47 +63,52 @@
             id="profile_id"
             type="number"
             name="profile_id"
-            :value="$route.query.store.profile_id"
+            v-model="profile_id"
           >
 
         </div>
-        <div >
-          <p>  عکس پروفایل </p>
+        <div>
+          <p> عکس پروفایل </p>
+
 
           <input style="border: none"
-            id="profile_pic"
-            type="file"
-            name="profile_id"
-           v-on:value="$route.query.store.profile_pic"
+                 id="pic"
+                 type="file"
+                 name="pic"
+                 ref="file"
 
+                 v-on:change="selectFileProfile"
           >
 
         </div>
-        <div >
+        <div>
           <p> عکس هدر </p>
 
           <input style="border: none"
-            id="header_pic"
-            type="file"
-            name="profile_id"
-            v-on:value="$route.query.store.header_pic"
+                 id="header_pic"
+                 type="file"
+                 name="header_pic"
+                 ref="file"
+                 v-on:change="selectFileHeader"
           >
 
         </div>
         <div class="inp">
           <p> دسته بندی مغازه </p>
-          <select style="padding-right: 12%" name="cat_id" id="cars">
-            <option v-for="cats in cat_names" :value="cats.id" :selected="cats.name===test">{{cats.name}}</option>
-
+          <select v-model="selected" style="padding-right: 12%" name="cat_id" id="cars">
+            <option v-for="cat in this.categories" :value="cat.id">{{cat.name}}</option>
           </select>
         </div>
 
         <div style="margin-top: 15px">
-          <input
+          <button
             type="submit"
             value=" ثبت تغیرات"
             id="su"
-          >
+            v-on:click="checkForm"
+          > ثبت تغیرات
+          </button>
+
         </div>
 
       </form>
@@ -126,21 +129,60 @@
     components: {AdminHome},
     data() {
       return {
-        cat_names: this.$route.query.cat_names,
-        test: this.$route.query.store.cat_name
+        categories: '',
+        selected: this.$route.query.store.cat_name,
+        name: this.$route.query.store.cat_name,
+        phone: this.$route.query.store.phone,
+        header_pic: this.$route.query.store.header_pic,
+        pic: '',
+        email: this.$route.query.store.email,
+        address: this.$route.query.store.address,
+        profile_id: this.$route.query.store.profile_id,
+        caption: this.$route.query.store.caption,
+        id: this.$route.query.store.id,
       }
 
     }, methods: {
       checkForm: function () {
-        axios.post()
-      },onFileChange(e) {
-        var files = e.target.files || e.dataTransfer.files;
-        if (!files.length)
-          return;
-        this.createImage(files[0]);
+
+        let formData = new FormData();
+        formData.append('id', this.id)
+        formData.append('profile_pic', this.pic)
+        formData.append('header_pic', this.header_pic)
+        formData.append('profile_id', this.profile_id)
+        formData.append('caption', this.caption)
+        formData.append('name', this.name)
+        formData.append('cat_id', this.selected)
+        formData.append('address', this.address)
+        formData.append('email', this.email)
+        formData.append('phone', this.phone)
+        axios.post('http://127.0.0.1/laravel/public/api/admin/store/edit',
+          formData
+          , {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+
+          }).then(resp => console.log(resp)).catch(error => console.log(error))
+
+      },
+      pp: function () {
+
+      },
+      selectFileProfile: function () {
+        this.pic = this.$refs.file.files[0];
+      },
+      selectFileHeader: function () {
+        this.header_pic = this.$refs.file.files[0];
       },
 
-    }
+
+    },
+    created() {
+      axios.post('http://127.0.0.1/laravel/public/api/admin/category/store/all')
+        .then(response => (this.categories = response.data)
+        ).catch(error => console.log(error))
+    },
   }
 </script>
 

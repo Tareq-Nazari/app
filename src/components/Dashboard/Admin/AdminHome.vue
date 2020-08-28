@@ -1,5 +1,5 @@
 <template>
-  <div style="display: grid;grid-template-columns: 1fr 2fr">
+  <div style="display: grid;grid-template-columns: 12fr 2fr">
     <div id="myNav" class="overlay" :style="showTopMenu===true? style3:style2">
       <div
         style="display: grid;grid-template-columns: 1fr;grid-row-gap: 15px;height: 150px;position: relative;top: 10%;transition:display 5s">
@@ -95,11 +95,11 @@
       </div>
 
     </div>
-    <div class="main" :style="showTopMenu===true? style4:style1">
-      <span style="font-size:30px;cursor:pointer" @click="showTopMenu=!showTopMenu , turnOff(9)">&#9776; </span>
+<!--    <div class="main" :style="showTopMenu===true? style4:style1">-->
+<!--      <span style="font-size:30px;cursor:pointer" @click="showTopMenu=!showTopMenu , turnOff(9)">&#9776; </span>-->
 
-    </div>
-<router-view></router-view>
+<!--    </div>-->
+   <div> <router-view></router-view> </div>
   </div>
 
 </template>

@@ -5,10 +5,7 @@
     <AdminHome></AdminHome>
     <div class="box">
       <form
-        id="app"
-        @submit="checkForm"
-        action="#"
-        method="post"
+        v-on:submit.prevent="submit"
       >
         <div>
           <h2 style="text-align: center;color: #d63938 ">اضافه کردن کاربرجدید</h2>
@@ -19,7 +16,7 @@
           <input
             id="name"
             type="text"
-            name="name"
+            v-model="name"
           >
 
         </div>
@@ -30,6 +27,7 @@
             id="email"
             type="text"
             name="email"
+            v-model="email"
           >
 
         </div>
@@ -40,6 +38,18 @@
             id="password"
             type="password"
             name="password"
+            v-model="password"
+          >
+
+        </div>
+        <div class="inp">
+          <p> تکرار رمزعبور </p>
+
+          <input
+            id="password_confirmation"
+            type="password"
+            name="password_confirmation"
+            v-model="password_confirmation"
           >
 
         </div>
@@ -50,23 +60,25 @@
             id="phone"
             type="number"
             name="phone"
+            v-model="phone"
           >
 
         </div>
         <div class="inp">
-          <p> آدرس  </p>
+          <p> آدرس </p>
 
           <input
             id="address"
             type="text"
             name="address"
+            v-model="address"
           >
 
         </div>
         <div class="inp">
           <p>نقش </p>
-          <select style="padding-right: 12%" name="categories" id="categories">
-            <option v-for="role in roles"  :value="role.id">{{role.name}}</option>
+          <select v-model="selected"style="padding-right: 12%" name="categories" id="categories">
+            <option v-for="role in roles"    :value="role.id">{{role.title}}</option>
 
           </select>
         </div>
@@ -74,8 +86,9 @@
         <div style="margin-top: 15px">
           <input
             type="submit"
-            value="ثبت"
+
             id="su"
+            v-on:click="checkForm"
           >
         </div>
 
@@ -89,24 +102,22 @@
 
 <script>
   import AdminHome from "../AdminHome";
+  import axios from "axios";
 
   export default {
     name: "add",
     data() {
       return {
-        roles: [
-          {
-            id: 1,
-            name: "admin"
-          },
-          {
-            id: 2,
-            name: "shopOwner"
-          },
-          {
-            id: 3,
-            name: "author"
-          }]
+        name: '',
+        password: '',
+        phone: '',
+        address: '',
+        email: '',
+        password_confirmation:'',
+        selected:'',
+        roles:''
+
+
       }
     }, components: {
 
@@ -115,10 +126,28 @@
 
     },
     methods: {
-      checkForm:function () {
+      checkForm: function () {
 
-      }
-    }
+        axios.post('http://127.0.0.1/laravel/public/api/admin/users/add',
+          {
+            name: this.name,
+            password: this.password,
+            email: this.email,
+            phone: this.phone,
+            address: this.address,
+            role: this.selected,
+            password_confirmation:this.password_confirmation
+
+          }
+        )
+      },
+    },
+    created() {
+      axios.post('http://127.0.0.1/laravel/public/api/admin/roles')
+        .then(response => (this.roles = response.data)
+        ).catch(error => console.log(error))
+    },
+
 
   }
 
@@ -158,7 +187,8 @@
   input:focus {
     outline: none;
   }
-  select{
+
+  select {
     border-radius: 3px;
     border: solid 1px #dcdcdc;
     min-height: 45px;
@@ -166,7 +196,8 @@
     width: 40%;
 
   }
-  select:focus{
+
+  select:focus {
     outline: none;
   }
 
@@ -196,7 +227,8 @@
   .inp > p {
     margin-right: 2%;
   }
-  p{
+
+  p {
     color: #d81c1e;
   }
 

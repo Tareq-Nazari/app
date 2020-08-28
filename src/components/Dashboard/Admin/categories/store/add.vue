@@ -6,9 +6,7 @@
     <div class="box">
       <form
         id="app"
-        @submit="checkForm"
-        action="#"
-        method="post"
+        v-on:submit.prevent="submit"
       >
         <div>
           <h2 style="text-align: center;color: #d63938;font-size: 17px "> اضافه کردن دسته بندی جدید به مغازه ها</h2>
@@ -20,15 +18,17 @@
             id="name"
             type="text"
             name="name"
+            v-model="name"
           >
 
         </div>
 
         <div style="margin-top: 15px">
           <input
+            name="submit"
             type="submit"
-            value="ثبت"
-            id="su"
+            id="submit"
+            v-on:click="checkForm"
           >
         </div>
 
@@ -42,13 +42,12 @@
 
 <script>
   import AdminHome from "../../AdminHome";
+  import axios from "axios";
 
   export default {
     name: "add",
     data() {
-      return {
-
-      }
+      return {name: ''}
     }, components: {
 
       AdminHome
@@ -56,8 +55,12 @@
 
     },
     methods: {
-      checkForm:function () {
+      checkForm: function () {
 
+        axios.post('http://127.0.0.1/laravel/public/api/admin/category/store/add',
+          {
+            name: this.name,
+          })
       }
 
     }
@@ -100,7 +103,8 @@
   input:focus {
     outline: none;
   }
-  select{
+
+  select {
     border-radius: 3px;
     border: solid 1px #dcdcdc;
     min-height: 45px;
@@ -108,7 +112,8 @@
     width: 40%;
 
   }
-  select:focus{
+
+  select:focus {
     outline: none;
   }
 
@@ -138,7 +143,8 @@
   .inp > p {
     margin-right: 2%;
   }
-  p{
+
+  p {
     color: #d81c1e;
   }
 

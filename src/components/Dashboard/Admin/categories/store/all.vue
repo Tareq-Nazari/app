@@ -19,9 +19,14 @@
             -
           </th>
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
-              v-for="(column, index) in columns2"
-              :key="index"><input style="font-size: 58%" :name="name1(column)" :placeholder="'فیلترکردن '+column">
+
+          ><input style="font-size: 58%" v-model="name" name="name" placeholder="فیلترکردن ">
           </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="id" name="id" placeholder="فیلترکردن ">
+          </th>
+
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
           >
             <button @click="send" style="cursor: pointer;background-color: #00a8ed;border: solid 1px" type="submit">
@@ -30,8 +35,8 @@
           </th>
         </tr>
         </thead>
-        <tbody>
-        <tr v-for="(category, index) in categories" :key="index">
+        <tbody >
+        <tr v-for="(category, index) in cats" :key="index">
           <td class="counter" style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none">
           </td>
           <td style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
@@ -40,7 +45,9 @@
           <td
             style="color: #00a8ed;text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
           >
-            <button  @click="delete1(category.id)" style=" cursor:pointer;background-color: #EF394E;border: 1px solid #d63938">حذف کردن</button>
+            <button @click="delete1(category.id)"
+                    style=" cursor:pointer;background-color: #EF394E;border: 1px solid #d63938">حذف کردن
+            </button>
           </td>
         </tr>
         </tbody>
@@ -61,7 +68,10 @@
     name: "all",
     data() {
       return {
-        pull: 0,
+        name: '',
+        id: '',
+        cats: '',
+
         categories: [
           {name: "t-shirt", id: "21"},
           {name: "t-shirt", id: "21"},
@@ -71,7 +81,7 @@
 
         columns: ['name', 'id'],
         columns1: ['شمارنده', 'نام دسته بندی', 'id', 'جزئیات'],
-        columns2: [ 'دسته بندی', 'id']
+        columns2: ['دسته بندی', 'id']
       }
     },
     components: {AdminHome},
@@ -79,7 +89,9 @@
 
       delete1: function (id) {
         if (confirm("آیا می خواهید دسته بندی را حذف کنید؟")) {
-          axios.post()
+          axios.post('http://127.0.0.1/laravel/public/api/admin/category/store/delete'+id)
+            .then(response => console.log(response)
+            ).catch(error => console.log(error))
 
         }
       },
@@ -91,10 +103,19 @@
           return 'name';
         }
       },
-      send() {
-        axios.post()
+      send: function () {
+        axios.post('http://127.0.0.1/laravel/public/api/admin/category/store/search', {
+          id: this.id,
+          name: this.name,
+        }).then(response => (this.cats = response.data))
+
       }
 
+    },
+    created() {
+      axios.post('http://127.0.0.1/laravel/public/api/admin/category/store/all')
+        .then(response => (this.cats = response.data)
+        ).catch(error => console.log(error))
     },
 
     computed: {

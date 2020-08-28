@@ -73,6 +73,7 @@
       AdminHome
     },
 
+
     methods: {
       deleteUser: function (id) {
         if (confirm("آیا می خواهید مغازه را حذف کنید؟")) {

@@ -19,18 +19,41 @@
             -
           </th>
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
-              v-for="(column, index) in columns2"
-              :key="index"><input style="font-size: 58%" :name="name1(column)" :placeholder="'فیلترکردن '+column">
+
+          ><input style="font-size: 58%" v-model="name" name="name" placeholder="فیلترکردن ">
           </th>
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
-          >
+          ><input style="font-size: 58%" v-model="cat_name" name="cat_name" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+
+          ><input style="font-size: 58%" v-model="id" name="id" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="price" name="price" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="store_id" name="store_id" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="max" name="max" placeholder="حد بالا ">
+          <input style="font-size: 58%" v-model="min" name="min" placeholder="حد پایین ">
+          </th>
+
+
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none">
+
             <button @click="send" style="cursor: pointer;background-color: #00a8ed;border: solid 1px" type="submit">
               اعمال فیلتر
             </button>
           </th>
         </tr>
         </thead>
-        <tbody>
+        <tbody >
         <tr v-for="(product, index) in products" :key="index">
           <td class="counter" style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none">
           </td>
@@ -38,9 +61,13 @@
               v-for="(column, indexColumn) in columns" :key="indexColumn">{{product[column]}}
           </td>
           <td
+            style="color: #00a8ed;text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
+           >
+            -
+          </td><td
             style="color: #00a8ed;cursor: pointer;text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
             @click="routerLinkToDetails(product)">
-            مشاهده صفحه مغازه
+            مشاهده صفحه محصول
           </td>
         </tr>
         </tbody>
@@ -61,16 +88,17 @@
     name: "all",
     data() {
       return {
-        pull: 0,
-        products: [
-          {name: "t-shirt", id: "21", cat_name: 'لباس تابستانه', caption: "خوب است زیباست", price: 22000,store_id:"24",pic:'product-12.jpg'},
-          {name: "t-shirt", id: "22", cat_name: 'لباس تابستانه', caption: "خوب است زیباست", price: 22000,store_id:"24",pic:'product-12.jpg'},
-          {name: "t-shirt", id: "23", cat_name: 'لباس تابستانه', caption: "خوب است زیباست", price: 22000,store_id:"24",pic:'product-12.jpg'},
-        ],
+        cat_name:'',
+        price:'',
+        store_id:'',
+        name:'',
+        id:'',
+        max:'',
+        min:'',
+        products: '',
+        columns: ['name', 'cat_name', 'id', 'price','store_id'],
+        columns1: ['شمارنده', 'نام محصول', 'دسته بندی', 'id محصول', 'قیمت','store_id','حدود قیمت', 'جزئیات'],
 
-        columns: ['name', 'cat_name', 'id', 'price', 'caption'],
-        columns1: ['شمارنده', 'نام محصول', 'دسته بندی', 'id محصول', 'قیمت', 'توضیحات', 'جزئیات'],
-        columns2: ['نام محصول', 'دسته بندی', 'id محصول', 'قیمت', 'توضیحات']
       }
     },
     components: {AdminHome},
@@ -92,24 +120,38 @@
         if (msg === 'قیمت') {
           return 'price';
         }
-        if (msg === 'توضیحات') {
-          return 'caption';
-        }
+
 
       },
-      send() {
-        axios.post()
+      send: function () {
+        axios.post('http://127.0.0.1/laravel/public/api/admin/product/search', {
+          id: this.id,
+          store_id: this.store_id,
+          name: this.name,
+          cat_name: this.cat_name,
+          price: this.role,
+          max: this.max,
+          min: this.min,
+
+
+        }).then(response => (this.products = response.data))
+
+      },
+  },
+      created() {
+        axios.post('http://127.0.0.1/laravel/public/api/admin/product/all')
+          .then(response => (this.products = response.data)
+          ).catch(error => console.log(error))
+      },
+
+
+      computed: {
+        ...mapGetters([
+          'stores'
+        ]),
+
       }
-
-    },
-
-    computed: {
-      ...mapGetters([
-        'stores'
-      ]),
-
     }
-  }
 
 </script>
 
