@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <admin-home></admin-home>
+<div></div>
     <div style="margin-bottom: 10px;display: grid;grid-template-columns: 1fr;grid-row-gap: 20px; ">
       <table class="table">
 
@@ -158,7 +158,8 @@
 <style scoped>
   .main {
     display: grid;
-    grid-template-columns: 0.4fr 1fr 0.2fr;
+    grid-template-columns: 2fr 4fr 0.8fr;
+
 
   }
 

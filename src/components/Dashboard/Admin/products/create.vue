@@ -2,7 +2,7 @@
 
 
   <div class="main">
-    <AdminHome></AdminHome>
+  <div></div>
     <div class="box">
       <form
         v-on:submit.prevent="submit"

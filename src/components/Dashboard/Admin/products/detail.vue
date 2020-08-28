@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <admin-home></admin-home>
+    <div></div>
     <div class="textDetail">
       <h1>نام محصول : {{this.$route.query.product.name}}</h1>
       <h2>توضیحات : {{this.$route.query.product.caption}}</h2>
