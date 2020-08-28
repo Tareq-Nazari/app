@@ -97,7 +97,12 @@ export const routes = [
     {path: 'profile/show',component: AdminProfileShow},
     {path: 'profile/edit',component: AdminProfileEdit},
   ],beforeEnter: (to,from,next) => {
-    auth.isLoggedIn() ? next():next('/login')
+   if(auth.isLoggedIn() == 'admin')  {
+
+     next()
+   } else {
+     next('/login')
+   }
 }
 
   },
