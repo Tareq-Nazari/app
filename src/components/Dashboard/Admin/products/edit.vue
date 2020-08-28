@@ -2,14 +2,12 @@
   <div class="main">
     <div>
 
-      <admin-home></admin-home>
+      <div></div>
     </div>
     <div class="box">
       <form
         id="app"
-        @submit="checkForm"
-        action="#"
-        method="post"
+        v-on:submit.prevent="submit"
       >
         <div>
           <h2 style="text-align: center;color: #d63938 "> ادیت کردن محصول </h2>
@@ -21,8 +19,7 @@
             id="name"
             type="text"
             name="name"
-
-            :value="$route.query.product.name"
+            v-model="name"
           >
 
         </div>
@@ -33,8 +30,7 @@
             id="caption"
             type="text"
             name="caption"
-
-            :value="$route.query.product.caption"
+            v-model="caption"
           >
 
         </div>
@@ -43,11 +39,11 @@
           <p> قیمت محصول </p>
 
           <input
-            id="phone"
+            id="price"
             type="number"
             name="price"
 
-            :value="$route.query.product.price"
+            v-model="price"
           >
 
         </div>
@@ -60,37 +56,40 @@
             type="number"
             name="store_id"
 
-            :value="$route.query.product.store_id"
+
+            v-model="store_id"
           >
 
         </div>
-        <div >
-          <p>  عکس محصول </p>
+        <div>
+          <p> عکس محصول </p>
 
           <input style="border: none"
-                 id="pic"
+                 id="file"
                  type="file"
-                 name="pic"
-                 v-on:value="this.$route.query.product.pic"
-
+                 name="file"
+                 ref="file"
+                 v-on:change="selectFile"
           >
 
         </div>
 
         <div class="inp">
           <p> دسته بندی مغازه </p>
-          <select style="padding-right: 12%" name="cat_id" id="cars">
-            <option v-for="cats in cat_names" :value="cats.id" :selected="cats.name===test">{{cats.name}}</option>
+          <select v-model="selected" style="padding-right: 12%" name="cat_id" id="cars">
+            <option v-for="cats in  categories" :value="cats.id">{{cats.name}}</option>
 
           </select>
         </div>
 
         <div style="margin-top: 15px">
-          <input
+          <button
             type="submit"
-            value=" ثبت تغیرات"
+
             id="su"
-          >
+            v-on:click="checkForm"
+          >ثبت تغیرات
+          </button>
         </div>
 
       </form>
@@ -111,21 +110,51 @@
 
     data() {
       return {
-        cat_names: this.$route.query.cat_names,
-        test: this.$route.query.product.cat_name,
+        cat_id: this.$route.query.product.cat_id,
+        price: this.$route.query.product.price,
+        store_id: this.$route.query.product.store_id,
+        name: this.$route.query.product.name,
+        file: this.$route.query.product.pic,
+        selected: this.$route.query.product.cat_id,
+        caption: this.$route.query.product.caption,
+        categories: '',
+        id:this.$route.query.product.id,
 
       }
 
     }, methods: {
       checkForm: function () {
-        axios.post()
-      },onFileChange(e) {
-        var files = e.target.files || e.dataTransfer.files;
-        if (!files.length)
-          return;
-        this.createImage(files[0]);
-      },
+        let formData = new FormData();
+        formData.append('pic',this.file)
+        formData.append('id', this.id)
+        formData.append('price', this.price)
+        formData.append('caption', this.caption)
+        formData.append('name', this.name)
+        formData.append('cat_id', this.selected)
+        axios.post('http://127.0.0.1/laravel/public/api/admin/product/edit',
+          formData
+        , {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
 
+        }).then(resp => console.log(resp)).catch(error => console.log(error))
+
+      },
+      selectFile:function ()
+
+      {
+
+        // `files` is always an array because the file input may be in multiple mode
+        this.file = this.$refs.file.files[0];
+
+      }
+
+    },
+    created() {
+      axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/all')
+        .then(response => (this.categories = response.data)
+        ).catch(error => console.log(error))
     },
     components: {AdminHome},
   }

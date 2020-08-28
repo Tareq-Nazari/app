@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <admin-home></admin-home>
+    <div></div>
     <div class="textDetail">
       <h1>نام : {{this.$route.query.user.name}}</h1>
       <h2>profile_id : {{this.$route.query.user.id}}</h2>
@@ -72,6 +72,7 @@
     , components: {
       AdminHome
     },
+
 
     methods: {
       deleteUser: function (id) {

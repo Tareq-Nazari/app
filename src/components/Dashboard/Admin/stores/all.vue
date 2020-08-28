@@ -1,34 +1,42 @@
 <template>
   <div class="main">
-    <admin-home></admin-home>
+    <div></div>
     <div style="margin-bottom: 10px;display: grid;grid-template-columns: 1fr;grid-row-gap: 20px; ">
-            <table class="table">
+      <table class="table">
 
+        <thead>
         <thead>
         <tr>
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
               v-for="(column, index) in columns1"
               :key="index"> {{column}}
           </th>
-        </tr>
-        </thead>
-        <thead>
+
         <tr>
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
           >
             -
           </th>
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
-              v-for="(column, index) in columns2"
-              :key="index"><input style="font-size: 58%" :name="name1(column)" :placeholder="'فیلترکردن '+column">
+          ><input style="font-size: 58%" v-model="name" name="name" placeholder="فیلترکردن ">
           </th>
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+          ><input style="font-size: 58%" v-model="id" name="id" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+          ><input style="font-size: 58%" v-model="cat_name" name="cat_name" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+          ><input style="font-size: 58%" v-model="profile_id" name="profile_id" placeholder="فیلترکردن ">
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
           >
-            <button @click="send" style="cursor: pointer;background-color: #00a8ed;border: solid 1px" type="submit">اعمال فیلتر</button>
+            <button @click="send" style="cursor: pointer;background-color: #00a8ed;border: solid 1px" type="submit">
+              اعمال فیلتر
+            </button>
           </th>
         </tr>
         </thead>
-        <tbody>
+        <tbody >
         <tr v-for="(store, index) in stores" :key="index">
           <td class="counter" style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none">
           </td>
@@ -60,61 +68,22 @@
     data() {
       return {
         pull: 0,
-        stores:
-          [
-            {
-              name: "مغازه من",
-              id: "21",
-              cat_name: "خشکشویی",
-              email: "@",
-              caption: "خشکشویی",
-              phone: "225588",
-              profile_id: "8",
-              address: "asasasas",
-            },
-            {
-              name: "مغازه من",
-              id: "22",
-              cat_name: "خشکشویی",
-              email: "@",
-              caption: "خشکشویی",
-              phone: "225588",
-              profile_id: "8",
-              address: "asasasas",
-            },
-            {
-              name: "مغازه من",
-              id: "23",
-              cat_name: "خشکشویی",
-              email: "@",
-              caption: "خشکشویی",
-              phone: "225588",
-              profile_id: "8",
-              address: "asasasas",
-            },
-            {
-              name: "مغازه من",
-              id: "24",
-              cat_name: "خشکشویی",
-              email: "@",
-              caption: "خشکشویی",
-              phone: "225588",
-              profile_id: "8",
-              address: "asasasas",
-            }
+        stores: '',
+        id: '',
+        cat_id: '',
+        profile_id: '',
+        name: '',
+        cat_name: '',
+        columns: ['name', 'id', 'cat_name', 'profile_id'],
+        columns1: ['شمارنده', 'نام مغازه', 'id مغازه', 'دسته بندی مغازه', 'پروفایلid', 'جزئیات'],
 
-          ]
-        ,
-        columns: ['name', 'id', 'cat_name',],
-        columns1: ['شمارنده', 'نام مغازه',  'id مغازه', 'دسته بندی مغازه','جزئیات'],
-        columns2: [ 'نام مغازه', 'دسته بندی مغازه', 'id مغازه']
       }
     },
     components: {AdminHome},
     methods: {
 
       routerLinkToDetails: function (store) {
-        this.$router.push({path: '/dashboard/admin/store/detail',query:{store}});
+        this.$router.push({path: '/dashboard/admin/store/detail', query: {store}});
       },
       name1: function (msg) {
         if (msg === 'نام مغازه') {
@@ -126,19 +95,26 @@
         if (msg === 'دسته بندی مغازه') {
           return 'title';
         }
-
+        if (msg === 'پروفایلid') {
+          return 'profile_id';
+        }
       },
-      send(){
-        axios.post()
+      send: function () {
+        axios.post('http://127.0.0.1/laravel/public/api/admin/store/search', {
+          id: this.id,
+          profile_id: this.profile_id,
+          name: this.name,
+          cat_id: this.cat_id,
+        }).then(response => (this.stores = response.data))
       }
-
     },
-
+    created() {
+      axios.post('http://127.0.0.1/laravel/public/api/admin/store/all')
+        .then(response => (this.stores = response.data)
+        ).catch(error => console.log(error))
+    },
     computed: {
-      ...mapGetters([
-        'stores'
-      ]),
-
+      ...mapGetters([]),
     }
   }
 

@@ -2,13 +2,11 @@
 
 
   <div class="main">
-    <AdminHome></AdminHome>
+    <div></div>
     <div class="box">
       <form
         id="app"
-        @submit="checkForm"
-        action="#"
-        method="post"
+        v-on:submit.prevent="submit"
       >
 <div>
   <h2 style="text-align: center;color: #d63938 ">ایجاد مغازه جدید</h2>
@@ -20,6 +18,7 @@
             id="name"
             type="text"
             name="name"
+            v-model="name"
           >
 
         </div>
@@ -30,6 +29,7 @@
             id="caption"
             type="text"
             name="caption"
+            v-model="caption"
           >
 
         </div>
@@ -40,6 +40,7 @@
             id="email"
             type="email"
             name="email"
+            v-model="email"
           >
 
         </div>
@@ -50,6 +51,7 @@
             id="phone"
             type="number"
             name="phone"
+            v-model="phone"
           >
 
         </div>
@@ -60,23 +62,36 @@
             id="profile_id"
             type="number"
             name="profile_id"
+            v-model="profile_id"
+          >
+
+        </div>
+        <div class="inp">
+          <p>  آدرس  </p>
+
+          <input
+            id="address"
+            type="number"
+            name="address"
+            v-model="address"
           >
 
         </div>
         <div class="inp">
           <p> دسته بندی مغازه </p>
-          <select style="padding-right: 12%" name="categories" id="categories">
-            <option v-for="cat in cat_names"  :value="cat.id">{{cat.name}}</option>
+          <select  v-model="selected" style="padding-right: 12%" name="categories" id="categories">
+            <option  v-for="cat in cats" :value="cat.id">{{cat.name}}</option>
 
           </select>
         </div>
 
         <div style="margin-top: 15px">
-          <input
+          <button
             type="submit"
-            value="ثبت"
+
             id="su"
-          >
+            v-on:click="checkForm"
+          >ثبت مغازه</button>
         </div>
 
       </form>
@@ -89,32 +104,54 @@
 
 <script>
   import AdminHome from "../AdminHome";
+  import axios from "axios";
 
   export default {
     name: "create",
     data() {
       return {
-        cat_names: [
-          {
-            id: 1,
-            name: "sdsd"
-          },
-          {
-            id: 2,
-            name: "لباس تابستانه"
-          },
-          {
-            id: 3,
-            name: "aa"
-          }]
+        name:'',
+        email:'',
+        caption:'',
+        phone:'',
+        profile_id:'',
+        cats:'',
+        address:'',
+        selected:'',
+
       }
     }, components: {
 
       AdminHome
 
 
+    }, created() {
+      axios.post('http://127.0.0.1/laravel/public/api/category/store_all')
+        .then(response => (this.cats = response.data)
+        ).catch(error => console.log(error))
     },
-    methods: {}
+
+    methods: {
+      checkForm: function () {
+        let formData = new FormData();
+        formData.append('phone', this.phone)
+        formData.append('profile_id', this.profile_id)
+        formData.append('address', this.address)
+        formData.append('caption', this.caption)
+        formData.append('email', this.email)
+        formData.append('cat_id', this.selected)
+        formData.append('name', this.name)
+        axios.post('http://127.0.0.1/laravel/public/api/admin/store/create',
+          formData,
+        ).then(function () {
+          console.log('SUCCESS!!');
+        })
+          .catch(function () {
+            console.log('FAILURE!!');
+          });
+
+      }
+    }
 
   }
 
@@ -138,7 +175,7 @@
     0 3px 1px -2px rgba(0, 0, 0, .12),
     0 1px 5px 0 rgba(0, 0, 0, .2);
 
-    height: 945px;
+    height: 1045px;
   }
 
   input {

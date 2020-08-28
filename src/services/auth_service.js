@@ -42,10 +42,14 @@ export function isLoggedIn() {
 
 let token = localStorage.getItem('token');
 token = JSON.parse(token);
+
 if (token != null){
   return true
 }
 else {return false}
+
+
+
 
 }
 

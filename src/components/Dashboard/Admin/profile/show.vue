@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <admin-home></admin-home>
+    <div></div>
     <div class="textDetail">
       <h1>نام:{{user.name}}</h1>
       <h2>ایمیل : {{user.email}}</h2>

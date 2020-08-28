@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <admin-home></admin-home>
+    <div></div>
     <div class="textDetail">
       <h1>اسم مغازه : {{this.$route.query.store.name}}</h1>
       <h2>توضیحات : {{this.$route.query.store.caption}}</h2>
@@ -9,10 +9,10 @@
       <h5>دسته بندی :{{this.$route.query.store.cat_name}} </h5>
       <h5>ایدی مغازه : :{{this.$route.query.store.id}} </h5>
       <div style="display: grid;grid-template-columns: 1fr 1fr;grid-column-gap: 5px">
-        <button @click="edit(store,cat_names)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">ادیت
+        <button @click="edit(store)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">ادیت
           کردن
         </button>
-        <button @click="deleteStore(id)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">حذف کردن
+        <button @click="deleteStore(store.id)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">حذف کردن
         </button>
 
       </div>
@@ -41,21 +41,7 @@
       return {
 
 
-        cat_names: [
-          {
-            id: 1,
-            name: "sdsd"
-          },
-          {
-            id: 2,
-            name: "خشکشویی"
-          },
-          {
-            id: 3,
-            name: "aa"
-          }
 
-        ],
         store: {
           profile_id: this.$route.query.store.profile_id,
           header_pic: this.$route.query.store.header_pic,
@@ -79,16 +65,20 @@
     },
 
     methods: {
-      delete1: function (id) {
+
+      deleteStore: function (id) {
         if (confirm("آیا می خواهید مغازه را حذف کنید؟")) {
-          axios.post()
+          axios.post('http://127.0.0.1/laravel/public/api/admin/store/delete' + id)
+            .then(resp => console.log(resp)).catch(error => console.log(error))
+
+          this.$router.push({path: '/dashboard/admin/store/all'})
 
         }
       },
       edit: function (store, cat_names) {
-        this.$router.push({path: '/dashboard/admin/store/edit', query: {store, cat_names}});
+        this.$router.push({path: '/dashboard/admin/store/edit', query: {store}});
       }
-    }
+    },
   }
 </script>
 

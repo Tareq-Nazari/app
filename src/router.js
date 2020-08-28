@@ -86,6 +86,7 @@ export const routes = [
     {path: 'store/all',component: AdminAllStore},
     {path: 'store/detail',component: AdminStoreDetail},
     {path: 'store/edit',component: AdminStoreEdit},
+    {path: 'store/create',component: AdminCreateStore},
     {path: 'product/all',component: AdminAllProduct},
     {path: 'product/detail',component: AdminProductDetail},
     {path: 'product/edit',component: AdminProductEdit},
@@ -101,6 +102,7 @@ export const routes = [
     {path: 'user/detail',component: AdminDetailUsers},
     {path: 'user/add',component: AdminAddUsers},
     {path: 'profile/show',component: AdminProfileShow},
+
     {path: 'profile/edit',component: AdminProfileEdit},
   ],beforeEnter: (to,from,next) => {
    if(auth.isLoggedIn())  {
@@ -109,9 +111,18 @@ export const routes = [
    } else {
      next('/login')
    }
-}
+}},
 
-  },
+    {path: 'profile/edit',component: AdminProfileEdit}
+//   ],beforeEnter: (to,from,next) => {
+//    if(auth.isLoggedIn() == 'admin')  {
+//
+//      next()
+//    } else {
+//      next('/login')
+//    }
+// }
+
 
 
 

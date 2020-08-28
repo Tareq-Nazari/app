@@ -1,8 +1,7 @@
 <template>
   <div class="main">
     <div>
-
-      <admin-home></admin-home>
+      <div></div>
     </div>
     <div class="box">
       <form

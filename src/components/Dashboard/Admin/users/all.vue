@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <admin-home></admin-home>
+    <div></div>
     <div style="margin-bottom: 10px;display: grid;grid-template-columns: 1fr;grid-row-gap: 20px; ">
       <table class="table">
 
@@ -18,17 +18,41 @@
           >
             -
           </th>
+
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
-              v-for="(column, index) in columns2"
-              :key="index"><input style="font-size: 58%" :name="name1(column)" :placeholder="'فیلترکردن '+column">
+
+          ><input style="font-size: 58%" v-model="profile_id" name="profile_id" placeholder="فیلترکردن ">
           </th>
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
-          >
-            <button @click="send" style="cursor: pointer;background-color: #00a8ed;border: solid 1px" type="submit">اعمال فیلتر</button>
+
+          ><input style="font-size: 58%" v-model="id" name="id" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="name" name="name" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="email" name="email" placeholder="فیلترکردن ">
+          </th>
+
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="phone" name="phone" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="role" name="role" placeholder="فیلترکردن ">
+          </th>
+
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none">
+            <button @click="send" style="cursor: pointer;background-color: #00a8ed;border: solid 1px" type="submit">
+              اعمال فیلتر
+            </button>
           </th>
         </tr>
         </thead>
-        <tbody>
+        <tbody >
         <tr v-for="(user, index) in users" :key="index">
           <td class="counter" style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none">
           </td>
@@ -60,43 +84,24 @@
     data() {
       return {
         pull: 0,
-        users:
-          [
-            {
-              name: "مغازه من",
-              id: "21",
-              email: "@",
-              phone: "225588",
-              role: "8",
-              user_id:"14",
-              pic:'product-12.jpg',
-              address:"sdsd",
-            }  ,
-            {
-              name: "مغازه من",
-              id: "21",
-              email: "@",
-              phone: "225588",
-              role: "8",
-              user_id:"14",
-              pic:'product-12.jpg',
-              address:"sdsd",
-
-            },
-
-
-          ]
+        email: '',
+        role: '',
+        phone: '',
+        id: '',
+        profile_id: '',
+        name: '',
+        users: ''
         ,
-        columns: ['id', 'user_id',  'name','email', 'phone',  'role'],
-        columns1: ['شمارنده', 'id',  'user_id','نام' ,'ایمیل', 'شماره تلفن', 'نقش','جزئیات'],
-        columns2: [ ' id', 'user_id', 'نام', 'ایمیل','شماره تلفن' ,'نقش']
+        columns: ['id', 'user_id', 'name', 'email', 'phone', 'role'],
+        columns1: ['شمارنده', 'profile_id', 'user_id', 'نام', 'ایمیل', 'شماره تلفن', 'نقش', 'جزئیات'],
+        columns2: [' id', 'user_id', 'نام', 'ایمیل', 'شماره تلفن', 'نقش']
       }
     },
     components: {AdminHome},
     methods: {
 
       routerLinkToDetails: function (user) {
-        this.$router.push({path: '/dashboard/admin/user/detail',query:{user}});
+        this.$router.push({path: '/dashboard/admin/user/detail', query: {user}});
       },
       name1: function (msg) {
         if (msg === 'نام') {
@@ -116,10 +121,24 @@
         }
 
       },
-      send(){
-        axios.post()
+      send: function () {
+        axios.post('http://127.0.0.1/laravel/public/api/admin/users/search', {
+          id: this.id,
+          profile_id: this.profile_id,
+          name: this.name,
+          phone: this.phone,
+          role: this.role,
+          email: this.email,
+        }).then(response => (this.users = response.data))
+
+
       }
 
+    },
+    created() {
+      axios.post('http://127.0.0.1/laravel/public/api/admin/users/all')
+        .then(response => (this.users = response.data)
+        ).catch(error => console.log(error))
     },
 
     computed: {

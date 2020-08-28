@@ -2,14 +2,11 @@
   <div class="main">
     <div>
 
-      <admin-home></admin-home>
+      <div></div>
     </div>
     <div class="box">
       <form
-        id="app"
-        @submit="checkForm"
-        action="#"
-        method="post"
+        v-on:submit.prevent="submit"
       >
         <div>
           <h2 style="text-align: center;color: #d63938 "> ادیت کردن کاربر</h2>
@@ -21,8 +18,8 @@
             id="name"
             type="text"
             name="name"
+            v-model="name"
 
-            :value="$route.query.user.name"
           >
 
         </div>
@@ -33,11 +30,12 @@
             id="email"
             type="email"
             name="email"
+            v-model="email"
 
-            :value="$route.query.user.email"
           >
 
         </div>
+
         <div class="inp">
           <p> شماره تلفن </p>
 
@@ -45,8 +43,8 @@
             id="phone"
             type="number"
             name="phone"
+            v-model="phone"
 
-            :value="$route.query.user.phone"
           >
 
         </div>
@@ -57,38 +55,42 @@
             id="address"
             type="text"
             name="address"
+            v-model="address"
 
-            :value="$route.query.user.address"
+          >
+
+        </div>
+        <div class="inp">
+          <p> عکس </p>
+
+          <input
+            id="file"
+            type="file"
+            name="file"
+            ref="file"
+            v-on:change="selectFile"
           >
 
         </div>
 
-        <div >
-          <p> عکس پروفایل </p>
-
-          <input style="border: none"
-                 id="pic"
-                 type="file"
-                 name="pic"
-                 v-on:value="$route.query.user.pic"
-          >
-
-        </div>
 
         <div class="inp">
           <p> نقش </p>
           <select style="padding-right: 12%" name="cat_id" id="cars">
-            <option v-for="role in roles " :value="role.id" :selected="role.name===test">{{role.name}}</option>
+            <option v-for="role1 in roles " @click="rolee(role1.id)" :selected="role1.name===test">{{role1.name}}
+            </option>
 
           </select>
         </div>
 
         <div style="margin-top: 15px">
-          <input
+          <button
+            v-on:click="checkForm"
             type="submit"
             value=" ثبت تغیرات"
-            id="su"
-          >
+            name="submit"
+          >l;;;l
+          </button>
         </div>
 
       </form>
@@ -109,15 +111,45 @@
     components: {AdminHome},
     data() {
       return {
+        file: '',
+        id: this.$route.query.user.id,
         roles: this.$route.query.roles,
-        test: this.$route.query.user.role
+        test: this.$route.query.user.role,
+        role: this.$route.query.user.role,
+        pic: this.$route.query.user.pic,
+        name: this.$route.query.user.name,
+        phone: this.$route.query.user.phone,
+        email: this.$route.query.user.email,
+        address: this.$route.query.user.address,
+
       }
 
     }, methods: {
       checkForm: function () {
-        axios.post()
+        axios.post('http://127.0.0.1/laravel/public/api/admin/users/edit', {
+          role: this.role,
+          id: this.id,
+          pic: this.file,
+          name: this.name,
+          phone: this.phone,
+          email: this.email,
+          address: this.address
+        }).then(res => console.log(res)).catch(error => console.log(error))
+      },
+      pp: function (event) {
+        this.pic = event.target.files;
+      },
+      handleFileUpload() {
+        pic = this.$refs.file.files[0];
+
       }
 
+      , rolee: function (msg) {
+        this.role = msg;
+
+      }, selectFile(event) {
+        // `files` is always an array because the file input may be in multiple mode
+        this.pic = event.target.files[0];}
     }
   }
 </script>

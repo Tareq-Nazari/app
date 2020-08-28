@@ -1,5 +1,5 @@
 <template>
-  <div style="display: grid;grid-template-columns: 1fr 2fr">
+  <div style="display: grid;grid-template-columns:  2fr">
     <div id="myNav" class="overlay" :style="showTopMenu===true? style3:style2">
       <div
         style="display: grid;grid-template-columns: 1fr;grid-row-gap: 15px;height: 150px;position: relative;top: 10%;transition:display 5s">
@@ -14,7 +14,7 @@
 
         <div class="sub-menu" v-if="showTopMenu===true && subMenu[1]===true">
 
-          <router-link to="/dashboard/admin/store/create"><a href="#"> ایجاد مغازه جدید</a></router-link>
+          <router-link to="/dashboard/admin/store/create"> ایجاد مغازه جدید</router-link>
           <router-link to="/dashboard/admin/store/all"> تمام مغازه ها</router-link>
 
 
@@ -27,8 +27,8 @@
         </a>
         <div class="sub-menu" v-if="showTopMenu===true && subMenu[2]===true">
 
-          <router-link to="/dashboard/admin/product/all"><a href="#"> تمام محصولات</a></router-link>
-          <router-link to="/dashboard/admin/product/create"><a href="#"> اضافه کردن محصول جدید</a></router-link>
+          <router-link to="/dashboard/admin/product/all"> تمام محصولات</router-link>
+          <router-link to="/dashboard/admin/product/create"> اضافه کردن محصول جدید</router-link>
 
 
         </div>
@@ -40,10 +40,10 @@
         </a>
         <div class="sub-menu" v-if="turnOff ,showTopMenu===true && subMenu[3]===true">
 
-          <router-link to="/dashboard/admin/storeCategory/all"><a href="#"> تمام دسته بندی های مغازه </a></router-link>
-          <router-link to="/dashboard/admin/storeCategory/create"><a href="#"> اضافه کردن دسته بندی جدید مغازه </a></router-link>
-          <router-link to="/dashboard/admin/productCategory/all"><a href="#"> تمام دسته بندی های محصولات </a></router-link>
-          <router-link to="/dashboard/admin/productCategory/create"><a href="#"> اضافه کردن دسته بندی جدید محصول </a></router-link>
+          <router-link to="/dashboard/admin/storeCategory/all"> تمام دسته بندی های مغازه </router-link>
+          <router-link to="/dashboard/admin/storeCategory/create"> اضافه کردن دسته بندی جدید مغازه </router-link>
+          <router-link to="/dashboard/admin/productCategory/all"> تمام دسته بندی های محصولات </router-link>
+          <router-link to="/dashboard/admin/productCategory/create"> اضافه کردن دسته بندی جدید محصول </router-link>
 
 
 
@@ -56,7 +56,7 @@
         </a>
         <div class="sub-menu" v-if="showTopMenu===true && subMenu[4]===true">
 
-          <router-link to="/dashboard/admin/factors/all"><a href="#"> همه ی فاکتورها </a></router-link>
+          <router-link to="/dashboard/admin/factors/all"> همه ی فاکتورها </router-link>
 
 
 
@@ -69,8 +69,8 @@
         </a>
         <div class="sub-menu" v-if="showTopMenu===true && subMenu[5]===true">
 
-          <router-link to="/dashboard/admin/user/add"><a href="#"> اضافه کردن کاربر </a></router-link>
-          <router-link to="/dashboard/admin/users/all"><a href="#"> همه ی کاربران </a></router-link>
+          <router-link to="/dashboard/admin/user/add"> اضافه کردن کاربر </router-link>
+          <router-link to="/dashboard/admin/users/all"> همه ی کاربران </router-link>
 
 
         </div>
@@ -81,8 +81,8 @@
           <p style="display: inline-block;position: relative;bottom: 9px;left: -75%"> ></p>
         </a>
         <div class="sub-menu" v-if="showTopMenu===true && subMenu[6]===true">
-          <router-link to="/dashboard/admin/profile/show"><a href="#"> نمایش پروفایل من </a></router-link>
-          <router-link to="/dashboard/admin/profile/edit"><a href="#"> تغیر دادن پروفایل من </a></router-link>
+          <router-link to="/dashboard/admin/profile/show"> نمایش پروفایل من </router-link>
+          <router-link to="/dashboard/admin/profile/edit"> تغیر دادن پروفایل من </router-link>
 
         </div>
         <a class="menu-but" :style="style[7]" @click="turnOff('7') " v-if="showTopMenu===true" >
@@ -95,11 +95,11 @@
       </div>
 
     </div>
-    <div class="main" :style="showTopMenu===true? style4:style1">
-      <span style="font-size:30px;cursor:pointer" @click="showTopMenu=!showTopMenu , turnOff(9)">&#9776; </span>
+<!--    <div class="main" :style="showTopMenu===true? style4:style1">-->
+<!--      <span style="font-size:30px;cursor:pointer" @click="showTopMenu=!showTopMenu , turnOff(9)">&#9776; </span>-->
 
-    </div>
-<router-view></router-view>
+<!--    </div>-->
+   <div> <router-view></router-view> </div>
   </div>
 
 </template>
@@ -169,6 +169,7 @@
     text-align: center;
     margin-top: 30px;
     transition-duration: 0.2s;
+
   }
 
   .title {

@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <admin-home></admin-home>
+    <div></div>
     <div style="margin-bottom: 10px;display: grid;grid-template-columns: 1fr;grid-row-gap: 20px; ">
       <table class="table">
 
@@ -18,9 +18,18 @@
           >
             -
           </th>
+
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
-              v-for="(column, index) in columns2"
-              :key="index"><input style="font-size: 58%" :name="name1(column)" :placeholder="'فیلترکردن '+column">
+
+          ><input style="font-size: 58%" v-model="name1" name="name" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="id1" name="id" placeholder="فیلترکردن ">
+          </th>
+          <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
+
+          ><input style="font-size: 58%" v-model="store_id1" name="store_id" placeholder="فیلترکردن ">
           </th>
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
           >
@@ -30,17 +39,19 @@
           </th>
         </tr>
         </thead>
-        <tbody v-for="p in cats">
-        <tr v-for="(category, index) in p" :key="index">
+        <tbody >
+        <tr v-for="(category, index) in cats" :key="index">
           <td class="counter" style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none">
           </td>
-          <td  style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
+          <td style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
               v-for="(column, indexColumn) in columns" :key="indexColumn">{{category[column]}}
           </td>
           <td
             style="color: #00a8ed;text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
-           >
-            <button  @click="delete1(category.id)" style=" cursor:pointer;background-color: #EF394E;border: 1px solid #d63938">حذف کردن</button>
+          >
+            <button @click="delete1(category.id)"
+                    style=" cursor:pointer;background-color: #EF394E;border: 1px solid #d63938">حذف کردن
+            </button>
           </td>
         </tr>
         </tbody>
@@ -61,7 +72,10 @@
     name: "all",
     data() {
       return {
-        cats:'',
+        cats: '',
+        name1: '',
+        id1: '',
+        store_id1: '',
         categories: [
           {name: "t-shirt", id: "21"},
           {name: "t-shirt", id: "21"},
@@ -69,9 +83,9 @@
           {name: "t-shirt", id: "21"},
         ],
 
-        columns: ['name', 'id','store_id'],
-        columns1: ['شمارنده', 'نام دسته بندی', 'id','idمغازه', 'جزئیات'],
-        columns2: [ 'دسته بندی', 'id','idمغازه']
+        columns: ['name', 'id', 'store_id'],
+        columns1: ['شمارنده', 'نام دسته بندی', 'id', 'idمغازه', 'جزئیات'],
+        columns2: ['دسته بندی', 'id', 'idمغازه']
       }
     },
     components: {AdminHome},
@@ -79,30 +93,39 @@
 
       delete1: function (id) {
         if (confirm("آیا می خواهید دسته بندی را حذف کنید؟")) {
-          axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/delete'+id)
-            .then(response=>console.log(response)
-            ).catch(error=>console.log(error))
+          axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/delete' + id)
+            .then(response => console.log(response)
+            ).catch(error => console.log(error))
+
         }
       },
-      name1: function (msg) {
+      name2: function (msg) {
         if (msg === 'id') {
+          this.id1 = msg;
           return 'id';
         }
         if (msg === 'دسته بندی') {
+          this.name1 = msg;
           return 'name';
-        }  if (msg === 'idمغازه') {
+        }
+        if (msg === 'idمغازه') {
+          this.store_id1 = msg;
           return 'store_id';
         }
       },
-      send() {
-        axios.post()
+      send: function () {
+        axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/search', {
+          store_id:this.store_id1,
+          id:this.id1,
+          name:this.name1,
+        }).then(response => (this.cats = response.data))
       }
 
     },
-   mounted() {
+    created() {
       axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/all')
-        .then(response=>(this.cats=response.data)
-        ).catch(error=>console.log(error))
+        .then(response => (this.cats = response.data)
+        ).catch(error => console.log(error))
     },
 
     computed: {
