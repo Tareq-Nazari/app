@@ -42,6 +42,13 @@ export const store = new Vuex.Store({
     ],
     style5: "border-bottom:1px solid ",
     counter: 0,
+    productAdd : {
+      name : '',
+      price : 0,
+      cat_id : 1,
+      caption : '',
+      pic : ''
+    }
 
   },
 
@@ -62,7 +69,8 @@ export const store = new Vuex.Store({
     },
     isLoggedIn(){
       return isLoggedIn();
-    }
+    },
+
 
   }
   ,
@@ -73,8 +81,9 @@ export const store = new Vuex.Store({
     authUser(state , userData){
       state.idToken = userData.token;
       state.userId = userData.userId
-    }
-,
+    },
+
+
     deleteFromCart(){
 
     },
@@ -143,7 +152,9 @@ export const store = new Vuex.Store({
           console.log(error[0])
         })
 
-    }
+    },
+
+
   }
 
 

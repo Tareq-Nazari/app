@@ -22,8 +22,8 @@ export function login(user) {
 
   axios.post('users/login',{
 
-    email : 'email@gmail.com', //user.email,
-    password : 'pass' //user.password,
+    email : user.email,
+    password : user.password,
   }).then(response => {
      if (response.status === 200) {
        //const token = jwt.sign({user : user}, 'secret')
@@ -71,13 +71,20 @@ export function logout() {
 }
   function getAccessToken() {
   const token = localStorage.getItem('token');
-  console.log(token)
+  const access = token.data.access_token
   if (!token){
     return null
   }
-  //return token.access_token
-  //const tokenData = jwt.decode(token.user.access_token)
-  //return tokenData;
+  return JSON.parse(access)
+
 
 }
+  export function getScope() {
+    let token = localStorage.getItem('token');
+    token = JSON.parse(token)
+    token = token.data.scope[0]
+
+    return token
+
+  }
 

@@ -43,16 +43,12 @@
   </section>
 </template>
 <script>
-  import axios from 'axios'
   import * as auth from '../services/auth_service'
 
   export default {
 
   data(){
     return {
-      email : '',
-      password : '',
-
       user : {
         email : '',
         password : '',
@@ -62,12 +58,7 @@
   }
   ,
   methods : {
-    submit (){
-      this.$store.dispatch('login' , {
-        email : this.email,
-        password : this.password
-      })
-    },
+
     login: async function(){
 
        try {

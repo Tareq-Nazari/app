@@ -1,5 +1,5 @@
 
-
+import newStore from "./components/Dashboard/Store/newStore"
 import StorePage from "./components/StorePage";
 import Contact from "./components/Contact";
 import Home from "./components/Home"
@@ -52,7 +52,7 @@ export const routes = [
   {path: '/signup' , component: Sginup},
   {path: '/search' , component: Search},
   {path: '' , component: Home},
-  {path : '*' , component: StorePage},
+  {path : '*' , component: Home},
   {path: '/product/:id' , component: ProductDetail},
   {path: '/login' , component: Login,beforeEnter: (to,from,next)=>{
       if (!auth.isLoggedIn()) {
@@ -69,11 +69,27 @@ export const routes = [
   {path: '/shoppingcart' , component: ShoppingCart},
   {path: '/category/:id' , component: category},
   {path: '/shopregister' , component: ShopRegister},
-  {path : '/dashboard/store/:id/edit' , component: EditStore},
-  {path: '/dashboard/store/:id/edit/skin',component: Skin},
-  {path: '/dashboard/store/:id/edit/addproduct',component: AddProduct},
-  {path: '/dashboard/store/:id/edit/editproduct',component: EditProduct},
-  {path: '/dashboard/store/:id/edit/addproduct/:p_id',component: AddProduct},
+
+
+
+
+  {path : '/dashboard/store/' , component: newStore , children: [
+      {path: '' , component: EditStore},
+      {path: 'skin',component: Skin},
+      {path: 'addproduct',component: AddProduct},
+      {path: 'editproduct',component: EditProduct},
+
+
+    ],
+  beforeEnter: (to , from , next) => {
+
+     if (auth.isLoggedIn() && auth.getScope()==='shopOwner') {
+       next()
+     }else  {
+       next('/login')
+     }
+  }},
+
 
 
 
@@ -105,12 +121,13 @@ export const routes = [
 
     {path: 'profile/edit',component: AdminProfileEdit},
   ],beforeEnter: (to,from,next) => {
-   if(auth.isLoggedIn())  {
+      if(auth.isLoggedIn() )  {
 
-     next()
-   } else {
-     next('/login')
-   }
+        next()
+      } else {
+        next('/login')
+      }
+
 }},
 
     {path: 'profile/edit',component: AdminProfileEdit}
