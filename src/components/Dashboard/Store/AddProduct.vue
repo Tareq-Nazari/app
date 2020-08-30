@@ -1,33 +1,35 @@
 <template>
   <div class="add-product-container">
 
-      <div v-if="img == ''" style="height: 233px;width: 98%;border: 5px dotted rgba(28,110,164,0.78);
+  <div v-if="img == ''" style="height: 233px;width: 98%;border: 5px dotted rgba(28,110,164,0.78);
 border-radius: 7px 7px 7px 7px;position: relative">
-        <label style="cursor: pointer;display: inline-block;position: absolute;top: 83px;left: 225px">
-          <img src="./../../../img/plus.svg" style="" height="50px" width="50px">
+    <label style="cursor: pointer;display: inline-block;position: absolute;top: 83px;left: 225px">
+      <img src="./../../../img/plus.svg" style="" height="50px" width="50px">
 
-            <input ref="fileInput" type="file" v-on:change="previewImage" style="display: none;height: 100%;width: 100%">
+      <input ref="file" type="file" v-on:change="previewImage" style="display: none;height: 100%;width: 100%">
 
-        </label>
+    </label>
 
-      </div>
-    <div v-else style="width: 100%">
-      <img :src="img" width="100%" height="233px">
-    </div>
+  </div>
+  <div v-else style="width: 100%">
+    <img :src="img" width="100%" height="233px">
+  </div>
 
 
   <input v-model="product.name" type="text" placeholder="نام محصول" class="add-product-input" >
 
   <input v-model="product.price" type="text" placeholder="قیمت" class="add-product-input" >
-    <textarea placeholder="توضیحات" style="padding: 8px;border: 0;border-radius: 12px;background-color: #d9dddc;outline: 0;height: 50px;width: 220px;" ></textarea>
-<label>دسته بندی :  <select>
-  <option @click="product.cat_id = 1">1</option>
-  <option @click="product.cat_id = 2">2</option>
-  <option @click="product.cat_id = 3">3</option>
+  <textarea v-model="product.caption" placeholder="توضیحات" style="padding: 8px;border: 0;border-radius: 12px;background-color: #d9dddc;outline: 0;height: 50px;width: 220px;" ></textarea>
+  <label>دسته بندی :  <select>
+    <option @click="product.cat_id = 1">1</option>
+    <option @click="product.cat_id = 2">2</option>
+    <option @click="product.cat_id = 3">3</option>
 
-</select></label>
+  </select></label>
 
-<button @click="addProduct" style="height: 30px;width: 100px;background-color: dodgerblue;font-family: vasir;color: white;border: 0;border-radius:  50% 50% 0 0" >ثبت</button>
+  <button @click="addProduct" style="height: 30px;width: 100px;background-color: dodgerblue;font-family: vasir;color: white;border: 0;border-radius:  50% 50% 0 0" >ثبت</button>
+
+
 
 
 
@@ -37,18 +39,23 @@ border-radius: 7px 7px 7px 7px;position: relative">
 </template>
 <script>
   import axios from 'axios'
+  import * as auth from '../../../services/auth_service'
 
 export default  {
 
   data(){
     return {
       img : '',
+      header : 'Bearer '+auth.getAccessToken(),
+
+
       product : {
-        image : '',
-        name : 'dd',
-        price : 0,
+        file : '',
+        name : '',
+        price : null,
         caption : '',
-        cat_id : 1
+        cat_id : 1,
+        store_id : 6
       }
 
 
@@ -58,7 +65,9 @@ export default  {
   },
   methods : {
     previewImage: function(event) {
-      this.product.image = event.target.file;
+      this.product.file = this.$refs.file.files[0]
+
+
 
       // Reference to the DOM input element
       var input = event.target;
@@ -74,26 +83,34 @@ export default  {
         }
         // Start the reader job - read file as a data url (base64 format)
         reader.readAsDataURL(input.files[0]);
+
       }
     },
     addProduct(){
-      axios({
-        method: 'post',
-        url: 'http://127.0.0.1/storeBackend/public/api/shopOwner/product/create',
-        data: {
-          name : this.product.name,
-          price : this.product.price,
-          cat_id : this.product.cat_id,
-          caption : this.product.caption,
-          image : this.product.image},
-        headers: {
-          Authorization: 'Bearer '+ auth.getAccessToken
-        }
-      }).then((respone) => {
-        alert('success')
-      }).catch((e) =>{
-        alert('failed')
-      })
+    let formData = new FormData()
+      formData.append('pic' , this.product.file)
+      formData.append('name',this.product.name)
+      formData.append('price',this.product.price)
+      formData.append('cat_id',this.product.cat_id)
+      formData.append('caption',this.product.caption)
+      formData.append('product_id' , 5)
+
+console.log(formData)
+        axios({
+          method: 'post',
+          url: 'http://127.0.0.1/storeBackend/public/api/shopOwner/product/create',
+          data: formData,
+          headers: {
+            'Authorization': this.header,
+            //'Content-Type': 'multipart/form-data'
+          }
+        }).then((respone) => {
+          alert('success')
+        }).catch(e =>{
+          alert(e)
+        })
+
+
     },
     }
   }

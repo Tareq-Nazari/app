@@ -20,7 +20,7 @@ export function register(user) {
 
 export function login(user) {
 
-  axios.post('users/login',{
+  axios.post('login',{
 
     email : user.email,
     password : user.password,
@@ -33,6 +33,8 @@ export function login(user) {
      }
 
 
+  }).catch(e => {
+    console.log(e)
   })
   if (loginRes) {return JSON.stringify(response.data.scope[0])}
 
@@ -66,19 +68,19 @@ export function logout() {
     }
   })) {
     localStorage.removeItem('token');
+
   }
 
 }
-  function getAccessToken() {
-  const token = localStorage.getItem('token');
-  const access = token.data.access_token
-  if (!token){
-    return null
-  }
-  return JSON.parse(access)
+ export function getAccessToken() {
+    let token = JSON.parse(localStorage.getItem('token'))
+    token = token.data.access_token
+   return token
+ }
 
 
-}
+
+
   export function getScope() {
     let token = localStorage.getItem('token');
     token = JSON.parse(token)
