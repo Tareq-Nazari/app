@@ -37,12 +37,10 @@ import AdminProfileShow from "./components/Dashboard/Admin/profile/show";
 import AdminProfileEdit from "./components/Dashboard/Admin/profile/edit";
 import Sginup from "./components/Sginup";
 import * as auth from './services/auth_service';
+import {getScope, isLoggedIn} from "./services/auth_service";
 
 export const routes = [
-  {path : '/store' , components:{
-    default: StorePage,
-
-    }},
+  {path: '/stores' , component: Stores},
   {path : '/store/:id' , components: StorePage},
   {path: '/contact' , component: Contact , children : [
 
@@ -61,11 +59,7 @@ export const routes = [
         next('/home')
       }
     }},
-  {path: '/stores' ,
-    component: Stores,
-    beforeEnter: (to,from,next) => {
-        auth.isLoggedIn() ? next():next('/login')
-    }},
+
   {path: '/shoppingcart' , component: ShoppingCart},
   {path: '/category/:id' , component: category},
   {path: '/shopregister' , component: ShopRegister},
@@ -93,7 +87,11 @@ export const routes = [
 
 
 
-  {path: '/dashboard/user' , component: UserDashboard},
+  {path: '/dashboard/user' , component: UserDashboard,beforeEnter: (to,from ,next) => {
+    if (isLoggedIn()) {
+      next()
+    } else next('/login')
+    }},
 
 
   //Admin dashboard routes

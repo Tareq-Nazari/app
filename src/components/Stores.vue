@@ -15,14 +15,12 @@
     </div>
     <br><br>
     <div style="display: flex;justify-content: space-around;flex-wrap: wrap;">
-      <div v-for="i in 10" class="stores-card" style="position: relative;margin: 10px;border: #888888 1px solid;border-radius: 8px;height: 250px;width:320px;display: flex;flex-direction: column;align-items: center;justify-content: space-evenly">
-        <div style="background-color: #282A37;color: #F3F8FB;padding: 6px;border-radius: 5px">فروشگاه کفش آراتامیس</div>
-        <img style="border-radius: 50%" src="src/img/store1.jpeg" height="50%" width="50%">
+      <div v-for="store in stores" class="stores-card" v-bind:style="{ backgroundImage: 'url(http://localhost/storeBackend/images/' + store.header_pic + ')' }">
+        <div style="background-color: #282A37;color: #F3F8FB;padding: 6px;border-radius: 5px">{{store.name}}</div>
+        <img style="border-radius: 50%" v-bind:src="'http://localhost/storeBackend/images/126027390.jpg'+store.profile_pic" height="50%" width="50%">
 
 
-      <font-awesome-icon @click="gotoshop" :icon="['fas' , 'arrow-right']" style="position: absolute;right: 9px;bottom: 7px;
-      font-size: 2em;color: white;background-color: #d63938;border-radius: 50%;padding: 5px;
-"/>
+      <router-link :to="'/store/'+store.id" > asdfsdfdsfsdf</router-link>
 
       </div>
       </div>
@@ -39,33 +37,41 @@
   import 'swiper/swiper-bundle.css'
     export default {
         name: "Stores",
+      data(){
+        return {
+          swiperOption: {
+            slidesPerView: 15,
+            spaceBetween: 50,
+            freeMode: true,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true
+            }
+          },
+          s: 10,
+          stores : null
+        }
+
+      },
+
       components : {
         Swiper,
         SwiperSlide,
 
       },
-      created() {
-          axios.get('')
+      mounted: function(){
+          axios.post('store/all').then((response) => {
+          this.stores = response.data
+          console.log(response)
+          }).catch(e => {
+            alert(e)
+          })
       },
       methods : {
-        gotoshop(){
-          this.$router.push({path: '/storepage'})
-        }
-      },
-      data(){
-          return {
-            swiperOption: {
-              slidesPerView: 15,
-              spaceBetween: 50,
-              freeMode: true,
-              pagination: {
-                el: '.swiper-pagination',
-                clickable: true
-              }
-            },
-            s: 10
-          }
+        gotoshop(ev){
 
+          this.$router.push({path: '/store/'+ev.target.id})
+        }
       },
 
     }
@@ -73,7 +79,15 @@
 
 <style scoped>
 .stores-card{
-  background-image: url("../img/stores-header.jpg");
+  position: relative;
+  margin: 10px;
+  border: #888888 1px solid;
+  border-radius: 8px;
+  height: 250px;
+  width:320px;display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly
 }
 
 </style>
