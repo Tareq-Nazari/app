@@ -1,15 +1,16 @@
 <template>
   <div style="font-family: vasir;background-color: #d9dddc">
-    <div class="container">
-      <img class="header-img" height="100%" width="100%" src="src/img/store1.jpeg">
-      <img style="border-radius: 50%;border: solid black 5px" src="src/img/store_profile.jpg" class="profile" >
+
+    <div class="container" >
+      <img class="header-img" height="100%" width="100%" :src="'http://localhost/storeBackend/images/'+shopDetail.header_pic">
+      <img style="border-radius: 50%;border: solid black 5px" :src="'http://localhost/storeBackend/images/'+shopDetail.profile_pic" class="profile" >
       <div class="store-name">
-        <p style="" >فروشگاه من</p>
+        <p style="" > فروشگاه {{shopDetail.name}} </p>
       </div>
 
       <div  class="store-caption">
 
-        <p style="text-align: end">فروشگاه مواد غذایی - فروشگاه باز است</p>
+        <p style="text-align: end">{{shopDetail.caption}} - فروشگاه <mark v-if="shopDetail.status===1">باز</mark><mark v-else>بسته</mark> است</p>
 
       </div>
       <div class="store-contact">
@@ -26,11 +27,11 @@
       <br><br><br>
     <div style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-evenly">
 
-      <div @click="productpage(1)" v-for="i in 50" dir="rtl" style="background-color: white;margin: 15px;height: 400px;width: 300px;border-radius: 2%;display: flex;flex-direction: column;align-items: center;justify-content: space-around" >
+      <div @click="productpage(1)" v-for="product in shopProducts" dir="rtl" style="background-color: white;margin: 15px;height: 400px;width: 300px;border-radius: 2%;display: flex;flex-direction: column;align-items: center;justify-content: space-around" >
 
-        <img src="src/img/tshirt.jpg" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="65%" width="98%">
-        <p  style="font-size: 20px;">تیشرت گوچی</p>
-        <p style="background-color: #ff2400;border-radius: 10px 5px 10px 5px;color: white;padding: 5px">127000 تومان</p>
+        <img :src="'http://localhost/storeBackend/images/'+product.pic" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="65%" width="98%">
+        <p  style="font-size: 20px;">{{product.name}}</p>
+        <p style="background-color: #ff2400;border-radius: 10px 5px 10px 5px;color: white;padding: 5px">{{product.price}} تومان</p>
 
       </div>
 
@@ -54,19 +55,33 @@
 
     data(){
       return {
-        data : ''
+        data : '',
+        routeParam : '',
+        shopDetail : null,
+        shopProducts : null
       }
     },
+    created(){
+      this.routeParam = this.$route.params.id
+    },
     mounted() {
-      axios
-        .get('http://127.0.0.1/test/public/api/store')
-        .then(response => (this.info = response.data));
+      axios.get('/store'+this.routeParam).then((response) => {
+       this.shopDetail = response.data[0]
+        this.shopDetail = this.shopDetail[0]
+        axios.get('/product_store'+this.routeParam).then((response) => {
+          this.shopProducts = response.data[0]
+
+          console.log(this.shopProducts)
+        })
+      }).catch(e => {
+        console.log(e)
+      })
     },
 
     methods : {
       addtocart() {
 
-        this.$store.commit('increment')
+
 
       },
       productpage(id){

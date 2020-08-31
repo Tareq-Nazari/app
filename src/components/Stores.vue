@@ -17,10 +17,10 @@
     <div style="display: flex;justify-content: space-around;flex-wrap: wrap;">
       <div v-for="store in stores" class="stores-card" v-bind:style="{ backgroundImage: 'url(http://localhost/storeBackend/images/' + store.header_pic + ')' }">
         <div style="background-color: #282A37;color: #F3F8FB;padding: 6px;border-radius: 5px">{{store.name}}</div>
-        <img style="border-radius: 50%" v-bind:src="'http://localhost/storeBackend/images/126027390.jpg'+store.profile_pic" height="50%" width="50%">
+        <img style="border-radius: 50%" v-bind:src="'http://127.0.0.1/storeBackend/images/'+store.profile_pic" height="50%" width="50%">
+        <h3 v-on:click="gotoshop" :id="`${store.id}`">SEE STORE</h3>
 
 
-      <router-link :to="'/store/'+store.id" > asdfsdfdsfsdf</router-link>
 
       </div>
       </div>
@@ -49,7 +49,8 @@
             }
           },
           s: 10,
-          stores : null
+          stores : null,
+          route : ''
         }
 
       },
@@ -60,7 +61,7 @@
 
       },
       mounted: function(){
-          axios.post('store/all').then((response) => {
+          axios.get('store/all').then((response) => {
           this.stores = response.data
           console.log(response)
           }).catch(e => {
@@ -68,7 +69,7 @@
           })
       },
       methods : {
-        gotoshop(ev){
+        gotoshop: function(ev){
 
           this.$router.push({path: '/store/'+ev.target.id})
         }

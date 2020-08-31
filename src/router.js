@@ -39,14 +39,14 @@ import Sginup from "./components/Sginup";
 import * as auth from './services/auth_service';
 import {getScope, isLoggedIn} from "./services/auth_service";
 
-export const routes = [
+export const routes =[
   {path: '/stores' , component: Stores},
-  {path : '/store/:id' , components: StorePage},
+
   {path: '/contact' , component: Contact , children : [
 
 
     ]},
-
+  {path: '/store/:id' , component : StorePage},
   {path: '/signup' , component: Sginup},
   {path: '/search' , component: Search},
   {path: '' , component: Home},
