@@ -2,7 +2,7 @@
 
   <div id="app">
 
-    <Nav ></Nav>
+    <Nav></Nav>
 
     <transition name="fade">
       <router-view></router-view>
