@@ -2,26 +2,9 @@
 
   <div class="footer-container">
 
-    <div class="footer-subcribe">
-      <div></div>
-      <div style="text-align: center">
-
-        <p style="font-family: vasir">ایمیل خود را ثبت کنید تا پیشنهاد های ویژه را برای شما بفرستیم</p>
-        <form>
-          <div class="x">
-            <div></div>
-            <input class="submit" type="button" value="ثبت">
-            <input class="text-area" placeholder="Email" type="text">
-          </div>
-        </form>
-
-      </div>
-
-    </div>
-
     <div class="footer-links">
       <div></div>
-      <div>mix store
+      <div>store
         <p>
           ایلام 22بهمن پلاک 123
         </p>
@@ -29,7 +12,7 @@
           09184536983
         </p>
         <p>
-          help@mixstore.com
+         info.store@yahoo.com
         </p>
         <div class="social-media">
 
@@ -84,20 +67,18 @@
           <p>محصولات جدید</p>
         </a>
         <a href="#">
-          <p>لباس </p>
+          <p>لباس بچه ها </p>
         </a>
         <a href="#">
-          <p>تجهیزات جانبی</p>
+          <p> لباس مردانه</p>
         </a>
         <a href="#">
-          <p>جواهرفروشی</p>
+          <p>لباس بانوان</p>
         </a>
         <a href="#">
-          <p>کفش </p>
+          <p>لباس زیر </p>
         </a>
-        <a href="#">
-          <p>ساعت</p>
-        </a>
+
       </div>
 
 
