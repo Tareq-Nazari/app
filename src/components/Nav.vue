@@ -4,16 +4,16 @@
 
   <div class="item" ref="t" v-on:click="currentNav($event)" id="/"><router-link to="/">خانه</router-link></div>
   <div class="item" @click="currentNav($event)" id="/store"><router-link to="/stores">فروشگاه ها</router-link></div>
-  <div class="item" @click="currentNav($event)" id="/products"><router-link to="/products">محضولات</router-link></div>
+  <div class="item" @click="currentNav($event)" id="/products"><router-link to="/products">محصولات</router-link></div>
   <div class="item" @click="currentNav($event)" id="/contact"><router-link to="/contact">تماس با ما</router-link></div>
-  <div class="item" v-on:click="currentNav($event)" id="/about">درباره ما</div>
-
+  <div v-if="showDash === true" style="background-color: #E11D20;color: white;border-radius: 6px" class="item" v-on:click="currentNav($event)" id="/about"><router-link style="color: white" to="dashboard/user/">داشبورد</router-link></div>
+  <div v-else class="item"></div>
   <div class="item">لوگو</div>
   <div style="cursor: pointer" v-on:click="searchClick = !searchClick"><font-awesome-icon :icon="['fas','search']" /></div>
-  <div style="position:relative;cursor: pointer" v-on:click="shopClick = 1"><font-awesome-icon :icon="['fas','shopping-cart']" /><div style="position:absolute;height: 15px;width: 15px;
-  background-color: red;border-radius: 50%;top: 58%;right: 14%;font-size: 12px;color: white">{{counter}}</div></div>
-  <div><font-awesome-icon v-if="prof == false" :icon="['fas','user']" />
-  <img v-if="prof == true" src="src/img/seller.jpg" style="height: 100%;width: 100%"></div>
+  <div v-on:click="getCart" style="position:relative;cursor: pointer" ><font-awesome-icon :icon="['fas','shopping-cart']" /><div style="position:absolute;height: 15px;width: 15px;
+  background-color: red;border-radius: 50%;top: 58%;right: 14%;font-size: 12px;color: white">{{cartCounter}}</div></div>
+  <div><font-awesome-icon :icon="['fas','user']" /></div>
+
   <transition name="fade">
     <div v-if="searchClick" style="height: 50px;width: 400px;display: flex;align-items: center;background-color: white;border-radius: 7px;border:3px solid limegreen;position: absolute;top: 50px;left: 37px">
       <input placeholder="نام محصول ..." style="outline: none;font-size: 19px;background-color: #d9dddc;border: none;height: 40px;width: 320px;padding: 5px;display: inline-block">
@@ -31,16 +31,16 @@
   <div v-if="shopClick == 1" class="shopping-cart" style="">
     <div style="height: 5%;width: 90%;background-color: white;border-radius: 10px">
       <p style="font-size: 13px;position: absolute;top: -8px;left: 118px">سبد خرید</p>
-      <img v-on:click="shopClick=0" src="src/img/close.svg"  style="cursor: pointer;position: absolute;right: 4px;top: 5px;z-index: 10" height="20px" width="20px">
+      <font-awesome-icon v-on:click="shopClick=0" :icon="['fas','times-circle']" style="cursor: pointer;position: absolute;right: 4px;top: 5px;z-index: 10;color: red" height="20px" width="20px" />
     </div>
 
-    <div style="height: 90%;width: 95%;background-color: white;border-radius: 7px;padding: 1%;overflow: auto">
+    <div style="height: 90%;width: 95%;background-color: white;border-radius: 7px;padding: 1%;overflow: auto" id="par">
 
-      <div v-for="r in forc" style="width: 100%;height: 55px;border-bottom: 1px solid black;display: flex;justify-items: center;justify-content: space-around;align-items: center">
-        <img src="src/img/chetoz.webp" height="50px" width="50px" >
-        <p>xxxxxxxxxxxxxx</p>
-        <p>price</p>
-        <font-awesome-icon :icon="['fas','times-circle']"  :style="{color : 'red'}"/>
+      <div v-for="product in products"  :id="product.id" style="width: 100%;height: 55px;border-bottom: 1px solid black;display: flex;justify-items: center;justify-content: space-around;align-items: center">
+        <img src="../img/tshirt.jpg" height="50px" width="50px" >
+        <p>{{product.name}}</p>
+        <p>{{product.price}}</p>
+        <font-awesome-icon :icon="['fas','times-circle']"  style="color : red;cursor: pointer" v-on:click="deleteFromCart(product.id)" />
       </div>
 
 
@@ -48,7 +48,7 @@
     <button style="position: absolute;bottom: 0;outline: none;left: 100px;height: 30px;width: 100px;background-color: dodgerblue;font-family: vasir;color: white;border: 0;border-radius:  50% 50% 0 0">
       پرداخت
     </button>
-    <img src="src/img/triangle.svg" style="z-index: -1;position:absolute;top: -20px;left: 52px;" height="40px" width="40px">
+
 
   </div>
 
@@ -63,7 +63,8 @@
 
 
   import {isLoggedIn} from "../services/auth_service";
-
+  import axios from 'axios'
+  import {http} from "../services/http_service";
   export default {
     name: "Nav",
     data(){
@@ -73,29 +74,53 @@
           forc : 10,
         user: {
             isLoggedIn: 1
-
-
-        }
+        },
+        products : null,
+        showDash : false,
+        cartCounter: null
       }
 
     },
 
     methods : {
       currentNav(event){
+      },
+      getCart(){
+        http().post('users/basket/all').then((response) => {
+          this.shopClick = 1
+          this.products = response.data
+          console.log(response)
+        }).catch((e) => {
+          console.log(e)
+        })
 
-              }
+      },
+      deleteFromCart(id) {
+        let x = document.getElementById(id)
+        x.remove()
+        http().post('users/basket/delete'+id).then((res)=>{
+
+        })
+      }
+
+
+    },
+    watch: {
+
+
+    },
+    created() {
+
+        this.cartCounter = this.$store.getters.cartNum
+        if (this.$store.getters.isLoggedIn) {
+          this.showDash = true
+        }else this.showDash=false
 
 
 
     },
     computed: {
-      counter() {
-        return this.$store.getters.increase;
-      },
-      prof () {
 
-        return this.$store.getters.isLoggedIn
-      }
     }
 
   }

@@ -43,38 +43,34 @@
   </section>
 </template>
 <script>
-  import axios from 'axios'
   import * as auth from '../services/auth_service'
 
   export default {
 
   data(){
     return {
-      email : '',
-      password : '',
-      response : '',
       user : {
         email : '',
-        password : ''
+        password : '',
+        response: null
       }
     }
   }
   ,
   methods : {
-    submit (){
-      this.$store.dispatch('login' , {
-        email : this.email,
-        password : this.password
-      })
-    },
+
     login: async function(){
-      try {
-        const response = await auth.login(this.user);
 
-      }catch (e) {
+        await auth.login(this.user)
+      let x = auth.getScope()
 
-      }
+      this.$router.push('/dashboard/'+x+'/')
+
+
+
     },
+
+
   }
 }
 

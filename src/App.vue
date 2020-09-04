@@ -25,9 +25,11 @@
 
 
   import "./assets/css/style.css"
+
   import Footer from "./components/Footer";
   import Nav from "./components/Nav";
   import "../node_modules/regenerator-runtime/runtime-module";
+
 
 
 

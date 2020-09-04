@@ -1,7 +1,24 @@
 input , button , select , option , p ,div {
   font-family: vasir;
 }
+a {
+  color: inherit;
+}
+button {
+  cursor: pointer;
 
+}
+.exit-btn {
+  height: 30px;
+  width: 70px;
+  color: white;
+  background-color: #ff2400;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  text-align: center;
+
+}
 .dsh-container {
   display: flex;
   flex-direction: row;

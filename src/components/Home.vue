@@ -94,6 +94,7 @@
 <script>
 
   import { Swiper, SwiperSlide , directive} from 'vue-awesome-swiper'
+  import * as auth from '../services/auth_service'
 
   import 'swiper/swiper-bundle.css'
   import axios from 'axios'
@@ -132,6 +133,7 @@ import {mapMutations} from 'vuex'
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev'
             }
+
           },
           s3 : {
             slidesPerView: 6,

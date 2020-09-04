@@ -7,14 +7,14 @@
       <div class="description">
 
         <div class="details" style="border-bottom:1px solid #e8e8e8">
-          <h1>اسم محصول : </h1>
-          <h2>قیمت : </h2>
+          <h1>اسم محصول : {{product.name}}</h1>
+          <h2>قیمت : {{product.price}}</h2>
           <h3>برند: </h3>
           <h4>سایز : </h4>
           <h5>رنگ : </h5>
         </div>
           <div style="height: 30px;width: 530px;display: grid;grid-template-columns: 30px 500px;grid-template-rows: repeat(2,15px);">
-            <button style="grid-column: 2/3;grid-row: 1/3;color: white;background-color: black;border: none"> اضافه کردن به سبد خرید</button>
+            <button v-on:click="addToCart(product.id)" style="grid-column: 2/3;grid-row: 1/3;color: white;background-color: black;border: none"> اضافه کردن به سبد خرید</button>
 
             <font-awesome-icon :icon="['fas','plus']" style="color: green;"></font-awesome-icon>
             <font-awesome-icon :icon="['fas','minus']" style="color: red;margin-top: 4px;"></font-awesome-icon>
@@ -52,8 +52,6 @@
            :style="DescriptionDisplay==='block'? style5:style4">
 
           توضیحات</p>
-        <p :style="moreInformationDisplay==='block'? style5:style4" @click="moreInformationDisplay='block',DescriptionDisplay='none',ReviewsDisplay='none'">اطلاعات
-          بیشتر</p>
         <p @click="moreInformationDisplay='none',DescriptionDisplay='none',ReviewsDisplay='block'"
            :style="ReviewsDisplay==='block'? style5:style4">بازخوردها</p>
       </div>
@@ -66,16 +64,10 @@
       <div class=" aboutProduct">
         <p v-if="DescriptionDisplay==='block'">
 
-          اما مدیر ورزشی ناپولی، کریستیانو جیونتولی آب پاکی روی دست شیاطین سرخ ریخته و می‌گوید وضعیت بغرنج مالی ناشی از
-          اپیدمی کرونا باعث نمی‌شود این باشگاه ایتالیایی ستاره‌اش را ارزانتر از ارزش واقعی‌اش واگذار کند. گیونتولی
-          می‌گوید بازیکنی مثل کولیبالی را نمی‌توان به خاطر یک بحران ارزان‌تر فروخت.
-
-
-          کولیبالی 28ساله تا سال 2023 با ناپولی قرارداد دارد. مدیر ورزشی ناپولی در این باره گفت:" کالیدو بازیکن بزرگی
-          است و هنوز با ما قراردادی بلندمدت دارد. ما اگر بخواهیم او را بفروشیم مبلغ قابل توجهی درخواست خواهیم کرد".
+          {{product.caption}}
 
         </p>
-        <p v-if="moreInformationDisplay==='block'">اطلاعات بیشتر</p>
+
         <div v-if="ReviewsDisplay==='block'">
           <div style="height: 900px;width: 700px;display: flex;flex-direction: column;align-content: center;">
             <div v-for="i in 3" style="border-radius: 10px;height: auto;max-width: 60%;margin: 10px;background-color: #d0d4d3;word-break: break-all;padding: 5px">
@@ -102,6 +94,7 @@
   import VueEasyLightbox from 'vue-easy-lightbox'
 
   import axios from 'axios'
+  import {http} from "../services/http_service";
 
   export default {
     components: {
@@ -130,16 +123,29 @@
             title: 'Slide #1',
             content: 'Slide content.'
           }
-        ]
+        ],
+        product : null
       }
     },
 
     mounted() {
       axios
-      .get('http://127.0.0.1/test/public/api/product')
-      .then(response => (this.info = response.data));
+      .get('product/detail/'+this.$route.params.id)
+      .then(response => {
+        this.product = response.data
+        console.log(response.data)
+      }
+    );
     },
     methods: {
+      addToCart(id){
+        http().post('users/basket/add'+id).then((response) => {
+          this.$store.
+          console.log(response)
+        }).catch(e =>{
+          console.log(e)
+        })
+      },
       resize: function () {
         this.display = "block"
 

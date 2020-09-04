@@ -9,6 +9,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {  faTwitter, faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons'
 
+
 library.add(faTwitter, faFacebook, faInstagram, faYoutube)
 library.add(fas)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -24,6 +25,7 @@ import {routes} from './router'
 
 
 Vue.use( VueRouter);
+
 
 
 const router = new VueRouter({

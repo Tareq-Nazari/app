@@ -1,6 +1,7 @@
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
 import {http} from "./http_service";
+let loginRes = null;
 export function register(user) {
 
     axios.post('users/register',{
@@ -19,19 +20,23 @@ export function register(user) {
 
 export function login(user) {
 
-  axios.post('users/login',{
+  axios.post('login',{
 
     email : user.email,
     password : user.password,
   }).then(response => {
-    if (response.status === 200) {
-      //const token = jwt.sign({user : user}, 'secret')
-      const token = JSON.stringify(response)
-      localStorage.setItem('token' , token)
-    }
-    return response.data
+     if (response.status === 200) {
+       //const token = jwt.sign({user : user}, 'secret')
+       const token = JSON.stringify(response)
+       localStorage.setItem('token' , token)
+       loginRes = response
+     }
 
+
+  }).catch(e => {
+    console.log(e)
   })
+  if (loginRes) {return JSON.stringify(response.data.scope[0])}
 
 }
 
@@ -39,7 +44,14 @@ export function isLoggedIn() {
 
 let token = localStorage.getItem('token');
 token = JSON.parse(token);
-return token.data.scope
+
+if (token != null){
+  return true
+}
+else {return false}
+
+
+
 
 }
 
@@ -56,18 +68,25 @@ export function logout() {
     }
   })) {
     localStorage.removeItem('token');
+
   }
 
 }
-  function getAccessToken() {
-  const token = localStorage.getItem('token');
-  console.log(token)
-  if (!token){
-    return null
-  }
-  //return token.access_token
-  //const tokenData = jwt.decode(token.user.access_token)
-  //return tokenData;
+ export function getAccessToken() {
+    let token = JSON.parse(localStorage.getItem('token'))
+    token = token.data.access_token
+   return token
+ }
 
-}
+
+
+
+  export function getScope() {
+    let token = localStorage.getItem('token');
+    token = JSON.parse(token)
+    token = token.data.scope[0]
+
+    return token
+
+  }
 

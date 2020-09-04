@@ -1,9 +1,16 @@
 <template>
   <div style="width: 100%;height: auto">
-    <img src="src/img/stores-header.jpg" width="100%" height="300px">
+    <img src="src/img/ww.jpg" width="100%" height="300px">
+    <div>
+      <div class="ac-title">
+        <div class="ac-title-side"></div>
+        <h3>فروشگاه ها </h3>
+        <div class="ac-title-side"></div>
+      </div>
+    </div>
     <div style="width: 100%;height: 40px;color: white;background-color: white;">
       <swiper class="swiper"  :options="swiperOption">
-        <swiper-slide v-for="i in 30"><div style="border-radius: 10px;display: flex;align-items: center;background-color: red;height: 40px;min-width: 100px">
+        <swiper-slide v-for="i in 30"><div style="border-radius: 10px;display: flex;justify-content: space-evenly;align-items: center;background-color: red;height: 40px;min-width: 100px">
           <input type="checkbox">
           <p>مردانه</p>
         </div> </swiper-slide>
@@ -15,14 +22,12 @@
     </div>
     <br><br>
     <div style="display: flex;justify-content: space-around;flex-wrap: wrap;">
-      <div v-for="i in 10" class="stores-card" style="position: relative;margin: 10px;border: #888888 1px solid;border-radius: 8px;height: 250px;width:320px;display: flex;flex-direction: column;align-items: center;justify-content: space-evenly">
-        <div style="background-color: #282A37;color: #F3F8FB;padding: 6px;border-radius: 5px">فروشگاه کفش آراتامیس</div>
-        <img style="border-radius: 50%" src="src/img/store1.jpeg" height="50%" width="50%">
+      <div v-for="store in stores" class="stores-card" v-bind:style="{ backgroundImage: 'url(http://localhost/storeBackend/images/' + store.header_pic + ')' }">
+        <div style="background-color: #282A37;color: #F3F8FB;padding: 6px;border-radius: 5px">{{store.name}}</div>
+        <img style="border-radius: 50%" v-bind:src="'http://127.0.0.1/storeBackend/images/'+store.profile_pic" height="50%" width="50%">
+        <h3 style="background-color: rgba(255,36,0,0.52);color: white;cursor: pointer;border-radius: 5px" v-on:click="gotoshop" :id="`${store.id}`">مشاهده فروشگاه</h3>
 
 
-      <font-awesome-icon @click="gotoshop" :icon="['fas' , 'arrow-right']" style="position: absolute;right: 9px;bottom: 7px;
-      font-size: 2em;color: white;background-color: #d63938;border-radius: 50%;padding: 5px;
-"/>
 
       </div>
       </div>
@@ -39,41 +44,75 @@
   import 'swiper/swiper-bundle.css'
     export default {
         name: "Stores",
+      data(){
+        return {
+          swiperOption: {
+            slidesPerView: 15,
+            spaceBetween: 50,
+            freeMode: true,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true
+            }
+          },
+          s: 10,
+          stores : null,
+          route : ''
+        }
+
+      },
+
       components : {
         Swiper,
         SwiperSlide,
 
       },
-      created() {
-          axios.get('')
+      mounted: function(){
+          axios.get('store/all').then((response) => {
+          this.stores = response.data
+          console.log(response)
+          }).catch(e => {
+            alert(e)
+          })
       },
       methods : {
-        gotoshop(){
-          this.$router.push({path: '/storepage'})
-        }
-      },
-      data(){
-          return {
-            swiperOption: {
-              slidesPerView: 15,
-              spaceBetween: 50,
-              freeMode: true,
-              pagination: {
-                el: '.swiper-pagination',
-                clickable: true
-              }
-            },
-            s: 10
-          }
+        gotoshop: function(ev){
 
+          this.$router.push({path: '/store/'+ev.target.id})
+        }
       },
 
     }
 </script>
 
 <style scoped>
+  .ac-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .ac-title-side{
+    height: 6px;
+    width: 40%;
+    background-color: #888888;
+    border-radius: 50%;
+  }
 .stores-card{
-  background-image: url("../img/stores-header.jpg");
+  position: relative;
+  margin: 10px;
+  border: #888888 1px solid;
+  border-radius: 8px;
+  height: 250px;
+  width:320px;display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  transition: width 500ms;
 }
+  .stores-card:hover {
+    width: 340px;
+    height: 270px;
+  }
 
 </style>

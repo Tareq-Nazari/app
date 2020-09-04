@@ -1,5 +1,5 @@
 
-
+import newStore from "./components/Dashboard/Store/newStore"
 import StorePage from "./components/StorePage";
 import Contact from "./components/Contact";
 import Home from "./components/Home"
@@ -37,41 +37,61 @@ import AdminProfileShow from "./components/Dashboard/Admin/profile/show";
 import AdminProfileEdit from "./components/Dashboard/Admin/profile/edit";
 import Sginup from "./components/Sginup";
 import * as auth from './services/auth_service';
+import {getScope, isLoggedIn} from "./services/auth_service";
 
-export const routes = [
-  {path : '/store' , components:{
-    default: StorePage,
+export const routes =[
+  {path: '/stores' , component: Stores},
 
-    }},
-  {path : '/store/:id' , components: StorePage},
   {path: '/contact' , component: Contact , children : [
 
 
     ]},
-
+  {path: '/store/:id' , component : StorePage},
   {path: '/signup' , component: Sginup},
   {path: '/search' , component: Search},
-  {path: '' , component: Home},
-  {path : '*' , component: StorePage},
+
+  {path : '*' , component: Home},
   {path: '/product/:id' , component: ProductDetail},
-  {path: '/login' , component: Login},
-  {path: '/stores' ,
-    component: Stores,
-    beforeEnter: (to,from,next) => {
-        auth.isLoggedIn() ? next():next('/login')
+  {path: '/login' , component: Login,beforeEnter: (to,from,next)=>{
+      if (!auth.isLoggedIn()) {
+        next()
+      }else {
+        next('/home')
+      }
     }},
+
   {path: '/shoppingcart' , component: ShoppingCart},
   {path: '/category/:id' , component: category},
   {path: '/shopregister' , component: ShopRegister},
-  {path : '/dashboard/store/:id/edit' , component: EditStore},
-  {path: '/dashboard/store/:id/edit/skin',component: Skin},
-  {path: '/dashboard/store/:id/edit/addproduct',component: AddProduct},
-  {path: '/dashboard/store/:id/edit/editproduct',component: EditProduct},
-  {path: '/dashboard/store/:id/edit/addproduct/:p_id',component: AddProduct},
 
 
 
-  {path: '/dashboard/user' , component: UserDashboard},
+
+  {path : '/dashboard/store/' , component: newStore , children: [
+      {path: '' , component: EditStore},
+      {path: 'skin',component: Skin},
+      {path: 'addproduct',component: AddProduct},
+      {path: 'editproduct',component: EditProduct},
+
+
+    ],
+  beforeEnter: (to , from , next) => {
+
+     if (auth.isLoggedIn()) {
+       next()
+     }else  {
+       next('/login')
+     }
+  }},
+
+
+
+
+  {path: '/dashboard/user/' , component: UserDashboard,beforeEnter: (to,from ,next) => {
+    if (isLoggedIn()) {
+      next()
+    } else next('/login')
+    }},
 
 
   //Admin dashboard routes
@@ -96,7 +116,19 @@ export const routes = [
     {path: 'user/detail',component: AdminDetailUsers},
     {path: 'user/add',component: AdminAddUsers},
     {path: 'profile/show',component: AdminProfileShow},
-    {path: 'profile/edit',component: AdminProfileEdit},]
+
+    {path: 'profile/edit',component: AdminProfileEdit},
+  ],beforeEnter: (to,from,next) => {
+      if(auth.isLoggedIn() )  {
+
+        next()
+      } else {
+        next('/login')
+      }
+
+}},
+
+    {path: 'profile/edit',component: AdminProfileEdit}
 //   ],beforeEnter: (to,from,next) => {
 //    if(auth.isLoggedIn() == 'admin')  {
 //
@@ -106,7 +138,6 @@ export const routes = [
 //    }
 // }
 
-  },
 
 
 

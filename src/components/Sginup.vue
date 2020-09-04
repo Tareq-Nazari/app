@@ -11,23 +11,23 @@
             <form  class="register-form" id="register-form">
               <div class="form-group">
                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                <input type="text" v-model="name" name="name" id="name" placeholder="نام و نام خانوادگی"/>
+                <input type="text" v-model="user.name" name="name" id="name" placeholder="نام و نام خانوادگی"/>
               </div>
               <div class="form-group">
                 <label for="email"><i class="zmdi zmdi-email"></i></label>
-                <input type="email" v-model="email" name="email" id="email" placeholder="ایمیل"/>
+                <input type="email" v-model="user.email" name="email" id="email" placeholder="ایمیل"/>
               </div>
               <div class="form-group">
                 <label for="cp"><i class="zmdi zmdi-email"></i></label>
-                <input type="number" v-model="phone" name="cp" id="cp" placeholder="09xx xxx xxxx" />
+                <input type="number" v-model="user.phone" name="cp" id="cp" placeholder="09xx xxx xxxx" />
               </div>
               <div class="form-group">
                 <label for="address"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                <textarea style="font-family: vasir;height: 100%;width: 95%%;padding: 5px" v-model="address" name="address"  id="address" placeholder="آدرس"> </textarea>
+                <textarea style="font-family: vasir;height: 100%;width: 95%%;padding: 5px" v-model="user.address" name="address"  id="address" placeholder="آدرس"> </textarea>
               </div>
               <div class="form-group">
                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                <input type="password"  v-model="password" name="pass" id="pass" placeholder="پسورد"/>
+                <input type="password"  v-model="user.password" name="pass" id="pass" placeholder="پسورد"/>
               </div>
               <div class="form-group">
                 <input type="checkbox"  name="agree-term" id="agree-term" class="agree-term" />
@@ -67,14 +67,14 @@
             password : '',
             address : '',
             phone : 0,
-            role : 1,
+            role : 2,
             user : {
               name : '',
               email : '',
               password : '',
               address : '',
               phone : 0,
-              role : 1
+              role : 2
             },
 
           }
