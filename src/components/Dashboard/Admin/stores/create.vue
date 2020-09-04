@@ -126,7 +126,7 @@
 
 
     }, created() {
-      axios.post('http://127.0.0.1/laravel/public/api/category/store_all')
+      axios.get('http://127.0.0.1/laravel/public/api/category/store_all')
         .then(response => (this.cats = response.data)
         ).catch(error => console.log(error))
     },

@@ -60,18 +60,6 @@
           >
 
         </div>
-        <div class="inp">
-          <p> عکس </p>
-
-          <input
-            id="file"
-            type="file"
-            name="file"
-            ref="file"
-            v-on:change="selectFile"
-          >
-
-        </div>
 
 
         <div class="inp">
@@ -85,11 +73,11 @@
 
         <div style="margin-top: 15px">
           <button
-            v-on:click="checkForm"
+            v-on:click="checkForm(id)"
             type="submit"
             value=" ثبت تغیرات"
             name="submit"
-          >l;;;l
+          >ثبت
           </button>
         </div>
 
@@ -125,7 +113,7 @@
       }
 
     }, methods: {
-      checkForm: function () {
+      checkForm: function (id) {
         axios.post('http://127.0.0.1/laravel/public/api/admin/users/edit', {
           role: this.role,
           id: this.id,
@@ -134,23 +122,19 @@
           phone: this.phone,
           email: this.email,
           address: this.address
-        }).then(res => console.log(res)).catch(error => console.log(error))
+        }).then(res =>{
+          this.$router.push({
+            path: '/dashboard/admin/user/detail', query: {id}
+          })
+        }).catch(error => console.log(error))
+
       },
-      pp: function (event) {
-        this.pic = event.target.files;
-      },
-      handleFileUpload() {
-        pic = this.$refs.file.files[0];
 
-      }
-
-      , rolee: function (msg) {
-        this.role = msg;
-
-      }, selectFile(event) {
-        // `files` is always an array because the file input may be in multiple mode
-        this.pic = event.target.files[0];}
     }
+    , rolee: function (msg) {
+      this.role = msg;
+
+    },
   }
 </script>
 

@@ -1,39 +1,33 @@
 <template>
-
-
-  <div class="main">
+  <div class="main"
+       style="display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;">
     <div></div>
     <div class="box">
       <form
         id="app"
         v-on:submit.prevent="submit"
       >
-        <div>
-          <h2 style="text-align: center;color: #d63938;font-size: 17px "> اضافه کردن دسته بندی جدید به مغازه ها</h2>
-        </div>
+        <p> عکس محصول </p>
 
-        <div class="inp">
-          <p>نام کتگوری</p>
-          <input
-            id="name"
-            type="text"
-            name="name"
-            v-model="name"
-          >
-
-        </div>
-
+        <input style="border: none"
+               id="file"
+               type="file"
+               name="file"
+               ref="file"
+               v-on:change="selectFile"
+        >
         <div style="margin-top: 15px">
           <button
-            name="submit"
             type="submit"
-            id="submit"
-            v-on:click="checkForm"
-          >ثبت</button>
+
+            id="su"
+            v-on:click="checkForm(id)"
+          >ثبت تغیرات
+          </button>
         </div>
 
       </form>
-
     </div>
 
 
@@ -41,45 +35,51 @@
 </template>
 
 <script>
-  import AdminHome from "../../AdminHome";
   import axios from "axios";
 
   export default {
-    name: "add",
+    name: "editPic",
     data() {
-      return {name: ''}
-    }, components: {
+      return {
+        file: '',
+        id: this.$route.query.id,
 
-      AdminHome
 
-
+      }
     },
     methods: {
-      checkForm: function () {
+      selectFile: function () {
 
-        axios.post('http://127.0.0.1/laravel/public/api/admin/category/store/add',
-          {
-            name: this.name,
-          }).then(response=>{
-          this.$router.push({path: '/dashboard/admin/storeCategory/all'})
-        })
-      }
+        // `files` is always an array because the file input may be in multiple mode
+        this.file = this.$refs.file.files[0];
+
+      },
+      checkForm: function (id) {
+        let formData = new FormData();
+        formData.append('pic', this.file)
+        formData.append('id', this.id)
+
+        axios.post('http://127.0.0.1/laravel/public/api/admin/product/edit_pic',
+          formData
+          , {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+
+          }).then((resp) => {
+          this.$router.push({
+            path: '/dashboard/admin/product/detail',query:{id}
+          })
+        }).catch(error => console.log(error))
+
+
+      },
 
     }
-
   }
-
-
 </script>
 
 <style scoped>
-  .main {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-
-
-  }
-
   .box {
     margin-top: 20px;
     padding-top: 15%;
@@ -88,8 +88,7 @@
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14),
     0 3px 1px -2px rgba(0, 0, 0, .12),
     0 1px 5px 0 rgba(0, 0, 0, .2);
-
-    height: 945px;
+    height: 300px;
   }
 
   input {
@@ -151,18 +150,3 @@
   }
 
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

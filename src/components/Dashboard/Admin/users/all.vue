@@ -19,6 +19,7 @@
             -
           </th>
 
+
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
 
           ><input style="font-size: 58%" v-model="profile_id" name="profile_id" placeholder="فیلترکردن ">
@@ -61,7 +62,7 @@
           </td>
           <td
             style="color: #00a8ed;cursor: pointer;text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
-            @click="routerLinkToDetails(user)">
+            @click="routerLinkToDetails(user.user_id)">
             مشاهده صفحه کاربر
           </td>
         </tr>
@@ -93,15 +94,15 @@
         users: ''
         ,
         columns: ['id', 'user_id', 'name', 'email', 'phone', 'role'],
-        columns1: ['شمارنده', 'profile_id', 'user_id', 'نام', 'ایمیل', 'شماره تلفن', 'نقش', 'جزئیات'],
+        columns1: ['شمارنده', ,'profile_id', 'user_id', 'نام', 'ایمیل', 'شماره تلفن', 'نقش', 'جزئیات'],
         columns2: [' id', 'user_id', 'نام', 'ایمیل', 'شماره تلفن', 'نقش']
       }
     },
     components: {AdminHome},
     methods: {
 
-      routerLinkToDetails: function (user) {
-        this.$router.push({path: '/dashboard/admin/user/detail', query: {user}});
+      routerLinkToDetails: function (id) {
+        this.$router.push({path: '/dashboard/admin/user/detail', query: {id}});
       },
       name1: function (msg) {
         if (msg === 'نام') {
@@ -136,7 +137,7 @@
 
     },
     created() {
-      axios.post('http://127.0.0.1/laravel/public/api/admin/users/all')
+      axios.get('http://127.0.0.1/laravel/public/api/admin/users/all')
         .then(response => (this.users = response.data)
         ).catch(error => console.log(error))
     },

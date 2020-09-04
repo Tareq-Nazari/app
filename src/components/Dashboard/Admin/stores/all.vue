@@ -45,7 +45,7 @@
           </td>
           <td
             style="color: #00a8ed;cursor: pointer;text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
-            @click="routerLinkToDetails(store)">
+            @click="routerLinkToDetails(store.id)">
             مشاهده صفحه مغازه
           </td>
         </tr>
@@ -82,8 +82,8 @@
     components: {AdminHome},
     methods: {
 
-      routerLinkToDetails: function (store) {
-        this.$router.push({path: '/dashboard/admin/store/detail', query: {store}});
+      routerLinkToDetails: function (id) {
+        this.$router.push({path: '/dashboard/admin/store/detail', query: {id}});
       },
       name1: function (msg) {
         if (msg === 'نام مغازه') {
@@ -109,7 +109,7 @@
       }
     },
     created() {
-      axios.post('http://127.0.0.1/laravel/public/api/admin/store/all')
+      axios.get('http://127.0.0.1/laravel/public/api/admin/store/all')
         .then(response => (this.stores = response.data)
         ).catch(error => console.log(error))
     },

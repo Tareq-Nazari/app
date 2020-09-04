@@ -161,7 +161,7 @@
       },
     },
     created() {
-      axios.post('http://127.0.0.1/laravel/public/api/admin/factors/all')
+      axios.get('http://127.0.0.1/laravel/public/api/admin/factors/all')
         .then(response => (this.factors = response.data)
         ).catch(error => console.log(error))
     },
