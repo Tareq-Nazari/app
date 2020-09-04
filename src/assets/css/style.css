@@ -1,6 +1,13 @@
 input , button , select , option , p ,div {
   font-family: vasir;
 }
+a {
+  color: inherit;
+}
+button {
+  cursor: pointer;
+
+}
 .exit-btn {
   height: 30px;
   width: 70px;

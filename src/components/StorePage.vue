@@ -1,5 +1,5 @@
 <template>
-  <div style="font-family: vasir;background-color: #d9dddc">
+  <div style="font-family: vasir;background-color: white;">
 
     <div class="container" >
       <img class="header-img" height="100%" width="100%" :src="'http://localhost/storeBackend/images/'+shopDetail.header_pic">
@@ -14,7 +14,7 @@
 
       </div>
       <div class="store-contact">
-        <button style="border-radius: 5px;border: solid 3px #4a61d3;width: 40%;height: 72%;background-color: white;color: #4a61d3;margin-top: 7px;"><font-awesome-icon :icon="['fas','phone']"></font-awesome-icon>&nbsp;&nbsp;تماس با ما</button>
+        <button v-on:click="contact" style="border-radius: 5px;border: solid 3px #4a61d3;width: 40%;height: 72%;background-color: white;color: #4a61d3;margin-top: 7px;"><font-awesome-icon :icon="['fas','phone']"></font-awesome-icon>&nbsp;&nbsp;تماس با ما</button>
       </div>
 
     </div>
@@ -27,7 +27,7 @@
       <br><br><br>
     <div style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-evenly">
 
-      <div @click="productpage(1)" v-for="product in shopProducts" dir="rtl" style="background-color: white;margin: 15px;height: 400px;width: 300px;border-radius: 2%;display: flex;flex-direction: column;align-items: center;justify-content: space-around" >
+      <div @click="productpage(`${product.id}`)" v-for="product in shopProducts" dir="rtl" style="box-shadow: 10px 10px rgba(208,212,211,0.52);border: solid 0.5px rgba(195,199,198,0.52);background-color: white;margin: 15px;height: 400px;width: 300px;border-radius: 2%;display: flex;flex-direction: column;align-items: center;justify-content: space-around" >
 
         <img :src="'http://localhost/storeBackend/images/'+product.pic" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="65%" width="98%">
         <p  style="font-size: 20px;">{{product.name}}</p>
@@ -39,6 +39,13 @@
 
 
 
+
+
+    </div>
+    <br><br>
+    <div class="contact-footer" id="contactus">
+      <div ><font-awesome-icon :icon="['fas','phone']" style="color: red;font-size: 1.3em" />&nbsp;&nbsp;{{shopDetail.phone}}111111</div>
+      <div ><font-awesome-icon :icon="['fas','envelope']" style="color: red;font-size: 1.6em" />&nbsp;&nbsp;{{shopDetail.email}}</div>
     </div>
 
     </div>
@@ -68,6 +75,7 @@
       axios.get('/store'+this.routeParam).then((response) => {
        this.shopDetail = response.data[0]
         this.shopDetail = this.shopDetail[0]
+        console.log(this.shopDetail)
         axios.get('/product_store'+this.routeParam).then((response) => {
           this.shopProducts = response.data[0]
 
@@ -81,11 +89,13 @@
     methods : {
       addtocart() {
 
-
-
       },
       productpage(id){
-        this.$router.push({path: `product/${id}`})
+        this.$router.push('/product/'+id)
+      },
+      contact(){
+        let pos = document.getElementById("contactus")
+        pos.scrollIntoView(false)
       }
     }
 
@@ -93,6 +103,24 @@
 </script>
 
 <style scoped>
+  .contact-footer {
+    margin-top: 20px;
+    height: 90px;
+    background-color: rgba(208,212,211,0.52);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center
+  }
+  .contact-footer div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    width: 215px;
+    padding-right: 50px;
+    background-color: rgba(255,12,0,0.25)
+  }
   .container {
 
     display: grid;

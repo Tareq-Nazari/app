@@ -49,7 +49,7 @@ export const routes =[
   {path: '/store/:id' , component : StorePage},
   {path: '/signup' , component: Sginup},
   {path: '/search' , component: Search},
-  {path: '' , component: Home},
+
   {path : '*' , component: Home},
   {path: '/product/:id' , component: ProductDetail},
   {path: '/login' , component: Login,beforeEnter: (to,from,next)=>{
@@ -77,7 +77,7 @@ export const routes =[
     ],
   beforeEnter: (to , from , next) => {
 
-     if (auth.isLoggedIn() && auth.getScope()==='shopOwner') {
+     if (auth.isLoggedIn()) {
        next()
      }else  {
        next('/login')
@@ -87,7 +87,7 @@ export const routes =[
 
 
 
-  {path: '/dashboard/user' , component: UserDashboard,beforeEnter: (to,from ,next) => {
+  {path: '/dashboard/user/' , component: UserDashboard,beforeEnter: (to,from ,next) => {
     if (isLoggedIn()) {
       next()
     } else next('/login')

@@ -53,7 +53,7 @@ export const store = new Vuex.Store({
   },
 
   getters: {
-    increase: state => {
+    cartNum: (state) => {
       return state.counter;
     },
     subMenu: state => {

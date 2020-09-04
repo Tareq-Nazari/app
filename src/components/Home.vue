@@ -110,7 +110,7 @@ import {mapMutations} from 'vuex'
     data() {
       return {
 
-        a : auth.getAccessToken(),
+
         swiperOption: {
 
           s1 : {
@@ -133,6 +133,7 @@ import {mapMutations} from 'vuex'
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev'
             }
+
           },
           s3 : {
             slidesPerView: 6,

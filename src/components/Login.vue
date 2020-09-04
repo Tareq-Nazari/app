@@ -61,14 +61,11 @@
 
     login: async function(){
 
-       try {
         await auth.login(this.user)
-         this.$router.push('/')
+      let x = auth.getScope()
 
+      this.$router.push('/dashboard/'+x+'/')
 
-       }catch (e) {
-
-       }
 
 
     },
