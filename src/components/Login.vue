@@ -62,9 +62,9 @@
     login: async function(){
 
         await auth.login(this.user)
-      let x = auth.getScope()
 
-      this.$router.push('/dashboard/'+x+'/')
+
+
 
 
 

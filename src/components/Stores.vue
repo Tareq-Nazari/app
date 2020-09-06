@@ -9,6 +9,7 @@
       </div>
     </div>
     <div style="width: 100%;height: 40px;color: white;background-color: white;">
+
       <swiper class="swiper" :options="swiperOption">
         <swiper-slide v-for="cat in cats">
           <div
@@ -19,6 +20,7 @@
 
           </div>
         </swiper-slide>
+
 
 
         <div class="swiper-pagination" slot="pagination"></div>

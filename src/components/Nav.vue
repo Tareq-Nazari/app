@@ -5,25 +5,15 @@
   <div class="item" ref="t" v-on:click="currentNav($event)" id="/"><router-link to="/">خانه</router-link></div>
   <div class="item" @click="currentNav($event)" id="/store"><router-link to="/stores">فروشگاه ها</router-link></div>
   <div class="item" @click="currentNav($event)" id="/products"><router-link to="/products">محصولات</router-link></div>
-  <div class="item" @click="currentNav($event)" id="/contact"><router-link to="/contact">تماس با ما</router-link></div>
-  <div v-if="showDash === true" style="background-color: #E11D20;color: white;border-radius: 6px" class="item" v-on:click="currentNav($event)" id="/about"><router-link style="color: white" to="dashboard/user/">داشبورد</router-link></div>
+  <div class="item" @click="currentNav($event)" id="/contact"><router-link to="/contact">درباره ما</router-link></div>
+  <div v-if="showDash === true" style="background-color: #E11D20;color: white;border-radius: 6px" class="item" v-on:click="currentNav($event)" id="/about"><router-link style="color: white" to="/dashboard/user/" replace>داشبورد</router-link></div>
   <div v-else class="item"></div>
   <div class="item">لوگو</div>
-  <div style="cursor: pointer" v-on:click="searchClick = !searchClick"><font-awesome-icon :icon="['fas','search']" /></div>
+  <div style="cursor: pointer" v-on:click="searchPage"><font-awesome-icon :icon="['fas','search']" /></div>
   <div v-on:click="getCart" style="position:relative;cursor: pointer" ><font-awesome-icon :icon="['fas','shopping-cart']" /><div style="position:absolute;height: 15px;width: 15px;
   background-color: red;border-radius: 50%;top: 58%;right: 14%;font-size: 12px;color: white">{{cartCounter}}</div></div>
   <div><font-awesome-icon :icon="['fas','user']" /></div>
 
-  <transition name="fade">
-    <div v-if="searchClick" style="height: 50px;width: 400px;display: flex;align-items: center;background-color: white;border-radius: 7px;border:3px solid limegreen;position: absolute;top: 50px;left: 37px">
-      <input placeholder="نام محصول ..." style="outline: none;font-size: 19px;background-color: #d9dddc;border: none;height: 40px;width: 320px;padding: 5px;display: inline-block">
-      <div style="display: inline-block;width: 70px;height: 50px;background-color: #d81c1e;text-align: center;cursor: pointer">
-        <font-awesome-icon :icon="['fas','search']" :style="{color : 'white',width: '28px',height: '28px',marginTop: '10px'}"></font-awesome-icon>
-
-      </div>
-
-    </div>
-  </transition>
 
 
   <transition name="fade">
@@ -101,6 +91,9 @@
         http().post('users/basket/delete'+id).then((res)=>{
 
         })
+      },
+      searchPage(){
+        this.$router.push('/search')
       }
 
 

@@ -1,8 +1,8 @@
 <template>
     <div style="background-color: #F5F5F5;width: 100%;min-height: 670px;overflow: auto">
       <div  style="background-color: #FFFFFF;min-height: 163px;width:55%;margin-top: 50px;margin-left: auto;margin-right: auto;">
-     <div id="1" v-for="i in 2" style="display: flex;margin: 10px;position: relative;border-bottom: 1px solid #d0d4d3">
-       <img style="border-radius: 5px" src="src/img/tshirt.jpg" height="150" width="150">
+     <div :id="product.id" v-for="product in products" style="display: flex;margin: 10px;position: relative;border-bottom: 1px solid #d0d4d3">
+       <img style="border-radius: 5px" :src="'http://127.0.0.1/storeBackend/images/'+product.pic" height="150" width="150">
        <div style="margin-right: 10px" >
         <h3>xxxxxxxxxxxx</h3>
          <h5>xxxxxxxxxxxx</h5>
@@ -25,11 +25,14 @@
 </template>
 
 <script>
+    import {http} from "../services/http_service";
+
     export default {
         name: "ShoppingCart",
       data(){
           return {
             show : true,
+            products : null
           }
       },
       methods : {
@@ -38,6 +41,15 @@
             v.remove();
 
         }
+      },
+      mounted(){
+
+          http().post('users/basket/all').then((response) => {
+
+            this.products = response.data
+          })
+
+
       }
     }
 </script>
