@@ -124,7 +124,7 @@
           address: this.address
         }).then(res =>{
           this.$router.push({
-            path: '/dashboard/admin/user/detail', query: {id}
+            path: '/dashboard/admin/user/detail', query: {id,message:'اطلاعات کاربر با موفقیت تغیر یافت'}
           })
         }).catch(error => console.log(error))
 

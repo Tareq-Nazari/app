@@ -61,7 +61,7 @@
           {
             name: this.name,
           }).then(response=>{
-          this.$router.push({path: '/dashboard/admin/storeCategory/all'})
+          this.$router.push({path: '/dashboard/admin/storeCategory/all',query:{message:'دسته بندی با موفقیت ثبت گردید'}})
         })
       }
 

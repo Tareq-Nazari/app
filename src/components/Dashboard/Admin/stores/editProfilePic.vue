@@ -68,7 +68,7 @@
 
           }).then((resp) => {
           this.$router.push({
-            path: '/dashboard/admin/store/detail',query:{id}
+            path: '/dashboard/admin/store/detail',query:{id,message:'عکس پروفایل مغازه با موفقیت تغییر یافت'}
           })
         }).catch(error => console.log(error))
 

@@ -2,6 +2,7 @@
   <div class="main">
     <div></div>
     <div class="textDetail">
+      <p style="color: red">{{message}}</p>
       <h1>نام : {{user[0].name}}</h1>
       <h2>profile_id : {{user[0].id}}</h2>
       <h3>ایمیل:{{user[0].email}} </h3>
@@ -14,11 +15,11 @@
                 style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">ادیت
           کردن
         </button>
-        <button @click="editPic(user[0].id)"
+        <button @click="editPic(user[0].user_id)"
                 style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">
           تغیر عکس پروفایل
         </button>
-        <button @click="deleteUser(user[0].id)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">حذف
+        <button @click="deleteUser(user[0].user_id)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">حذف
           کردن
         </button>
 
@@ -46,7 +47,7 @@
       return {
         user:'',
 
-
+message:this.$route.query.message,
           id: this.$route.query.id,
 
 
@@ -80,11 +81,16 @@
         if (confirm("آیا می خواهید کاربر را حذف کنید؟")) {
           axios.get('http://127.0.0.1/laravel/public/api/admin/users/delete' + id)
             .then(resp => {
-                this.$router.push({path: '/dashboard/admin/users/all'})
+                this.$router.push({path: '/dashboard/admin/users/all',query:{message:'کاربر باموفقیت حذف شد'}})
               }
             ).catch(error => console.log(error))
 
         }
+      },
+      mounted() {
+        setTimeout(() => {
+          this.message = ''
+        }, 5000);
       },
       edit: function (user, roles) {
         this.$router.push({path: '/dashboard/admin/user/edit', query: {user, roles}});

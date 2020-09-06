@@ -8,7 +8,7 @@
         id="app"
         v-on:submit.prevent="submit"
       >
-        <p> عکس پروفایل کاربر </p>
+        <p> عکس پروفایل  </p>
 
         <input style="border: none"
                id="file"
@@ -22,7 +22,7 @@
             type="submit"
 
             id="su"
-            v-on:click="checkForm(id)"
+            v-on:click="checkForm()"
           >ثبت تغیرات
           </button>
         </div>
@@ -54,12 +54,12 @@
         this.file = this.$refs.file.files[0];
 
       },
-      checkForm: function (id) {
+      checkForm: function () {
         let formData = new FormData();
         formData.append('pic', this.file)
-        formData.append('id', this.id)
 
-        axios.post('http://127.0.0.1/laravel/public/api/admin/users/edit_Profile_pic',
+
+        axios.post('http://127.0.0.1/laravel/public/api/users/profile/edit_picture',
           formData
           , {
             headers: {
@@ -68,7 +68,7 @@
 
           }).then((resp) => {
           this.$router.push({
-            path: '/dashboard/admin/user/detail',query:{id,message:'عکس پروفایل با موفقیت تغیر یافت'}
+            path: '/dashboard/admin/profile/show',query:{message:'عکس پروفایل با موفقیت تغیر یافت'}
           })
         }).catch(error => console.log(error))
 

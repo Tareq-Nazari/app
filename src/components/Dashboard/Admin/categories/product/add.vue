@@ -85,7 +85,7 @@
         axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/add',
           formData
         ).then(response => {
-          this.$router.push({path: '/dashboard/admin/productCategory/all'})
+          this.$router.push({path: '/dashboard/admin/productCategory/all',query:{message:'دسته بندی با موفقیت ثبت گردید'}})
         })
       }
 

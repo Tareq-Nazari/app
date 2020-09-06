@@ -2,6 +2,7 @@
   <div class="main">
     <div></div>
     <div class="textDetail">
+      <p style="color: red">{{message}}</p>
       <h1>اسم مغازه : {{store[0].name}}</h1>
       <h2>توضیحات : {{store[0].caption}}</h2>
       <h3>ایمیل:{{store[0].email}} </h3>
@@ -16,7 +17,7 @@
           ادیت
           کردن عکس پروفایل مغازه
         </button>
-        <button @click="editHeaderPic(store[0].id)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">
+        <button @click="edit_HeaderPic(store[0].id)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">
           ادیت
           کردن عکس هدر مغازه
         </button>
@@ -49,7 +50,8 @@
     data() {
       return {
         id: this.$route.query.id,
-        store: ''
+        store: '',
+        message:this.$route.query.message
         ,
         e: 1,
       }
@@ -66,7 +68,7 @@
         if (confirm("آیا می خواهید مغازه را حذف کنید؟")) {
           axios.get('http://127.0.0.1/laravel/public/api/admin/store/delete' + id)
             .then(resp => {
-              this.$router.push({path: '/dashboard/admin/store/all', query: {id}})
+              this.$router.push({path: '/dashboard/admin/store/all', query: {id,message:'مغازه باموفقیت حذف گردید'}})
             }).catch(error => console.log(error))
 
 
@@ -78,7 +80,7 @@
       editProfilePic: function (id) {
         this.$router.push({path: '/dashboard/admin/store/edit_profile_pic', query: {id}});
       },
-      editHeaderPic: function (id) {
+      edit_HeaderPic: function (id) {
         this.$router.push({path: '/dashboard/admin/store/edit_header_pic', query: {id}});
       }
     },
@@ -88,7 +90,12 @@
           this.store = response.data
         }
       ).catch(error => console.log(error))
-    }
+    },
+    mounted() {
+      setTimeout(() => {
+        this.message = ''
+      }, 5000);
+    },
   }
 </script>
 

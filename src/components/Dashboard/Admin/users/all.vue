@@ -2,6 +2,7 @@
   <div class="main">
     <div></div>
     <div style="margin-bottom: 10px;display: grid;grid-template-columns: 1fr;grid-row-gap: 20px; ">
+      <p style="color: red">{{message}}</p>
       <table class="table">
 
         <thead>
@@ -94,8 +95,9 @@
         users: ''
         ,
         columns: ['id', 'user_id', 'name', 'email', 'phone', 'role'],
-        columns1: ['شمارنده', ,'profile_id', 'user_id', 'نام', 'ایمیل', 'شماره تلفن', 'نقش', 'جزئیات'],
-        columns2: [' id', 'user_id', 'نام', 'ایمیل', 'شماره تلفن', 'نقش']
+        columns1: ['شمارنده','profile_id', 'user_id', 'نام', 'ایمیل', 'شماره تلفن', 'نقش', 'جزئیات'],
+        columns2: [' id', 'user_id', 'نام', 'ایمیل', 'شماره تلفن', 'نقش'],
+        message:this.$route.query.message,
       }
     },
     components: {AdminHome},
@@ -140,6 +142,11 @@
       axios.get('http://127.0.0.1/laravel/public/api/admin/users/all')
         .then(response => (this.users = response.data)
         ).catch(error => console.log(error))
+    },
+    mounted() {
+      setTimeout(() => {
+        this.message = ''
+      }, 5000);
     },
 
     computed: {

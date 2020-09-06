@@ -20,8 +20,8 @@ import UserDashboard from "./components/Dashboard/user/UserDashboard";
 import AdminAllStore from "./components/Dashboard/Admin/stores/all";
 import AdminStoreDetail from "./components/Dashboard/Admin/stores/detail";
 import AdminStoreEdit from "./components/Dashboard/Admin/stores/edit";
-import AdminStoreEditProfilePic from "./components/Dashboard/Admin/stores/editHeaderPic";
-import AdminStoreEditHeaderPic from "./components/Dashboard/Admin/stores/editProfilePic";
+import AdminStoreEditHeaderPic from "./components/Dashboard/Admin/stores/editHeaderPic";
+import AdminStoreEditProfilePic from "./components/Dashboard/Admin/stores/editProfilePic";
 import AdminAllProduct from "./components/Dashboard/Admin/products/all";
 import AdminProductDetail from "./components/Dashboard/Admin/products/detail";
 import AdminProductEdit from "./components/Dashboard/Admin/products/edit";
@@ -39,6 +39,7 @@ import AdminEditUsersPic from "./components/Dashboard/Admin/users/editPic";
 import AdminAddUsers from "./components/Dashboard/Admin/users/add";
 import AdminProfileShow from "./components/Dashboard/Admin/profile/show";
 import AdminProfileEdit from "./components/Dashboard/Admin/profile/edit";
+import AdminProfileEditPic from "./components/Dashboard/Admin/profile/editPic";
 import Sginup from "./components/Sginup";
 import * as auth from './services/auth_service';
 import {getScope, isLoggedIn} from "./services/auth_service";
@@ -50,7 +51,7 @@ export const routes =[
 
 
     ]},
-  {path: '/store/:id' , component : StorePage},
+  {path: '/storePage' , component : StorePage},
   {path: '/signup' , component: Sginup},
   {path: '/search' , component: Search},
 
@@ -124,8 +125,8 @@ export const routes =[
     {path: 'user/detail',component: AdminDetailUsers},
     {path: 'user/add',component: AdminAddUsers},
     {path: 'profile/show',component: AdminProfileShow},
-
     {path: 'profile/edit',component: AdminProfileEdit},
+    {path: 'profile/editPic',component: AdminProfileEditPic},
     ],
   // ],beforeEnter: (to,from,next) => {
   //     if(auth.isLoggedIn() )  {

@@ -6,9 +6,7 @@
     <div class="box">
       <form
         id="app"
-        @submit="checkForm"
-        action="#"
-        method="post"
+        v-on:submit.prevent="submit"
       >
         <div>
           <h2 style="text-align: center;color: #d63938 "> ادیت کردن پروفایل</h2>
@@ -20,8 +18,8 @@
             id="name"
             type="text"
             name="name"
-            :placeholder="this.user_name"
-            :value="this.user_name"
+            :placeholder="this.user.name"
+            v-model="user.name"
           >
 
         </div>
@@ -32,8 +30,8 @@
             id="email"
             type="email"
             name="email"
-            :placeholder="this.user_email"
-            :value="this.user_email"
+            :placeholder="this.user.email"
+            v-model="user.email"
           >
 
         </div>
@@ -44,8 +42,8 @@
             id="phone"
             type="number"
             name="phone"
-            :placeholder="this.user_phone"
-            :value="this.user_phone"
+            :placeholder="this.user.phone"
+            v-model="user.phone"
           >
 
         </div>
@@ -56,31 +54,20 @@
             id="address"
             type="text"
             name="address"
-            :placeholder="this.user_address"
-            :value="this.user_address"
-          >
-
-        </div>
-
-        <div >
-          <p> عکس پروفایل </p>
-
-          <input style="border: none"
-                 id="pic"
-                 type="file"
-                 name="pic"
-                 v-on:value="user_pic"
-
+            :placeholder="this.user.address"
+            v-model="user.address"
           >
 
         </div>
 
         <div style="margin-top: 15px">
-          <input
+          <button
             type="submit"
+            name="submit"
             value=" ثبت تغیرات"
             id="su"
-          >
+            v-on:click="checkForm"
+          >ثبت تغیرات</button>
         </div>
 
       </form>
@@ -101,18 +88,34 @@
     components: {AdminHome},
     data() {
       return {
-
-        user_name:"sd",
-        user_phone:"22",
-        user_pic:"sd",
-        user_email:"dd@hmail",
-        user_address:"sd",
+        user: '',
+        user_name: "sd",
+        user_phone: "22",
+        user_pic: "sd",
+        user_email: "dd@hmail",
+        user_address: "sd",
 
 
       }
 
-    }, methods: {
+    }, created() {
+      axios.get('http://127.0.0.1/laravel/public/api/users/profile/show')
+        .then(response => (this.user = response.data[0])
+        ).catch(error => console.log(error))
+    },
+    methods: {
       checkForm: function () {
+        axios.post('http://127.0.0.1/laravel/public/api/users/profile/edit', {
+          name: this.user.name,
+          email: this.user.email,
+          address: this.user.address,
+          phone: this.user.phone,
+        }).then(res =>{
+          this.$router.push({
+            path: '/dashboard/admin/profile/show', query: {message:'اطلاعات پروفایل با موفقیت تغیر یافت'}
+          })
+        }).catch(error => console.log(error))
+
 
       }
 

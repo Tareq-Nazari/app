@@ -163,8 +163,9 @@
               'Content-Type': 'multipart/form-data'
             }
           }
-        ).then(function () {
-          console.log('SUCCESS!!');
+        ).then(response=>{
+          this.$router.push({path: '/dashboard/admin/users/all',query:{message:'محصول باموفقیت ثبت گردید'}})
+
         })
           .catch(function () {
             console.log('FAILURE!!');

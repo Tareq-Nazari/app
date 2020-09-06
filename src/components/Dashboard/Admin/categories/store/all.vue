@@ -2,6 +2,7 @@
   <div class="main">
     <div></div>
     <div style="margin-bottom: 10px;display: grid;grid-template-columns: 1fr;grid-row-gap: 20px; ">
+      <p style="color: red">{{message}}</p>
       <table  class="table">
 
         <thead>
@@ -71,6 +72,7 @@
         name: '',
         id: '',
         cats: '',
+        message:this.$route.query.message,
 
         categories: [
           {name: "t-shirt", id: "21"},
@@ -121,6 +123,11 @@
       axios.get('http://127.0.0.1/laravel/public/api/admin/category/store/all')
         .then(response => (this.cats = response.data)
         ).catch(error => console.log(error))
+    },
+    mounted() {
+      setTimeout(() => {
+        this.message = ''
+      }, 5000);
     },
 
     computed: {

@@ -153,7 +153,7 @@
 
         }).then((resp) => {
           this.$router.push({
-            path: '/dashboard/admin/product/detail', query: {id}
+            path: '/dashboard/admin/product/detail', query: {id,message:'محصول باموفقیت تغیر یافت'}
           })
         }).catch(error => console.log(error))
 

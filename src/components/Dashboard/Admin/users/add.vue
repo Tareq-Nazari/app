@@ -140,7 +140,7 @@
 
           }
         ).then(response=>{
-          this.$router.push({path: '/dashboard/admin/users/all'})
+          this.$router.push({path: '/dashboard/admin/users/all',query:{message:'کاربر با موفقیت ثبت شد'}})
         })
       },
     },

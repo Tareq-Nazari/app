@@ -2,6 +2,7 @@
   <div class="main">
     <div></div>
     <div class="textDetail">
+      <p style="color: red">{{message}}</p>
       <h1>نام محصول : {{product[0].name}}</h1>
       <h2>توضیحات : {{product[0].caption}}</h2>
       <h3>قیمت:{{product[0].price}} </h3>
@@ -45,7 +46,7 @@
       return {
         product:'',
         id:this.$route.query.id,
-
+      message:this.$route.query.message,
 
 
 
@@ -58,6 +59,11 @@
     name: "storeProfile"
     , components: {
       AdminHome
+    },
+    mounted() {
+      setTimeout(() => {
+        this.message = ''
+      }, 5000);
     },
     methods: {
       deleteProduct: function (id) {

@@ -123,7 +123,7 @@
           ).then((resp) =>
         {
           this.$router.push({
-            path: '/dashboard/admin/store/detail', query: {id}
+            path: '/dashboard/admin/store/detail', query: {id,message:'اطلاعات مغازه با موفقیت تغیر یافت'}
           })
 
 

@@ -119,6 +119,7 @@
         address:'',
         selected:'',
 
+
       }
     }, components: {
 
@@ -143,8 +144,9 @@
         formData.append('name', this.name)
         axios.post('http://127.0.0.1/laravel/public/api/admin/store/create',
           formData,
-        ).then(function () {
-          console.log('SUCCESS!!');
+        ).then(response=>{
+          this.$router.push({path: '/dashboard/admin/store/all',query:{message:'مغازه با موفقیت ساخته شد'}})
+
         })
           .catch(function () {
             console.log('FAILURE!!');

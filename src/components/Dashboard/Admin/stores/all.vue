@@ -2,6 +2,7 @@
   <div class="main">
     <div></div>
     <div style="margin-bottom: 10px;display: grid;grid-template-columns: 1fr;grid-row-gap: 20px; ">
+      <p style="color: red">{{message}}</p>
       <table class="table">
 
         <thead>
@@ -73,6 +74,7 @@
         cat_id: '',
         profile_id: '',
         name: '',
+        message:this.$route.query.message,
         cat_name: '',
         columns: ['name', 'id', 'cat_name', 'profile_id'],
         columns1: ['شمارنده', 'نام مغازه', 'id مغازه', 'دسته بندی مغازه', 'پروفایلid', 'جزئیات'],
@@ -112,6 +114,11 @@
       axios.get('http://127.0.0.1/laravel/public/api/admin/store/all')
         .then(response => (this.stores = response.data)
         ).catch(error => console.log(error))
+    },
+    mounted() {
+      setTimeout(() => {
+        this.message = ''
+      }, 5000);
     },
     computed: {
       ...mapGetters([]),
