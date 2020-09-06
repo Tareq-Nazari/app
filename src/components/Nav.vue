@@ -81,7 +81,7 @@
           this.products = response.data
           console.log(response)
         }).catch((e) => {
-          console.log(e)
+          return 'خالی است'
         })
 
       },
