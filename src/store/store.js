@@ -101,7 +101,7 @@ export const store = new Vuex.Store({
   },
   actions : {
     signup({commit} , authData){
-      axios.post('users/register',{
+      axios.post('/register',{
         name : authData.name,
         email : authData.email,
         password : authData.password,

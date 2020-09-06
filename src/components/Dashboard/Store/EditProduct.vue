@@ -1,33 +1,38 @@
 <template>
-  <div dir="rtl" style="border-radius: 2%" class="product-card">
+  <div style="display: flex;justify-content: space-evenly">
+    <div dir="rtl" style="border-radius: 2%" class="product-card" v-for="product in products">
 
-    <img src="./../../../img/shoes.svg" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
-    <p class="card-title" style="font-size: 20px">چیپس سرکه ای چیتوز</p>
-    <p class="card-desc">محدوده وزن:
-      کمتر از 150 گرم</p>
+    <img :src="'http://127.0.0.1/storeBackend/images/'+product.pic" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
+    <p class="card-title" style="font-size: 20px">{{product.name}}</p>
+    <p class="card-desc" style="padding-left: 50px">{{product.caption}}</p>
     <div class="card-button-1" style="right: 15px;top: 280px">
-      <router-link tag="a" to="/asd" >ویرایش</router-link>
+      <router-link tag="a" :to="'/dashboard/store/editproduct/'+product.id" >ویرایش</router-link>
     </div>
     <div class="card-button-1" style="top: 280px;left: 15px;background-color: #c74d4a">
       <router-link tag="a" to="/sfd">حذف</router-link>
 
     </div>
-    </div>
+  </div>
+  </div>
+
 </template>
 <script>
+import {http} from "../../../services/http_service";
+
 export default {
   data(){
     return {
-      product : {
-        id : 1,
-        name : '',
-        price : 123,
-      }
+      products : null
     }
+  },
+  mounted(){
+    http().get('shopOwner/product/all').then((res)=>{
+      this.products = res.data
+    })
   }
 }
 </script>
-<style>
+<style scoped>
   .product-card{
 
     height: 336px;
@@ -68,7 +73,8 @@ export default {
     font-size: 10px;
     position: absolute;
     top: 223px;
-    right: 62px;
+    right: 45px;
+    word-break: break-word;
   }
 
 </style>

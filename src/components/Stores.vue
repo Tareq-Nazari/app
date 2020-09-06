@@ -11,7 +11,7 @@
     <div style="width: 100%;height: 40px;color: white;background-color: white;">
       <swiper class="swiper"  :options="swiperOption">
         <swiper-slide v-for="i in 30"><div style="border-radius: 10px;display: flex;justify-content: space-evenly;align-items: center;background-color: red;height: 40px;min-width: 100px">
-          <input type="checkbox">
+          <input type="checkbox" @click="filter">
           <p>مردانه</p>
         </div> </swiper-slide>
 
@@ -79,6 +79,9 @@
         gotoshop: function(ev){
 
           this.$router.push({path: '/store/'+ev.target.id})
+        },
+        filter(event){
+          console.log(event)
         }
       },
 

@@ -17,13 +17,13 @@ border-radius: 7px 7px 7px 7px;position: relative">
 
 
   <input v-model="product.name" type="text" placeholder="نام محصول" class="add-product-input" >
-
+    <input v-model="product.color" type="text" placeholder="رنگ" class="add-product-input" >
+    <input v-model="product.size" type="text" placeholder="سایز" class="add-product-input" >
   <input v-model="product.price" type="text" placeholder="قیمت" class="add-product-input" >
   <textarea v-model="product.caption" placeholder="توضیحات" style="padding: 8px;border: 0;border-radius: 12px;background-color: #d9dddc;outline: 0;height: 50px;width: 220px;" ></textarea>
-  <label>دسته بندی :  <select>
-    <option @click="product.cat_id = 1">1</option>
-    <option @click="product.cat_id = 2">2</option>
-    <option @click="product.cat_id = 3">3</option>
+  <label>دسته بندی :  <select v-model="product.cat_id">
+    <option v-for="category in categories" :value="category.id">{{category.name}}</option>
+
 
   </select></label>
 
@@ -40,6 +40,7 @@ border-radius: 7px 7px 7px 7px;position: relative">
 <script>
   import axios from 'axios'
   import * as auth from '../../../services/auth_service'
+  import {http} from "../../../services/http_service";
 
 export default  {
 
@@ -54,14 +55,22 @@ export default  {
         name : '',
         price : null,
         caption : '',
-        cat_id : 1,
-        store_id : 6
-      }
+        cat_id : null,
+        color : '',
+        size : ''
+
+      },
+      categories : null
 
 
 
 
     }
+  },
+  mounted(){
+    http().get('shopOwner/category/all').then((res) => {
+      this.categories = res.data
+    })
   },
   methods : {
     previewImage: function(event) {
@@ -93,25 +102,17 @@ export default  {
       formData.append('price',this.product.price)
       formData.append('cat_id',this.product.cat_id)
       formData.append('caption',this.product.caption)
-      formData.append('product_id' , 5)
+      formData.append('color',this.product.color)
+      formData.append('size',this.product.size)
 
-console.log(formData)
-        axios({
-          method: 'post',
-          url: 'http://127.0.0.1/storeBackend/public/api/shopOwner/product/create',
-          data: formData,
-          headers: {
-            'Authorization': this.header,
-            //'Content-Type': 'multipart/form-data'
-          }
-        }).then((respone) => {
-          alert('success')
-        }).catch(e =>{
-          alert(e)
-        })
+      http().post('shopOwner/product/create',formData)
 
 
     },
+
+    select(ev){
+      this.product.cat_id = ev.target.options.selectedIndex
+    }
     }
   }
 

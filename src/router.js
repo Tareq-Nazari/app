@@ -1,5 +1,6 @@
 
 import newStore from "./components/Dashboard/Store/newStore"
+import productEditPage from "./components/Dashboard/Store/productEditPage"
 import StorePage from "./components/StorePage";
 import Contact from "./components/Contact";
 import Home from "./components/Home"
@@ -8,6 +9,7 @@ import EditStore from "./components/Dashboard/Store/EditStore";
 import Skin from "./components/Dashboard/Store/Skin";
 import AddProduct from "./components/Dashboard/Store/AddProduct";
 import EditProduct from "./components/Dashboard/Store/EditProduct";
+import StoreInfo from "./components/Dashboard/Store/StoreInfo";
 import category from "./components/category";
 import ShopRegister from "./components/ShopRegister";
 import Login from "./components/Login";
@@ -38,6 +40,9 @@ import AdminProfileEdit from "./components/Dashboard/Admin/profile/edit";
 import Sginup from "./components/Sginup";
 import * as auth from './services/auth_service';
 import {getScope, isLoggedIn} from "./services/auth_service";
+
+
+
 
 export const routes =[
   {path: '/stores' , component: Stores},
@@ -72,6 +77,8 @@ export const routes =[
       {path: 'skin',component: Skin},
       {path: 'addproduct',component: AddProduct},
       {path: 'editproduct',component: EditProduct},
+      {path: 'editproduct/:id' , component: productEditPage},
+      {path: 'storenfo' , component: StoreInfo}
 
 
     ],

@@ -73,8 +73,8 @@
               email : '',
               password : '',
               address : '',
-              phone : 0,
-              role : 2
+              phone : null,
+              role : 1
             },
 
           }

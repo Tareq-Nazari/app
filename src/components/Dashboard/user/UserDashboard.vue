@@ -98,7 +98,8 @@
               caption : '',
               email : '',
               phone : '',
-              address : ' '
+              address : '',
+              status : 0
             },
             categories : null,
             selectedCategory : null
@@ -107,7 +108,7 @@
       mounted: function(){
 
            this.show.userScope =  auth.getScope()
-        axios.post('category/store_all').then((response) => {
+        axios.get('category/store_all').then((response) => {
           this.categories = response.data
 
         })
@@ -128,9 +129,13 @@
               email : this.shopRegister.email,
               cat_id : this.selectedCategory,
               caption : this.shopRegister.caption,
-              address : this.shopRegister.address
+              address : this.shopRegister.address,
+
             }).then(res => {
-              alert(res)
+              setTimeout(
+                this.logout(),2000
+              )
+              alert('فروشگاه ثبت شد')
             }).catch(e => {
               alert(e)
             })

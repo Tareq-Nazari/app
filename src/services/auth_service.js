@@ -4,13 +4,13 @@ import {http} from "./http_service";
 let loginRes = null;
 export function register(user) {
 
-    axios.post('users/register',{
+    axios.post('/register',{
       name : user.name,
       email : user.email,
       password : user.password,
       address : user.address,
       phone : user.phone,
-      role : user.role,
+
 
     })
 
@@ -20,7 +20,7 @@ export function register(user) {
 
 export function login(user) {
 
-  axios.post('login',{
+  axios.post('/login',{
 
     email : user.email,
     password : user.password,
@@ -30,6 +30,7 @@ export function login(user) {
        const token = JSON.stringify(response)
        localStorage.setItem('token' , token)
        loginRes = response
+
      }
 
 
