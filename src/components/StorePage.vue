@@ -27,12 +27,38 @@
       </div>
 
     </div>
+    <div style="width: 100%;height: 40px;color: white;background-color: white;">
+      <swiper class="swiper" :options="swiperOption">
+
+        <swiper-slide>
+          <div style="border-radius: 10px;display: flex;justify-content: space-evenly;align-items: center;background-color: red;height: 40px;min-width: 100px">
+
+            <input id="all" v-model="picked1" v-on:change="selectall" type="radio">
+            <label for="all">all</label>
+
+          </div>
+        </swiper-slide>
+        <swiper-slide v-for="cat in cats">
+
+          <div style="border-radius: 10px;display: flex;justify-content: space-evenly;align-items: center;background-color: red;height: 40px;min-width: 100px">
+
+            <input :id="cat.id" :value="cat.id" v-model="picked" v-on:change="select1" type="radio">
+            <label :for="cat.id">{{cat.name}}</label>
+
+          </div>
+        </swiper-slide>
+
+
+        <div class="swiper-pagination" slot="pagination"></div>
+      </swiper>
+
+    </div>
     <h2 style="margin-right: 65px">جستجو در فروشگاه</h2>
     <div style="display: flex;justify-content: center;justify-items: center">
       <input v-model="search" type="text" placeholder="نام محصول ..."
              style="height: 33px;width: 80%;margin-left: 10px;border-radius: 5px;padding: 7px">
       <button @click="send"
-        style="width: 10%;height: 50px;background-color: #ec1c1e;border: none;color: white;font-size: 26px;border-radius: 5px">
+              style="width: 10%;height: 50px;background-color: #ec1c1e;border: none;color: white;font-size: 26px;border-radius: 5px">
         جستجو
       </button>
     </div>
@@ -69,35 +95,85 @@
 </template>
 
 <script>
-  import axios from "axios";
+  import {Swiper, SwiperSlide} from 'vue-awesome-swiper'
+  import axios from 'axios'
+  import 'swiper/swiper-bundle.css'
 
   export default {
 
     data() {
       return {
+        swiperOption: {
+          slidesPerView: 15,
+          spaceBetween: 50,
+          freeMode: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+          }
+        },
         data: '',
-        search:'',
+        search: '',
         routeParam: '',
         shopDetail: null,
-        shopProducts: null
+        shopProducts: null,
+        cats: '',
+        picked:'',
+        picked1:''
       }
     },
     created() {
       this.routeParam = this.$route.params.id
+
     },
     mounted() {
       axios.get('store/one' + this.$route.query.id).then((response) => {
         this.shopDetail = response.data[0]
         axios.get('product_store' + this.$route.query.id).then((response) => {
+
           this.shopProducts = response.data[0]
         })
       }).catch(e => {
         console.log(e)
       })
+      axios.post('http://127.0.0.1/laravel/public/api/category/searchProduct', {
+        store_id: this.$route.query.id
+      }).then((response) => {
+        this.cats = response.data
+
+      }).catch(e => {
+        console.log(e)
+      })
+
+    },
+    components: {
+      Swiper,
+      SwiperSlide,
+
     },
 
     methods: {
       addtocart() {
+
+      },
+      selectall:function(){
+        this.picked=''
+        axios.post('http://127.0.0.1/laravel/public/api/product/search', {
+          store_id: this.shopDetail.id,
+        })
+          .then(response => (this.shopProducts = response.data)
+          ).catch(error => console.log(error))
+
+      },
+      select1: function () {
+        this.picked1=''
+        axios.post('http://127.0.0.1/laravel/public/api/product/search', {
+          cat_id: this.picked,
+          store_id: this.shopDetail.id,
+        })
+          .then(response => (this.shopProducts = response.data)
+          ).catch(error => console.log(error))
+
 
       },
       productpage(id) {
@@ -107,12 +183,17 @@
         let pos = document.getElementById("contactus")
         pos.scrollIntoView(false)
       },
-      send:function () {
-        axios.post('product_store' ,{
-          name:this.search
-        }).then(response=>{
-          ( this.shopProducts=response.data)
-        }).catch(error=>console.log(error))
+
+
+      send: function () {
+        axios.post('product/search', {
+          name: this.search,
+          store_id: this.shopDetail.id,
+          cat_id:this.picked
+        }).then(response => {
+          (this.shopProducts = response.data)
+        }).catch(error => console.log(error))
+
 
       }
     }
@@ -227,6 +308,39 @@
     top: 223px;
     right: 62px;
   }
+  .ac-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .ac-title-side {
+    height: 6px;
+    width: 40%;
+    background-color: #888888;
+    border-radius: 50%;
+  }
+
+  .stores-card {
+    position: relative;
+    margin: 10px;
+    border: #888888 1px solid;
+    border-radius: 8px;
+    height: 250px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    transition: width 500ms;
+  }
+
+  .stores-card:hover {
+    width: 340px;
+    height: 270px;
+  }
+
 
 
 </style>
