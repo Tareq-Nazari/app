@@ -1,5 +1,5 @@
 <template>
-  <div v-if="$store.state.role==='pp'" style="display: grid;grid-template-columns:  2fr">
+  <div  style="display: grid;grid-template-columns:  2fr">
     <div id="myNav" class="overlay" :style="showTopMenu===true? style3:style2">
       <div
         style="display: grid;grid-template-columns: 1fr;grid-row-gap: 15px;height: 150px;position: relative;top: 10%;transition:display 5s">

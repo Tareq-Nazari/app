@@ -2,6 +2,7 @@
   <div class="main">
     <div></div>
     <div style="margin-bottom: 10px;display: grid;grid-template-columns: 1fr;grid-row-gap: 20px; ">
+      <p style="color: red">{{message}}</p>
       <table class="table">
 
         <thead>
@@ -45,7 +46,7 @@
           </td>
           <td
             style="color: #00a8ed;cursor: pointer;text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none"
-            @click="routerLinkToDetails(store)">
+            @click="routerLinkToDetails(store.id)">
             مشاهده صفحه مغازه
           </td>
         </tr>
@@ -73,6 +74,7 @@
         cat_id: '',
         profile_id: '',
         name: '',
+        message:this.$route.query.message,
         cat_name: '',
         columns: ['name', 'id', 'cat_name', 'profile_id'],
         columns1: ['شمارنده', 'نام مغازه', 'id مغازه', 'دسته بندی مغازه', 'پروفایلid', 'جزئیات'],
@@ -82,8 +84,8 @@
     components: {AdminHome},
     methods: {
 
-      routerLinkToDetails: function (store) {
-        this.$router.push({path: '/dashboard/admin/store/detail', query: {store}});
+      routerLinkToDetails: function (id) {
+        this.$router.push({path: '/dashboard/admin/store/detail', query: {id}});
       },
       name1: function (msg) {
         if (msg === 'نام مغازه') {
@@ -109,9 +111,14 @@
       }
     },
     created() {
-      axios.post('http://127.0.0.1/laravel/public/api/admin/store/all')
+      axios.get('http://127.0.0.1/laravel/public/api/admin/store/all')
         .then(response => (this.stores = response.data)
         ).catch(error => console.log(error))
+    },
+    mounted() {
+      setTimeout(() => {
+        this.message = ''
+      }, 5000);
     },
     computed: {
       ...mapGetters([]),

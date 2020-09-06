@@ -1,56 +1,33 @@
 <template>
-
-
-  <div class="main">
-
+  <div class="main"
+       style="display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;">
     <div></div>
-
     <div class="box">
       <form
         id="app"
-
         v-on:submit.prevent="submit"
       >
-        <div>
-          <h2 style="text-align: center;color: #d63938 ;padding-right: 0!important;font-size: 17px"> اضافه کردن دسته
-            بندی جدید به محصولات</h2>
-        </div>
+        <p> عکس پروفایل کاربر </p>
 
-        <div class="inp">
-          <p>نام کتگوری</p>
-          <input
-            id="name"
-            type="text"
-            name="name"
-            v-model="name"
-
-          >
-
-        </div>
-        <div class="inp">
-          <p> store_id</p>
-          <input
-            id="store_id"
-            type="number"
-            name="store_id"
-            v-model="store_id"
-
-          >
-
-        </div>
-
+        <input style="border: none"
+               id="file"
+               type="file"
+               name="file"
+               ref="file"
+               v-on:change="selectFile"
+        >
         <div style="margin-top: 15px">
           <button
-            name="submit"
             type="submit"
-            id="submit"
-            v-on:click="checkForm"
-          >ثبت
+
+            id="su"
+            v-on:click="checkForm(id)"
+          >ثبت تغیرات
           </button>
         </div>
 
       </form>
-
     </div>
 
 
@@ -58,53 +35,51 @@
 </template>
 
 <script>
-  import AdminHome from "../../AdminHome";
-  import axios from 'axios';
+  import axios from "axios";
 
   export default {
-    name: "add",
+    name: "editPic",
     data() {
       return {
-        name: '',
-        store_id: ''
+        file: '',
+        id: this.$route.query.id,
+
 
       }
-    }, components: {
-
-      AdminHome
-
-
     },
     methods: {
+      selectFile: function () {
 
-      checkForm: function () {
+        // `files` is always an array because the file input may be in multiple mode
+        this.file = this.$refs.file.files[0];
+
+      },
+      checkForm: function (id) {
         let formData = new FormData();
-        formData.append('name', this.name)
-        formData.append('store_id', this.store_id)
+        formData.append('pic', this.file)
+        formData.append('id', this.id)
 
-        axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/add',
+        axios.post('http://127.0.0.1/laravel/public/api/admin/users/edit_Profile_pic',
           formData
-        ).then(response => {
-          this.$router.push({path: '/dashboard/admin/productCategory/all',query:{message:'دسته بندی با موفقیت ثبت گردید'}})
-        })
-      }
+          , {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+
+          }).then((resp) => {
+          this.$router.push({
+            path: '/dashboard/admin/user/detail',query:{id,message:'عکس پروفایل با موفقیت تغیر یافت'}
+          })
+        }).catch(error => console.log(error))
+
+
+      },
 
     }
-
   }
-
-
 </script>
 
 <style scoped>
-  .main {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-
-
-  }
-
-
   .box {
     margin-top: 20px;
     padding-top: 15%;
@@ -113,8 +88,7 @@
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14),
     0 3px 1px -2px rgba(0, 0, 0, .12),
     0 1px 5px 0 rgba(0, 0, 0, .2);
-
-    height: 945px;
+    height: 300px;
   }
 
   input {
@@ -176,18 +150,3 @@
   }
 
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

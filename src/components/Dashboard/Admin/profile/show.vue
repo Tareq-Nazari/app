@@ -2,18 +2,25 @@
   <div class="main">
     <div></div>
     <div class="textDetail">
+      <p style="color: red">{{message}}</p>
       <h1>نام:{{user.name}}</h1>
       <h2>ایمیل : {{user.email}}</h2>
       <h3>profile_id:{{user.profile_id}} </h3>
       <h4> user_id :{{user.user_id}} </h4>
       <h5>شماره تلفن : {{user.phone}}</h5>
       <h5>آدرس :{{user.address}} </h5>
-
+      <div style="display: grid;grid-template-columns: 1fr 1fr">
+      <button  @click="editPic()"
+              style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">
+        تغیر عکس پروفایل
+      </button>
+      </div>
     </div>
+
 
     <div style="display: grid;grid-template-columns: 1fr;grid-row-gap: 20px">
       <p style="font-family: vasir">عکس پروفایل</p>
-      <img style="height: 80%" :src="'/src/img/'+user.pic">
+      <img style="height: 80%" v-bind:src="'http://127.0.0.1/laravel/images/'+user.pic">
 
 
     </div>
@@ -30,34 +37,9 @@
   export default {
     data() {
       return {
+        user: '',
+        message:this.$route.query.message
 
-
-        roles: [
-          {
-            id: 1,
-            name: "admin"
-          },
-          {
-            id: 2,
-            name: "author"
-          },
-          {
-            id: 3,
-            name: "shopOwner"
-          }
-
-        ],
-        user: {
-          profile_id: "21",
-          name: "sd",
-          user_id: "25",
-          address: "dD",
-          phone: "656",
-          email: "@",
-          role: "admin",
-          pic: "product-151.jpg",
-
-        },
 
       }
     },
@@ -66,8 +48,25 @@
     , components: {
       AdminHome
     },
+    created() {
+      axios.get('http://127.0.0.1/laravel/public/api/users/profile/show')
+        .then(response => (this.user = response.data[0])
+        ).catch(error => console.log(error))
+    },
+    mounted() {
+      setTimeout(() => {
+        this.message = ''
+      }, 5000);
+    },
 
-    methods: {}
+
+    methods: {
+      editPic: function () {
+        this.$router.push({path: '/dashboard/admin/profile/editPic'});
+
+
+      }
+    }
   }
 </script>
 

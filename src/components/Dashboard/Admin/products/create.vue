@@ -34,6 +34,28 @@
 
         </div>
         <div class="inp">
+          <p>رنگ محصول </p>
+
+          <input
+            id="color"
+            type="text"
+            name="color"
+            v-model="color"
+          >
+
+        </div>
+        <div class="inp">
+          <p> سایز محصول </p>
+
+          <input
+            id="size"
+            type="text"
+            name="size"
+            v-model="size"
+          >
+
+        </div>
+        <div class="inp">
           <p> قیمت محصول </p>
 
           <input
@@ -109,6 +131,8 @@
         name: '',
         selected: '',
         file: '',
+        size: '',
+        color: '',
         cats: ''
       }
     }, components: {
@@ -125,6 +149,8 @@
       checkForm: function () {
         let formData = new FormData();
         formData.append('file', this.file)
+        formData.append('size', this.size)
+        formData.append('color', this.color)
         formData.append('store_id', this.store_id)
         formData.append('price', this.price)
         formData.append('caption', this.caption)
@@ -137,8 +163,9 @@
               'Content-Type': 'multipart/form-data'
             }
           }
-        ).then(function () {
-          console.log('SUCCESS!!');
+        ).then(response=>{
+          this.$router.push({path: '/dashboard/admin/users/all',query:{message:'محصول باموفقیت ثبت گردید'}})
+
         })
           .catch(function () {
             console.log('FAILURE!!');
@@ -147,7 +174,7 @@
       }
     },
     created() {
-      axios.post('http://127.0.0.1/laravel/public/api/category/product_all')
+      axios.get('http://127.0.0.1/laravel/public/api/category/product_all')
         .then(response => (this.cats = response.data)
         ).catch(error => console.log(error))
     },

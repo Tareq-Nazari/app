@@ -2,7 +2,8 @@
   <div class="main">
     <div></div>
     <div style="margin-bottom: 10px;display: grid;grid-template-columns: 1fr;grid-row-gap: 20px; ">
-      <table class="table">
+      <p style="color: red">{{message}}</p>
+      <table  class="table">
 
         <thead>
         <tr>
@@ -71,6 +72,7 @@
         name: '',
         id: '',
         cats: '',
+        message:this.$route.query.message,
 
         categories: [
           {name: "t-shirt", id: "21"},
@@ -89,8 +91,13 @@
 
       delete1: function (id) {
         if (confirm("آیا می خواهید دسته بندی را حذف کنید؟")) {
-          axios.post('http://127.0.0.1/laravel/public/api/admin/category/store/delete'+id)
-            .then(response => console.log(response)
+
+          axios.get('http://127.0.0.1/laravel/public/api/admin/category/store/delete'+id)
+            .then(response =>{
+              axios.get('http://127.0.0.1/laravel/public/api/admin/category/store/all')
+                .then(response => (this.cats = response.data)
+                ).catch(error => console.log(error))
+              }
             ).catch(error => console.log(error))
 
         }
@@ -113,9 +120,14 @@
 
     },
     created() {
-      axios.post('http://127.0.0.1/laravel/public/api/admin/category/store/all')
+      axios.get('http://127.0.0.1/laravel/public/api/admin/category/store/all')
         .then(response => (this.cats = response.data)
         ).catch(error => console.log(error))
+    },
+    mounted() {
+      setTimeout(() => {
+        this.message = ''
+      }, 5000);
     },
 
     computed: {

@@ -2,27 +2,37 @@
   <div class="main">
     <div></div>
     <div class="textDetail">
-      <h1>اسم مغازه : {{this.$route.query.store.name}}</h1>
-      <h2>توضیحات : {{this.$route.query.store.caption}}</h2>
-      <h3>ایمیل:{{this.$route.query.store.email}} </h3>
-      <h4>شماره تلفن :{{this.$route.query.store.phone}} </h4>
-      <h5>دسته بندی :{{this.$route.query.store.cat_name}} </h5>
-      <h5>ایدی مغازه : :{{this.$route.query.store.id}} </h5>
-      <div style="display: grid;grid-template-columns: 1fr 1fr;grid-column-gap: 5px">
-        <button @click="edit(store)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">ادیت
-          کردن
+      <p style="color: red">{{message}}</p>
+      <h1>اسم مغازه : {{store[0].name}}</h1>
+      <h2>توضیحات : {{store[0].caption}}</h2>
+      <h3>ایمیل:{{store[0].email}} </h3>
+      <h4>شماره تلفن :{{store[0].phone}} </h4>
+      <h5>دسته بندی :{{store[0].cat_name}} </h5>
+      <h5>ایدی مغازه : :{{store[0].id}} </h5>
+      <div style="display: grid;grid-template-columns: 1fr 1fr 1fr 1fr;grid-column-gap: 5px">
+        <button @click="edit(store[0])" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">ادیت
+          کردن مغازه
         </button>
-        <button @click="deleteStore(store.id)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">حذف کردن
+        <button @click="editProfilePic(store[0].id)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">
+          ادیت
+          کردن عکس پروفایل مغازه
+        </button>
+        <button @click="edit_HeaderPic(store[0].id)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">
+          ادیت
+          کردن عکس هدر مغازه
+        </button>
+        <button @click="deleteStore(store[0].id)" style="border-radius: 4px;background-color: rgba(255,102,37,0.78)">حذف
+          کردن
         </button>
 
       </div>
     </div>
     <div style="display: grid;grid-template-columns: 1fr;grid-row-gap: 20px">
-      <p style="font-family: vasir">عکس پپروفایل</p>
-      <img style="height: 120px" :src="'/src/img/'+profile_pic">
+      <p style="font-family: vasir">عکس پروفایل</p>
+      <img style="height: 120px" v-bind:src="'http://127.0.0.1/laravel/images/'+store[0].profile_pic">
 
       <p style="font-family: vasir">عکس هدر مغازه</p>
-      <img style="height: 120px" :src="'/src/img/'+header_pic">
+      <img style="height: 120px" v-bind:src="'http://127.0.0.1/laravel/images/'+store[0].header_pic">
 
 
     </div>
@@ -39,22 +49,10 @@
   export default {
     data() {
       return {
-
-
-
-        store: {
-          profile_id: this.$route.query.store.profile_id,
-          header_pic: this.$route.query.store.header_pic,
-          profile_pic: this.$route.query.store.profile_pic,
-          email: this.$route.query.store.email,
-          phone: this.$route.query.store.id,
-          address: this.$route.query.store.address,
-          caption: this.$route.query.store.caption,
-          id: this.$route.query.store.id,
-          cat_name: this.$route.query.store.cat_name,
-          name: this.$route.query.store.name,
-
-        },
+        id: this.$route.query.id,
+        store: '',
+        message:this.$route.query.message
+        ,
         e: 1,
       }
     },
@@ -68,16 +66,35 @@
 
       deleteStore: function (id) {
         if (confirm("آیا می خواهید مغازه را حذف کنید؟")) {
-          axios.post('http://127.0.0.1/laravel/public/api/admin/store/delete' + id)
-            .then(resp => console.log(resp)).catch(error => console.log(error))
+          axios.get('http://127.0.0.1/laravel/public/api/admin/store/delete' + id)
+            .then(resp => {
+              this.$router.push({path: '/dashboard/admin/store/all', query: {id,message:'مغازه باموفقیت حذف گردید'}})
+            }).catch(error => console.log(error))
 
-          this.$router.push({path: '/dashboard/admin/store/all'})
 
         }
       },
-      edit: function (store, cat_names) {
+      edit: function (store) {
         this.$router.push({path: '/dashboard/admin/store/edit', query: {store}});
+      },
+      editProfilePic: function (id) {
+        this.$router.push({path: '/dashboard/admin/store/edit_profile_pic', query: {id}});
+      },
+      edit_HeaderPic: function (id) {
+        this.$router.push({path: '/dashboard/admin/store/edit_header_pic', query: {id}});
       }
+    },
+    created() {
+      axios.get('http://127.0.0.1/laravel/public/api/store/one' + this.id).then(
+        response => {
+          this.store = response.data
+        }
+      ).catch(error => console.log(error))
+    },
+    mounted() {
+      setTimeout(() => {
+        this.message = ''
+      }, 5000);
     },
   }
 </script>

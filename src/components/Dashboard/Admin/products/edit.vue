@@ -34,6 +34,28 @@
           >
 
         </div>
+        <div class="inp">
+          <p> رنگ  محصول </p>
+
+          <input
+            id="color"
+            type="text"
+            name="color"
+            v-model="color"
+          >
+
+        </div>
+        <div class="inp">
+          <p>  سایز محصول </p>
+
+          <input
+            id="size"
+            type="text"
+            name="size"
+            v-model="size"
+          >
+
+        </div>
 
         <div class="inp">
           <p> قیمت محصول </p>
@@ -61,18 +83,7 @@
           >
 
         </div>
-        <div>
-          <p> عکس محصول </p>
 
-          <input style="border: none"
-                 id="file"
-                 type="file"
-                 name="file"
-                 ref="file"
-                 v-on:change="selectFile"
-          >
-
-        </div>
 
         <div class="inp">
           <p> دسته بندی مغازه </p>
@@ -87,7 +98,7 @@
             type="submit"
 
             id="su"
-            v-on:click="checkForm"
+            v-on:click="checkForm(id)"
           >ثبت تغیرات
           </button>
         </div>
@@ -114,8 +125,9 @@
         price: this.$route.query.product.price,
         store_id: this.$route.query.product.store_id,
         name: this.$route.query.product.name,
-        file: this.$route.query.product.pic,
         selected: this.$route.query.product.cat_id,
+        size: this.$route.query.product.size,
+        color: this.$route.query.product.color,
         caption: this.$route.query.product.caption,
         categories: '',
         id:this.$route.query.product.id,
@@ -123,12 +135,13 @@
       }
 
     }, methods: {
-      checkForm: function () {
+      checkForm: function (id) {
         let formData = new FormData();
-        formData.append('pic',this.file)
         formData.append('id', this.id)
         formData.append('price', this.price)
         formData.append('caption', this.caption)
+        formData.append('size', this.size)
+        formData.append('color', this.color)
         formData.append('name', this.name)
         formData.append('cat_id', this.selected)
         axios.post('http://127.0.0.1/laravel/public/api/admin/product/edit',
@@ -138,7 +151,11 @@
             'Content-Type': 'multipart/form-data'
           }
 
-        }).then(resp => console.log(resp)).catch(error => console.log(error))
+        }).then((resp) => {
+          this.$router.push({
+            path: '/dashboard/admin/product/detail', query: {id,message:'محصول باموفقیت تغیر یافت'}
+          })
+        }).catch(error => console.log(error))
 
       },
       selectFile:function ()
@@ -152,7 +169,7 @@
 
     },
     created() {
-      axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/all')
+      axios.get('http://127.0.0.1/laravel/public/api/admin/category/product/all')
         .then(response => (this.categories = response.data)
         ).catch(error => console.log(error))
     },

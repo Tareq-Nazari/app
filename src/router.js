@@ -22,9 +22,12 @@ import UserDashboard from "./components/Dashboard/user/UserDashboard";
 import AdminAllStore from "./components/Dashboard/Admin/stores/all";
 import AdminStoreDetail from "./components/Dashboard/Admin/stores/detail";
 import AdminStoreEdit from "./components/Dashboard/Admin/stores/edit";
+import AdminStoreEditHeaderPic from "./components/Dashboard/Admin/stores/editHeaderPic";
+import AdminStoreEditProfilePic from "./components/Dashboard/Admin/stores/editProfilePic";
 import AdminAllProduct from "./components/Dashboard/Admin/products/all";
 import AdminProductDetail from "./components/Dashboard/Admin/products/detail";
 import AdminProductEdit from "./components/Dashboard/Admin/products/edit";
+import AdminProductEditPic from "./components/Dashboard/Admin/products/editPic";
 import AdminCreateProduct from "./components/Dashboard/Admin/products/create";
 import AdminAllCategoryProduct from "./components/Dashboard/Admin/categories/product/all";
 import AdminAddCategoryProduct from "./components/Dashboard/Admin/categories/product/add";
@@ -34,9 +37,11 @@ import AdminAllFactors from "./components/Dashboard/Admin/factors/all";
 import AdminAllUsers from "./components/Dashboard/Admin/users/all";
 import AdminDetailUsers from "./components/Dashboard/Admin/users/detail";
 import AdminEditUsers from "./components/Dashboard/Admin/users/edit";
+import AdminEditUsersPic from "./components/Dashboard/Admin/users/editPic";
 import AdminAddUsers from "./components/Dashboard/Admin/users/add";
 import AdminProfileShow from "./components/Dashboard/Admin/profile/show";
 import AdminProfileEdit from "./components/Dashboard/Admin/profile/edit";
+import AdminProfileEditPic from "./components/Dashboard/Admin/profile/editPic";
 import Sginup from "./components/Sginup";
 import * as auth from './services/auth_service';
 import {getScope, isLoggedIn} from "./services/auth_service";
@@ -51,7 +56,8 @@ export const routes =[
 
 
     ]},
-  {path: '/store/:id' , component : StorePage},
+
+  {path: '/storePage' , component : StorePage},
   {path: '/signup' , component: Sginup},
   {path: '/search' , component: Search},
 
@@ -107,10 +113,13 @@ export const routes =[
     {path: 'store/all',component: AdminAllStore},
     {path: 'store/detail',component: AdminStoreDetail},
     {path: 'store/edit',component: AdminStoreEdit},
+    {path: 'store/edit_profile_pic',component: AdminStoreEditProfilePic},
+    {path: 'store/edit_header_pic',component: AdminStoreEditHeaderPic},
     {path: 'store/create',component: AdminCreateStore},
     {path: 'product/all',component: AdminAllProduct},
     {path: 'product/detail',component: AdminProductDetail},
     {path: 'product/edit',component: AdminProductEdit},
+    {path: 'product/editPic',component: AdminProductEditPic},
     {path: 'home/store/create',component: AdminCreateStore},
     {path: 'product/create',component: AdminCreateProduct},
     {path: 'storeCategory/create',component: AdminAddCategoryStore},
@@ -120,20 +129,22 @@ export const routes =[
     {path: 'factors/all',component: AdminAllFactors},
     {path: 'users/all',component: AdminAllUsers},
     {path: 'user/edit',component: AdminEditUsers},
+    {path: 'user/edit_pic',component: AdminEditUsersPic},
     {path: 'user/detail',component: AdminDetailUsers},
     {path: 'user/add',component: AdminAddUsers},
     {path: 'profile/show',component: AdminProfileShow},
-
     {path: 'profile/edit',component: AdminProfileEdit},
-  ],beforeEnter: (to,from,next) => {
-      if(auth.isLoggedIn() )  {
+    {path: 'profile/editPic',component: AdminProfileEditPic},
+    ],
+  // ],beforeEnter: (to,from,next) => {
+  //     if(auth.isLoggedIn() )  {
+  //
+  //       next()
+  //     } else {
+  //      next('/login')
+  //     }
 
-        next()
-      } else {
-        next('/login')
-      }
-
-}},
+},
 
     {path: 'profile/edit',component: AdminProfileEdit}
 //   ],beforeEnter: (to,from,next) => {

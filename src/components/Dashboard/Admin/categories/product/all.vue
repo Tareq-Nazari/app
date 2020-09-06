@@ -1,7 +1,9 @@
 <template>
   <div class="main">
     <div></div>
+
     <div style="margin-bottom: 10px;display: grid;grid-template-columns: 1fr;grid-row-gap: 20px; ">
+<p style="color: red">{{message}}</p>
       <table class="table">
 
         <thead>
@@ -33,13 +35,13 @@
           </th>
           <th style="color: #d81c1e;text-align: center;border:solid 1px #dcdcdc;border-left: none"
           >
-            <button @click="send" style="cursor: pointer;background-color: #00a8ed;border: solid 1px" type="submit">
+            <button @click="send" style="touch-action: none;cursor: pointer;background-color: #00a8ed;border: solid 1px" type="submit">
               اعمال فیلتر
             </button>
           </th>
         </tr>
         </thead>
-        <tbody >
+        <tbody>
         <tr v-for="(category, index) in cats" :key="index">
           <td class="counter" style="text-align: center;border:solid 1px #dcdcdc;border-top: none;border-left: none">
           </td>
@@ -72,16 +74,12 @@
     name: "all",
     data() {
       return {
+        message:this.$route.query.message,
         cats: '',
         name1: '',
         id1: '',
         store_id1: '',
-        categories: [
-          {name: "t-shirt", id: "21"},
-          {name: "t-shirt", id: "21"},
-          {name: "t-shirt", id: "21"},
-          {name: "t-shirt", id: "21"},
-        ],
+
 
         columns: ['name', 'id', 'store_id'],
         columns1: ['شمارنده', 'نام دسته بندی', 'id', 'idمغازه', 'جزئیات'],
@@ -93,12 +91,18 @@
 
       delete1: function (id) {
         if (confirm("آیا می خواهید دسته بندی را حذف کنید؟")) {
-          axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/delete' + id)
-            .then(response => console.log(response)
+          axios.get('http://127.0.0.1/laravel/public/api/admin/category/product/delete' + id )
+            .then(response => {
+                axios.get('http://127.0.0.1/laravel/public/api/admin/category/product/all')
+                  .then(response => (this.cats = response.data)
+                  ).catch(error => console.log(error))
+
+              }
             ).catch(error => console.log(error))
 
         }
       },
+
       name2: function (msg) {
         if (msg === 'id') {
           this.id1 = msg;
@@ -115,19 +119,25 @@
       },
       send: function () {
         axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/search', {
-          store_id:this.store_id1,
-          id:this.id1,
-          name:this.name1,
+          store_id: this.store_id1,
+          id: this.id1,
+          name: this.name1,
         }).then(response => (this.cats = response.data))
-      }
+      },
+
 
     },
     created() {
-      axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/all')
+      axios.get('http://127.0.0.1/laravel/public/api/admin/category/product/all')
         .then(response => (this.cats = response.data)
         ).catch(error => console.log(error))
-    },
 
+    },
+    mounted() {
+      setTimeout(() => {
+        this.message = ''
+      }, 5000);
+    },
     computed: {
       ...mapGetters([
         'stores'

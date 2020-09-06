@@ -139,11 +139,13 @@
             password_confirmation:this.password_confirmation
 
           }
-        )
+        ).then(response=>{
+          this.$router.push({path: '/dashboard/admin/users/all',query:{message:'کاربر با موفقیت ثبت شد'}})
+        })
       },
     },
     created() {
-      axios.post('http://127.0.0.1/laravel/public/api/admin/roles')
+      axios.get('http://127.0.0.1/laravel/public/api/admin/roles')
         .then(response => (this.roles = response.data)
         ).catch(error => console.log(error))
     },

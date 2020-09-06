@@ -24,12 +24,12 @@
         </div>
 
         <div style="margin-top: 15px">
-          <input
+          <button
             name="submit"
             type="submit"
             id="submit"
             v-on:click="checkForm"
-          >
+          >ثبت</button>
         </div>
 
       </form>
@@ -60,7 +60,9 @@
         axios.post('http://127.0.0.1/laravel/public/api/admin/category/store/add',
           {
             name: this.name,
-          })
+          }).then(response=>{
+          this.$router.push({path: '/dashboard/admin/storeCategory/all',query:{message:'دسته بندی با موفقیت ثبت گردید'}})
+        })
       }
 
     }
