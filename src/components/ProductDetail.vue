@@ -16,8 +16,6 @@
           <div style="height: 30px;width: 530px;display: grid;grid-template-columns: 30px 500px;grid-template-rows: repeat(2,15px);">
             <button v-on:click="addToCart(product.id)" style="grid-column: 2/3;grid-row: 1/3;color: white;background-color: black;border: none"> اضافه کردن به سبد خرید</button>
 
-            <font-awesome-icon :icon="['fas','plus']" style="color: green;"></font-awesome-icon>
-            <font-awesome-icon :icon="['fas','minus']" style="color: red;margin-top: 4px;"></font-awesome-icon>
 
           </div>
 
@@ -119,25 +117,23 @@
 
     mounted() {
       axios
+
       .get('http://127.0.0.1/laravel/public/api/product/one'+this.$route.params.id)
       .then(response => {
         this.product = response.data[0]
         console.log(response.data)
+
       }
-    );
+    )
     },
     methods: {
       addToCart(id){
-        http().post('users/basket/add'+id).then((response) => {
-          this.$store.
+        http().post('users/basket/add/'+id).then((response) => {
+
           console.log(response)
         }).catch(e =>{
           console.log(e)
         })
-      },
-      resize: function () {
-        this.display = "block"
-
       },
       showSingle() {
         this.imgs = this.src

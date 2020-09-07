@@ -12,9 +12,15 @@
   <div style="cursor: pointer" v-on:click="searchPage"><font-awesome-icon :icon="['fas','search']" /></div>
   <div v-on:click="getCart" style="position:relative;cursor: pointer" ><font-awesome-icon :icon="['fas','shopping-cart']" /><div style="position:absolute;height: 15px;width: 15px;
   background-color: red;border-radius: 50%;top: 58%;right: 14%;font-size: 12px;color: white">{{cartCounter}}</div></div>
-  <div><font-awesome-icon :icon="['fas','user']" /></div>
+  <div><font-awesome-icon :icon="['fas','user']" style="cursor: pointer" v-on:click="showuser = true"/></div>
 
+<transition name="fade">
+  <div v-if="showuser" style="width: 100px;height: 150px;background-color: #d6d7ff;position:absolute;left: 12px;top: 55px">
+  <button style="height: 33px;width: 76px;color: white;background-color: #00a5bb;margin-top: 25px;border: none;outline: none">ثبت نام</button>
+    <button style="height: 33px;width: 76px;color: white;background-color: #00a5bb;margin-top: 25px;border: none;outline: none">ثبت نام</button>
 
+  </div>
+</transition>
 
   <transition name="fade">
 
@@ -36,7 +42,8 @@
 
     </div>
     <button style="position: absolute;bottom: 0;outline: none;left: 100px;height: 30px;width: 100px;background-color: dodgerblue;font-family: vasir;color: white;border: 0;border-radius:  50% 50% 0 0">
-      پرداخت
+      <router-link to="/shoppingcart">پرداخت</router-link>
+
     </button>
 
 
@@ -67,7 +74,8 @@
         },
         products : null,
         showDash : false,
-        cartCounter: null
+        cartCounter: null,
+        showuser : false
       }
 
     },
@@ -81,7 +89,7 @@
           this.products = response.data
           console.log(response)
         }).catch((e) => {
-          console.log(e)
+          return 'خالی است'
         })
 
       },

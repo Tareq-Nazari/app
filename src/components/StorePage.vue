@@ -3,9 +3,9 @@
 
     <div class="container">
       <img class="header-img" height="100%" width="100%"
-           :src="'http://localhost/laravel/images/'+shopDetail.header_pic">
+           :src="'http://localhost/storeBackend/images/'+shopDetail.header_pic">
       <img style="border-radius: 50%;border: solid black 5px"
-           :src="'http://localhost/laravel/images/'+shopDetail.profile_pic" class="profile">
+           :src="'http://localhost/storeBackend/images/'+shopDetail.profile_pic" class="profile">
       <div class="store-name">
         <p style=""> فروشگاه {{shopDetail.name}} </p>
       </div>
@@ -69,7 +69,7 @@
       <div @click="productpage(`${product.id}`)" v-for="product in shopProducts" dir="rtl"
            style="box-shadow: 10px 10px rgba(208,212,211,0.52);border: solid 0.5px rgba(195,199,198,0.52);background-color: white;margin: 15px;height: 400px;width: 300px;border-radius: 2%;display: flex;flex-direction: column;align-items: center;justify-content: space-around">
 
-        <img :src="'http://localhost/laravel/images/'+product.pic"
+        <img :src="'http://localhost/storeBackend/images/'+product.pic"
              style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="65%" width="98%">
         <p style="font-size: 20px;">{{product.name}}</p>
         <p style="background-color: #ff2400;border-radius: 10px 5px 10px 5px;color: white;padding: 5px">
@@ -124,15 +124,19 @@
     },
     created() {
       this.routeParam = this.$route.params.id
-      axios.get('http://127.0.0.1/laravel/public/api/store/one' + this.$route.query.id).then((response) => {
+
+    },
+    mounted() {
+      axios.get('store/one' + this.$route.query.id).then((response) => {
         this.shopDetail = response.data[0]
-        axios.get('http://127.0.0.1/laravel/public/api/product_store/' + this.$route.query.id).then((response) => {
+        axios.get('product_store/' + this.$route.query.id).then((response) => {
+
           this.shopProducts = response.data[0]
         })
       }).catch(e => {
         console.log(e)
       })
-      axios.post('http://127.0.0.1/laravel/public/api/category/searchProduct', {
+      axios.post('category/searchProduct', {
         store_id: this.$route.query.id
       }).then((response) => {
         this.cats = response.data
@@ -140,10 +144,6 @@
       }).catch(e => {
         console.log(e)
       })
-
-    },
-    mounted() {
-
 
     },
     components: {
@@ -158,7 +158,7 @@
       },
       selectall:function(){
         this.picked=''
-        axios.post('http://127.0.0.1/laravel/public/api/product/search', {
+        axios.post('product/search', {
           store_id: this.shopDetail.id,
         })
           .then(response => (this.shopProducts = response.data)
@@ -167,7 +167,7 @@
       },
       select1: function () {
         this.picked1=''
-        axios.post('http://127.0.0.1/laravel/public/api/product/search', {
+        axios.post('product/search', {
           cat_id: this.picked,
           store_id: this.shopDetail.id,
         })
@@ -183,14 +183,17 @@
         let pos = document.getElementById("contactus")
         pos.scrollIntoView(false)
       },
+
+
       send: function () {
-        axios.post('http://127.0.0.1/laravel/public/api/product/search', {
+        axios.post('product/search', {
           name: this.search,
           store_id: this.shopDetail.id,
           cat_id:this.picked
         }).then(response => {
           (this.shopProducts = response.data)
         }).catch(error => console.log(error))
+
 
       }
     }

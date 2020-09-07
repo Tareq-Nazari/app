@@ -80,10 +80,10 @@
 
     },
     created() {
-      axios.get('http://127.0.0.1/laravel/public/api/category/store_all')
+      axios.get('category/store_all')
         .then(response => (this.cats = response.data)
         ).catch(error => console.log(error))
-      axios.get('http://127.0.0.1/laravel/public/api/store/all')
+      axios.get('store/all')
         .then(response => (this.stores = response.data)
         ).catch(error => console.log(error))
     },
@@ -101,7 +101,7 @@
         this.$router.push({path: '/storePage' ,query:{id} })
       },
       select1: function () {
-          axios.post('http://127.0.0.1/laravel/public/api/store/search', {
+          axios.post('store/search', {
             cat_id: this.picked
           })
             .then(response => (this.stores = response.data)
