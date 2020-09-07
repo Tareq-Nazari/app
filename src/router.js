@@ -45,13 +45,13 @@ import AdminProfileEditPic from "./components/Dashboard/Admin/profile/editPic";
 import Sginup from "./components/Sginup";
 import * as auth from './services/auth_service';
 import {getScope, isLoggedIn} from "./services/auth_service";
-
+import Products from "./components/Products"
 
 
 
 export const routes =[
   {path: '/stores' , component: Stores},
-
+  {path: '/products' , component: Products},
   {path: '/contact' , component: Contact , children : [
 
 
