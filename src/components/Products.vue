@@ -11,6 +11,14 @@
     <div style="width: 100%;height: 40px;color: white;background-color: white;">
 
       <swiper class="swiper" :options="swiperOption">
+        <swiper-slide>
+          <div style="border-radius: 10px;display: flex;justify-content: space-evenly;align-items: center;background-color: red;height: 40px;min-width: 100px">
+
+            <input id="all" v-model="picked1" v-on:change="selectall" type="radio">
+            <label for="all">all</label>
+
+          </div>
+        </swiper-slide>
         <swiper-slide v-for="cat in cats">
           <div
             style="border-radius: 10px;display: flex;justify-content: space-evenly;align-items: center;background-color: red;height: 40px;min-width: 100px">
@@ -58,6 +66,7 @@
       return {
         cats: '',
         picked: '',
+        picked1: '',
         swiperOption: {
           slidesPerView: 15,
           spaceBetween: 50,
@@ -100,14 +109,24 @@
         this.$router.push({path: '/storePage' ,query:{id} })
       },
       select1: function () {
-        axios.post('store/search', {
+        this.picked1=''
+        axios.post('product/search', {
           cat_id: this.picked
         })
-          .then(response => (this.stores = response.data)
+          .then(response => (this.products = response.data)
           ).catch(error => console.log(error))
 
 
-      }
+      },
+      selectall:function(){
+        this.picked=''
+        axios.post('product/search', {
+
+        })
+          .then(response => (this.products = response.data)
+          ).catch(error => console.log(error))
+
+      },
     },
 
   }
