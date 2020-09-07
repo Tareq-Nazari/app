@@ -9,9 +9,9 @@
         <div class="details" style="border-bottom:1px solid #e8e8e8">
           <h1>اسم محصول : {{product.name}}</h1>
           <h2>قیمت : {{product.price}}</h2>
-          <h3>برند: </h3>
-          <h4>سایز : </h4>
-          <h5>رنگ : </h5>
+          <h3>دسته بندی:{{product.cat_name}} </h3>
+          <h4>سایز :{{product.size}} </h4>
+          <h5>رنگ :{{product.color}} </h5>
         </div>
           <div style="height: 30px;width: 530px;display: grid;grid-template-columns: 30px 500px;grid-template-rows: repeat(2,15px);">
             <button v-on:click="addToCart(product.id)" style="grid-column: 2/3;grid-row: 1/3;color: white;background-color: black;border: none"> اضافه کردن به سبد خرید</button>
@@ -27,21 +27,10 @@
 
       </div>
       <div>
-        <img style="max-width: 100%;height: auto" src="../img/tshirt.jpg">
+        <img style="max-width: 100%;height: auto" :src="'http://localhost/laravel/images/'+product.pic">
       </div>
 
-      <div>
-        <img style="max-width: 100%;height: auto" src="../img/tshirt.jpg" @click="showSingle">
-        <img style="max-width: 100%;height: auto" src="../img/tshirt.jpg" @click="showSingle">
 
-        <VueEasyLightbox
-          :visible="visible"
-          :imgs="imgs"
-          :index="index"
-          @hide="handleHide"
-        ></VueEasyLightbox>
-
-      </div>
     </div>
     <div class="main2">
 
@@ -130,9 +119,9 @@
 
     mounted() {
       axios
-      .get('product/detail/'+this.$route.params.id)
+      .get('http://127.0.0.1/laravel/public/api/product/one'+this.$route.params.id)
       .then(response => {
-        this.product = response.data
+        this.product = response.data[0]
         console.log(response.data)
       }
     );
@@ -175,7 +164,7 @@
   .main1 {
     margin-top: 30px;
     display: grid;
-    grid-template-columns: 0.1fr 2fr 2fr 0.3fr 0.5fr;
+    grid-template-columns: 0.1fr 2fr 2fr ;
     column-gap: 50px;
 
   }
