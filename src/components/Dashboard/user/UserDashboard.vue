@@ -5,7 +5,6 @@
   <div class="usr-dsh-aside">
     <div @click="show.profile=true,show.history=false,show.fav=false,show.shop=false"  style="cursor: pointer;border-bottom: #c3c7c6 solid 1px;font-size: 24px;color: #e1d4de;text-align: center;margin-top: 30px"><font-awesome-icon :icon="['fas' , 'user-circle']" style="color: #e1d4de"></font-awesome-icon>&nbsp;پروفایل</div>
     <div  @click="show.profile=false,show.history=true,show.fav=false,show.shop=false" style="border-bottom: #c3c7c6 solid 1px;font-size: 24px;color: white;text-align: center;margin-top: 30px"><font-awesome-icon :icon="['fas' , 'shopping-cart']" style="color: #e1d4de"></font-awesome-icon>&nbsp;تاریخچه سفارشات</div>
-    <div @click="show.profile=false,show.history=false,show.fav=true,show.shop=false" style="border-bottom: #c3c7c6 solid 1px;font-size: 24px;color: white;text-align: center;margin-top: 30px"><font-awesome-icon :icon="['fas' , 'star']" style="color: #e1d4de"></font-awesome-icon>&nbsp;موردعلاقه ها</div>
     <div v-if="show.userScope !== 'shopOwner'" @click="show.profile=false,show.history=false,show.fav=false,show.shop=true" style="border-bottom: #c3c7c6 solid 1px;font-size: 24px;color: white;text-align: center;margin-top: 30px"><font-awesome-icon :icon="['fas' , 'store']" style="color: #e1d4de"></font-awesome-icon>&nbsp;ثبت فروشگاه</div>
     <div v-else style="border-bottom: #c3c7c6 solid 1px;font-size: 24px;color: white;text-align: center;margin-top: 30px"><font-awesome-icon :icon="['fas' , 'store']" style="color: #e1d4de"></font-awesome-icon>&nbsp;<router-link to="/dashboard/store"> فروشگاه من</router-link></div>
     <div @click="logout" style="border-bottom: #c3c7c6 solid 1px;font-size: 24px;color: white;text-align: center;margin-top: 30px"><font-awesome-icon :icon="['fas' , 'sign-out-alt']" style="color: #e1d4de"></font-awesome-icon> خروج </div>
@@ -33,16 +32,6 @@
         <h6>قیمت : </h6>
         <h6>تاریخ :  </h6>
         <h6>وضعیت سفارش : </h6>
-      </div>
-    </div>
-    <div v-else-if="show.fav" style="width: 100%;height: 100%;display: flex;flex-wrap: wrap;justify-content: space-evenly;background-color: #d0d4d3">
-      <div v-for="i in 10" dir="rtl" class="store-product-card" >
-
-        <img src="../../../img/tshirt.jpg" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="65%" width="98%">
-        <p  style="font-size: 20px;">تیشرت گوچی</p>
-        <p class="p">127000 تومان</p>
-        <font-awesome-icon @click="fav" :icon="['fas','star']" style="color: #f6f000;font-size: 2em;position: absolute;top: 3px;left: 3px;z-index: 2"></font-awesome-icon>
-
       </div>
     </div>
 
@@ -85,7 +74,7 @@
       data(){
           return {
             show : {
-              profile : false,
+              profile : true,
               history : false,
               fav: false,
               shop: false,

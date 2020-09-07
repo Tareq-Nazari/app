@@ -15,7 +15,7 @@ library.add(fas)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 
-axios.defaults.baseURL = 'http://127.0.0.1/laravel/public/api/'
+axios.defaults.baseURL = 'http://127.0.0.1/storeBackend/public/api/'
 
 
 import VueRouter from 'vue-router'

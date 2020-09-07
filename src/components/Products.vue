@@ -100,10 +100,10 @@
         this.$router.push({path: '/storePage' ,query:{id} })
       },
       select1: function () {
-        axios.post('store/search', {
+        axios.post('product/search', {
           cat_id: this.picked
         })
-          .then(response => (this.stores = response.data)
+          .then(response => (this.products = response.data)
           ).catch(error => console.log(error))
 
 
