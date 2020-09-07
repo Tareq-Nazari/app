@@ -129,14 +129,14 @@
     mounted() {
       axios.get('store/one' + this.$route.query.id).then((response) => {
         this.shopDetail = response.data[0]
-        axios.get('product_store' + this.$route.query.id).then((response) => {
+        axios.get('product_store/' + this.$route.query.id).then((response) => {
 
           this.shopProducts = response.data[0]
         })
       }).catch(e => {
         console.log(e)
       })
-      axios.post('http://127.0.0.1/laravel/public/api/category/searchProduct', {
+      axios.post('category/searchProduct', {
         store_id: this.$route.query.id
       }).then((response) => {
         this.cats = response.data
@@ -158,7 +158,7 @@
       },
       selectall:function(){
         this.picked=''
-        axios.post('http://127.0.0.1/laravel/public/api/product/search', {
+        axios.post('product/search', {
           store_id: this.shopDetail.id,
         })
           .then(response => (this.shopProducts = response.data)
@@ -167,7 +167,7 @@
       },
       select1: function () {
         this.picked1=''
-        axios.post('http://127.0.0.1/laravel/public/api/product/search', {
+        axios.post('product/search', {
           cat_id: this.picked,
           store_id: this.shopDetail.id,
         })

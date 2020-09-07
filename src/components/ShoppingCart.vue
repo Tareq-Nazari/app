@@ -18,7 +18,7 @@
         <div style="border-bottom: 1px solid #d0d4d3"><p style="float: left">{{off}}</p><p style="float: right">تخفیف کالا ها : </p></div>
         <div style="border-bottom: 1px solid #d0d4d3"><p style="float: left">{{total}}</p><p style="float: right">جمع : </p></div>
         <div style="border-bottom: 1px solid #d0d4d3"><p style="float: left">{{pay}}</p><p style="float: right">قابل پرداخت : </p></div>
-        <button style="margin-top: 5px;height: 36px;width: 80%;border: none;color: white;background-color: #EF394E;margin-left: auto;margin-right: auto;outline: none;border-radius: 5px">پرداخت</button>
+        <button style="margin-top: 5px;height: 36px;width: 80%;border: none;color: white;background-color: #EF394E;margin-left: auto;margin-right: auto;outline: none;border-radius: 5px" v-on:click="payment">پرداخت</button>
       </div>
 
     </div>
@@ -39,6 +39,11 @@
           }
       },
       methods : {
+          payment(){
+            http().post('users/basket/payment',this.products).then((res) => {
+
+            })
+          },
         deleteFromCart(id){
           let x = document.getElementById(id)
           x.remove()

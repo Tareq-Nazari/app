@@ -13,15 +13,14 @@
   <div style="width: 1080px;height: auto;">
     <div v-if="show.profile" style="width: 100%;height: 100%;display: flex;flex-direction: column;justify-content: space-between">
       <label> نام و نام خانوادگی :
-      <input type="text" style="height: 30px;width: 200px;background-color: #d0d4d3;padding: 2px;border: none;border-radius: 5px;outline: none"></label>
+      <input v-model="profile.name" type="text" style="height: 30px;width: 200px;background-color: #d0d4d3;padding: 2px;border: none;border-radius: 5px;outline: none"></label>
       <label>شماره همراه :
-        <input type="text" style="height: 30px;width: 150px;background-color: #d0d4d3;padding: 2px;border: none;border-radius: 5px;outline: none"></label>
+        <input v-model="profile.phone" type="text" style="height: 30px;width: 150px;background-color: #d0d4d3;padding: 2px;border: none;border-radius: 5px;outline: none"></label>
       <label>ایمیل :
-        <input type="text" style="height: 30px;width: 150px;background-color: #d0d4d3;padding: 2px;border: none;border-radius: 5px;outline: none"></label>
+        <input v-model="profile.email" type="text" style="height: 30px;width: 150px;background-color: #d0d4d3;padding: 2px;border: none;border-radius: 5px;outline: none"></label>
       <label for="addr"> آدرس :
-        <textarea id="addr" style="height: 145px;width: 215px;background-color: #d0d4d3;padding: 2px;border: none;border-radius: 5px;outline: none"></textarea></label>
-      <label>کدپستی :
-        <input type="text" style="height: 30px;width: 100px;background-color: #d0d4d3;padding: 2px;border: none;border-radius: 5px;outline: none"></label>
+        <textarea v-model="profile.address" id="addr" style="height: 145px;width: 215px;background-color: #d0d4d3;padding: 2px;border: none;border-radius: 5px;outline: none"></textarea></label>
+
       <button style="height: 50px;width: 100px;border: none;outline: none;background-color: #4a61d3;color: white;align-self: center">بروزرسانی</button>
 
     </div>
@@ -102,7 +101,8 @@
               status : 0
             },
             categories : null,
-            selectedCategory : null
+            selectedCategory : null,
+            profile : null
           }
       },
       mounted: function(){
@@ -112,6 +112,11 @@
           this.categories = response.data
 
         })
+        http().get('users/profile/show').then((res) => {
+          this.profile = res.data[0]
+          console.log(res)
+        })
+
 
 
       },
