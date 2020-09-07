@@ -8,6 +8,10 @@ button {
   cursor: pointer;
 
 }
+button a {
+  text-decoration: none;
+  cursor: pointer;
+}
 .exit-btn {
   height: 30px;
   width: 70px;
