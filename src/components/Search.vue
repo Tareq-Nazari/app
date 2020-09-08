@@ -1,6 +1,5 @@
 <template>
   <div style="width: 100%">
-{{min}}dddddddddd
 
   <div class="s008">
     <form v-on:submit.prevent="">
@@ -28,21 +27,24 @@
             </div>
             <div class="input-field">
               <div class="input-select">
-                <select data-trigger="" name="choices-single-defaul">
+                <select v-model="reqProduct.color" name="choices-single-defaul">
                   <option placeholder="" value="">رنگ</option>
-                  <option>GREEN</option>
-                  <option>SUBJECT B</option>
-                  <option>SUBJECT C</option>
+                  <option>سبز</option>
+                  <option>آبی</option>
+                  <option>قرمز</option>
+                  <option>بنفش</option>
+                  <option>سفید</option>
                 </select>
               </div>
             </div>
             <div class="input-field">
               <div class="input-select">
-                <select data-trigger="" name="choices-single-defaul">
+                <select v-model="reqProduct.size" name="choices-single-defaul">
                   <option placeholder="" value="">سایز</option>
-                  <option>SIZE</option>
-                  <option>SUBJECT B</option>
-                  <option>SUBJECT C</option>
+                  <option>M</option>
+                  <option>L</option>
+                  <option>XL</option>
+                  <option>XXL</option>
                 </select>
               </div>
             </div>
@@ -61,26 +63,6 @@
               <input v-model="max" type="text" style="height: 30px;width: 120px;padding: 1px 1px 1px 1px"  placeholder="تا">
 
 
-            </div>
-            <div class="input-field">
-              <div class="input-select">
-                <select data-trigger="" name="choices-single-defaul">
-                  <option placeholder="" value="">TIME</option>
-                  <option>THIS WEEK</option>
-                  <option>SUBJECT B</option>
-                  <option>SUBJECT C</option>
-                </select>
-              </div>
-            </div>
-            <div class="input-field">
-              <div class="input-select">
-                <select data-trigger="" name="choices-single-defaul">
-                  <option placeholder="" value="">TYPE</option>
-                  <option>TYPE</option>
-                  <option>SUBJECT B</option>
-                  <option>SUBJECT C</option>
-                </select>
-              </div>
             </div>
           </div>
           <div class="row third">
@@ -131,6 +113,8 @@
           max : null,
           min : null,
           price: null,
+          color : '',
+          size : ''
 
 
         },
@@ -152,6 +136,8 @@
           name : this.reqProduct.name,
           min : this.min,
           max : this.max,
+          color : this.reqProduct.color,
+          size : this.reqProduct.size
 
         }).then((response) => {
           this.resProduct = response.data

@@ -22,7 +22,28 @@
 </swiper>
 
 
-
+<div style="width: 100%;height: 200px;display: flex;justify-content: space-evenly;align-items: center">
+  <div style="background-color: rgba(243,231,0,0.36);border: 1px solid #e1d4de;height: 150px;width: 200px;display: flex;flex-direction: column;padding-top: 26px;align-items: center;justify-content: space-evenly">
+    <font-awesome-icon :icon="['fas','dollar-sign']" style="font-size: 2em"/>
+    <h5>پرداخت امن</h5>
+    <h6>از طریق تمام بانک های عضو شتاب</h6>
+  </div>
+  <div style="background-color: rgba(0,10,243,0.2);border: 1px solid #e1d4de;height: 150px;width: 200px;display: flex;flex-direction: column;padding-top: 26px;align-items: center;justify-content: space-evenly">
+    <font-awesome-icon :icon="['fas','truck']" style="font-size: 2em"/>
+    <h5>ارسال رایگان</h5>
+    <h6>ارسال به تمام کشور</h6>
+  </div>
+  <div style="background-color: rgba(243,29,33,0.2);border: 1px solid #e1d4de;height: 150px;width: 200px;display: flex;flex-direction: column;padding-top: 26px;align-items: center;justify-content: space-evenly">
+    <font-awesome-icon :icon="['fas','headphones-alt']" style="font-size: 2em"/>
+    <h5>پشتیبانی</h5>
+    <h6>در تمام ساعات شبانه روز</h6>
+  </div>
+  <div style="background-color: rgba(0,243,76,0.2);border: 1px solid #e1d4de;height: 150px;width: 200px;display: flex;flex-direction: column;padding-top: 26px;align-items: center;justify-content: space-evenly">
+    <font-awesome-icon :icon="['fas','undo-alt']" style="font-size: 2em"/>
+    <h5>بازگشت کالا</h5>
+    <h6>ضمانت بازگشت کالای خراب</h6>
+  </div>
+</div>
 
 
       <br>
@@ -37,17 +58,16 @@
 
     </div>
 <swiper class="swiper" :options="swiperOption.s2">
-  <swiper-slide v-for="i in 10">
+  <swiper-slide v-for="product in products">
     <div class="product-card">
 
       <img class="card-image" src="src/img/chetoz.webp"
            height="50%" width="98%">
-      <p class="card-title">چیپس سرکه ای چیتوز</p>
+      <p class="card-title">{{product.name}}</p>
+      <p class="card-price">قیمت : {{product.price}}</p>
+      <p class="card-desc">{{product.caption}}</p>
 
-      <p class="card-desc">محدوده وزن:
-        کمتر از 150 گرم</p>
-      <p class="card-price">قیمت : </p>
-      <button class="card-button" @click="increment">افزودن به سبد خرید</button>
+      <button class="card-button" @click="increment">مشاهده</button>
     </div>
   </swiper-slide>
   <div class="swiper-button-prev" slot="button-prev"></div>
@@ -57,27 +77,75 @@
 
 
   </div>
-  <div style="height: 100%;width: 28%;display: inline-block;position: absolute;left: 6px;top: 0">
-    <div style="width: 100%;height: 50%;background-color: #b8dd3c;border-radius: 5px">
-      <img src="src/img/takhfif.png" height="100%" width="100%">
-    </div>
-    <div style="height: 2%"></div>
-    <div style="width: 100%;height: 50%;background-color: #c74d4a;border-radius: 5px;margin-top: 4px">
-      <img src="src/img/takhfif.png" height="100%" width="100%">
-    </div>
-  </div>
+
 </div>
-<div style="height: 30px"></div>
+    <br><br>
     <div>
       <div class="ac-title">
         <div class="ac-title-side"></div>
-        <h3>دسته بندی</h3>
+        <h3>دسته بندی ها</h3>
+        <div class="ac-title-side"></div>
+      </div>
+    </div>
+    <br>
+    <div style="display: flex;flex-wrap: wrap;justify-content: space-evenly;width: 51%;align-content: space-between;height: 341px;margin-right: auto;margin-left: auto">
+
+      <div style="border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+        <img src="../img/wwshoe.svg" height="90px" width="90px">
+        <h3>کفش</h3>
+
+      </div>
+      <div style="border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+        <img src="../img/tshirt.svg" height="90px" width="90px">
+        <h3>تیشرت</h3>
+
+      </div>
+      <div style="border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+        <img src="../img/watch.svg" height="90px" width="90px">
+        <h3>ساعت</h3>
+
+      </div>
+      <div style="border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+        <img src="../img/pants.png" height="90px" width="90px">
+        <h3>شلوار</h3>
+
+      </div>
+      <div style="border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+        <img src="../img/hat.png" height="90px" width="90px">
+        <h3>کلاه</h3>
+
+      </div>
+      <div style="border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+        <img src="../img/shirt.png" height="90px" width="90px">
+        <h3>پیراهن</h3>
+
+      </div>
+    </div>
+<br><br>
+    <div>
+      <div class="ac-title">
+        <div class="ac-title-side"></div>
+        <h3>فروشگاه ها </h3>
         <div class="ac-title-side"></div>
       </div>
     </div>
 
+<div style="width: 100%;height: 300px;background-color: #f3d5ed">
+  <swiper class="swiper" :options="swiperOption.s3">
+    <swiper-slide v-for="store in stores">
+      <div  class="stores-card"
+           v-bind:style="{ backgroundImage: 'url(http://localhost/storeBackend/images/' + store.header_pic + ')' }">
+        <div style="background-color: #282A37;color: #F3F8FB;padding: 6px;border-radius: 5px">{{store.name}}</div>
+        <img style="border-radius: 50%" v-bind:src="'http://127.0.0.1/storeBackend/images/'+store.profile_pic"
+             height="50%" width="50%">
+        <h3 style="background-color: rgba(255,36,0,0.52);color: white;cursor: pointer;border-radius: 5px"
+            v-on:click="gotoshop(store.id)" :id="store.id">مشاهده فروشگاه</h3>
 
-      <div style="display: grid;grid-template-rows: 1fr 1fr;grid-template-columns: 1fr 1fr 1fr 1fr"></div>
+
+      </div>
+    </swiper-slide>
+  </swiper>
+</div>
 
 
 
@@ -122,9 +190,9 @@ import {mapMutations} from 'vuex'
               clickable: true
             }},
           s2 : {
-            slidesPerView: 4,
+            slidesPerView: 6,
             spaceBetween: 50,
-            freeMode: false,
+            freeMode: true,
             pagination: {
               el: '.swiper-pagination',
               clickable: true
@@ -136,20 +204,16 @@ import {mapMutations} from 'vuex'
 
           },
           s3 : {
-            slidesPerView: 6,
-            spaceBetween: 120,
+            slidesPerView: 4,
+            spaceBetween: 0,
             freeMode: true,
-            pagination: {
-              el: '.swiper-pagination',
-              clickable: true
-            },
-            navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev'
-            }
-          }
 
-}
+          },
+
+
+},
+        products : null,
+        stores : null,
       }
     },
 
@@ -159,9 +223,23 @@ import {mapMutations} from 'vuex'
    methods : {
      increment(){
        this.$store.commit('increment')
+     },
+     gotoshop: function (id) {
+
+       this.$router.push({path: '/storePage' ,query:{id} })
      }
 
-   }
+   },
+    mounted(){
+      axios.get('product/all').then((res)=>{
+        this.products = res.data
+      })
+      axios.get('store/all').then((res)=>{
+        this.stores = res.data
+      })
+
+
+    }
   }
 
 </script>
@@ -192,12 +270,12 @@ import {mapMutations} from 'vuex'
   }
 
   .offer-container {
-    width: 70%;
+    width: 100%;
     height: 500px;
     background-color: #b8dd3c;
     position: absolute;
-    right: 5px;
     padding: 7px;
+    right: -1px;
     display: inline-block;
 
 
@@ -279,6 +357,19 @@ import {mapMutations} from 'vuex'
     background-color: white;transform: rotate(-19deg);width: 120px;
 
     border-radius: 50%;text-align: center;align-content: center
+  }
+  .stores-card {
+    position: relative;
+    margin: 10px;
+    border: #888888 1px solid;
+    border-radius: 8px;
+    height: 250px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
   }
 
 </style>

@@ -58,7 +58,13 @@ export const routes =[
     ]},
 
   {path: '/storePage' , component : StorePage},
-  {path: '/signup' , component: Sginup},
+  {path: '/signup' , component: Sginup,beforeEnter: (to,from,next)=>{
+      if (!auth.isLoggedIn()) {
+        next()
+      }else {
+        next('/home')
+      }
+    }},
   {path: '/search' , component: Search},
 
   {path : '*' , component: Home},

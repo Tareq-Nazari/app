@@ -20,18 +20,17 @@
       <label for="addr"> آدرس :
         <textarea v-model="profile.address" id="addr" style="height: 145px;width: 215px;background-color: #d0d4d3;padding: 2px;border: none;border-radius: 5px;outline: none"></textarea></label>
 
-      <button style="height: 50px;width: 100px;border: none;outline: none;background-color: #4a61d3;color: white;align-self: center">بروزرسانی</button>
+      <button style="height: 50px;width: 100px;border: none;outline: none;background-color: #4a61d3;color: white;align-self: center" @click="editProfile">بروزرسانی</button>
 
     </div>
     <div  class="usr-dsh-order-history-container" v-else-if="show.history">
-      <div v-for="i in 10" class="usr-dsh-order-history" style="">
-        <img src="../../../img/tshirt.jpg" style="height: 90%;width: 80px;border-radius: 5px" >
-        <h6>نام محصول : </h6>
-        <h6>کد سفارش : </h6>
-        <h6>کد محصول : </h6>
-        <h6>قیمت : </h6>
-        <h6>تاریخ :  </h6>
-        <h6>وضعیت سفارش : </h6>
+      <div v-for="factor in factors" class="usr-dsh-order-history" style="">
+        <img :src="'http://localhost/storeBackend/images/'+factor.thumbnail_pic" style="height: 90%;width: 80px;border-radius: 5px" >
+        <h6>نام محصول : {{factor.product_name}}</h6>
+        <h6>کد سفارش : {{factor.payment_receipt}}</h6>
+        <h6>فروشگاه  : {{factor.store_name}}</h6>
+        <h6>قیمت : {{factor.price}}</h6>
+        <h6>تاریخ : {{factor.created_at}} </h6>
       </div>
     </div>
 
@@ -91,7 +90,8 @@
             },
             categories : null,
             selectedCategory : null,
-            profile : null
+            profile : null,
+            factors : null
           }
       },
       mounted: function(){
@@ -103,13 +103,26 @@
         })
         http().get('users/profile/show').then((res) => {
           this.profile = res.data[0]
-          console.log(res)
+
+          http().post('users/factor').then((res) => {
+            this.factors = res.data
+            console.log(this.factors)
+          })
         })
+
 
 
 
       },
       methods : {
+          editProfile(){
+            http().post('users/profile/edit',{
+              name : this.profile.name,
+              address : this.profile.address,
+              phone :  this.profile.phone,
+              email : this.profile.email
+              })
+          },
           logout(){
             auth.logout()
             this.$router.push('/login')
