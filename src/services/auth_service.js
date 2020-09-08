@@ -30,12 +30,12 @@ export function login(user) {
        const token = JSON.stringify(response)
        localStorage.setItem('token' , token)
        loginRes = response
-
+        location.reload()
      }
 
 
   }).catch(e => {
-    console.log(e)
+    return false
   })
   if (loginRes) {return JSON.stringify(response.data.scope[0])}
 
@@ -69,7 +69,8 @@ export function logout() {
     }
   })) {
     localStorage.removeItem('token');
-
+    location.reload()
+    window.location.pathname = '/login'
   }
 
 }

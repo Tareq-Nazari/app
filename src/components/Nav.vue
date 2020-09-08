@@ -15,8 +15,10 @@
 
 <transition name="fade">
   <div v-if="showuser" style="width: 100px;height: 150px;background-color: #d6d7ff;position:absolute;left: 12px;top: 55px">
-    <button style="height: 33px;width: 76px;color: white;background-color: #00a5bb;margin-top: 25px;border: none;outline: none"><router-link to="/signup" >ثبت نام</router-link></button>
-    <button style="height: 33px;width: 76px;color: white;background-color: #f31d21;margin-top: 25px;border: none;outline: none"><router-link to="/login" >ورود</router-link></button>
+    <button v-if="log === false" style="height: 33px;width: 76px;color: white;background-color: #00a5bb;margin-top: 25px;border: none;outline: none"><router-link to="/signup" >ثبت نام</router-link></button>
+    <button v-if="log === false" style="height: 33px;width: 76px;color: white;background-color: #f31d21;margin-top: 25px;border: none;outline: none"><router-link to="/login" >ورود</router-link></button>
+    <button v-if="log" @click="logout" style="height: 33px;width: 76px;color: white;background-color: red;margin-top: 25px;border: none;outline: none"><router-link to="/login" >خروج</router-link></button>
+
 
   </div>
 </transition>
@@ -58,13 +60,14 @@
 <script>
 
 
-  import {isLoggedIn} from "../services/auth_service";
+  import {isLoggedIn,logout} from "../services/auth_service";
   import axios from 'axios'
   import {http} from "../services/http_service";
   export default {
     name: "Nav",
     data(){
       return {
+        log : false,
           shopClick : 0,
           searchClick: false,
           forc : 10,
@@ -80,6 +83,9 @@
     },
 
     methods : {
+      logout(){
+        logout()
+      },
       getCard() {
         http().post('users/basket/all').then((response) => {
           this.shopClick = 1
@@ -113,7 +119,7 @@
     },
 
     mounted(){
-
+    this.log = isLoggedIn()
 
 
     },

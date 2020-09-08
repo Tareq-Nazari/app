@@ -1,10 +1,11 @@
 <template>
   <div class="main">
-
+    <vue-alert></vue-alert>
 
     <!-- Sign up form -->
     <section class="signup">
       <div class="container">
+
         <div class="signup-content">
           <div class="signup-form">
             <h2 class="form-title">ثبت نام</h2>
@@ -89,26 +90,15 @@
           ,
           register : async function(){
             try {
-              await auth.register(this.user);
+              await auth.register(this.user)
               this.$router.push('/login')
-            } catch (e) {
-              switch (e.response.status) {
-                case 422 :
-                  this.errors = e.response.data.errors;
-                  break;
-                case 500 :
-                  this.errors = e.response.data.errors;
-                  break;
-                case 201 :
-                  this.errors = e.response.data.errors;
-                  break;
-                default :
-                  this.errors = e.response.data.errors;
-                  break;
-
-              }
+            }catch (e) {
+              console.log(e)
             }
-          }
+
+
+          },
+
       }
     }
 </script>

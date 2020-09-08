@@ -42,7 +42,7 @@
         <div style="background-color: #282A37;color: #F3F8FB;padding: 6px;border-radius: 5px">{{store.name}}</div>
         <img style="border-radius: 50%" v-bind:src="'http://127.0.0.1/storeBackend/images/'+store.profile_pic"
              height="50%" width="50%">
-        <h3 style="background-color: rgba(255,36,0,0.52);color: white;cursor: pointer;border-radius: 5px"
+        <h3 class="mm" style=""
             v-on:click="gotoshop(store.id)" :id="store.id">مشاهده فروشگاه</h3>
 
 
@@ -135,6 +135,17 @@
 </script>
 
 <style scoped>
+  .mm {
+    background-color: rgba(255,36,0,0.52);color: white;cursor: pointer;border-radius: 5px;transition-timing-function: ease-in-out;
+    transition: 200ms;
+  }
+  .mm:hover {
+    font-size: 25px;
+    transition-duration: 200ms;
+    color: black;
+    background-color: white;
+
+  }
   .ac-title {
     display: flex;
     flex-direction: row;
@@ -160,12 +171,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    transition: width 500ms;
+    transition: 200ms;
+    transition-timing-function: ease-in-out;
   }
 
   .stores-card:hover {
-    width: 340px;
-    height: 270px;
+    transform: translate(5px , -5px);
+
   }
 
 </style>

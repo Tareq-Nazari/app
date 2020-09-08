@@ -1,7 +1,7 @@
 <template>
   <section class="sign-in">
 
-    <div class="container">
+    <div class="container"><vue-alert></vue-alert>
       <div class="signin-content">
         <div class="signin-image">
           <figure><img src="../img/buyer.png" alt="sing up image"></figure>
@@ -28,14 +28,7 @@
 
             </div>
           </form>
-<!--          <div class="social-login">-->
-<!--            <span class="social-label">Or login with</span>-->
-<!--            <ul class="socials">-->
-<!--              <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>-->
-<!--              <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>-->
-<!--              <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>-->
-<!--            </ul>-->
-<!--          </div>-->
+
         </div>
       </div>
     </div>
@@ -53,7 +46,8 @@
         email : '',
         password : '',
         response: null
-      }
+      },
+      x : ''
     }
   }
   ,
@@ -61,9 +55,14 @@
 
     login: async function(){
 
-        await auth.login(this.user)
 
+         if( await auth.login(this.user)) {
 
+         }else {
+           this.$alert.danger({
+             message : 'نام کابری یا رمزعبور اشتباه است'
+           })
+         }
 
 
 
