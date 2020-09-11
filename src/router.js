@@ -52,6 +52,7 @@ import Products from "./components/Products"
 export const routes =[
   {path: '/stores' , component: Stores},
   {path: '/products' , component: Products},
+  {path: '/products/:id' , component: Products},
   {path: '/contact' , component: Contact , children : [
 
 
@@ -142,15 +143,15 @@ export const routes =[
     {path: 'profile/edit',component: AdminProfileEdit},
     {path: 'profile/editPic',component: AdminProfileEditPic},
     ],
-  // ],beforeEnter: (to,from,next) => {
-  //     if(auth.isLoggedIn() )  {
-  //
-  //       next()
-  //     } else {
-  //      next('/login')
-  //     }
+   beforeEnter: (to,from,next) => {
+       if(auth.isLoggedIn())  {
 
-},
+         next()
+       } else {
+        next('/login')
+       }
+
+}},
 
     {path: 'profile/edit',component: AdminProfileEdit}
 //   ],beforeEnter: (to,from,next) => {

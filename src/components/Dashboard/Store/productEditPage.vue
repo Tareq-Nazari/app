@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-
+    <vue-alert></vue-alert>
     <div class="main1">
       <div></div>
       <div class="description">
@@ -30,7 +30,7 @@
           </div>
           <div class="input-container">
             <label for="inp" class="inp">
-              <input type="number" id="inp" v-model="product.size">
+              <input type="text" id="inp" v-model="product.size">
               <span class="label">سایز </span>
               <span class="focus-bg"></span>
             </label>
@@ -50,7 +50,7 @@
             </select>
             <label>دسته بندی محصول</label>
           </div>
-          <button style="font-family: vasir;position: absolute;right: 274px;margin-top: 60px" class="myButton" @click="submit">ثبت تغیرات</button>
+          <button v-on:click="submitt" style="font-family: vasir;position: absolute;right: 274px;margin-top: 60px;background-color: #c74d4a;color: white;border: none;outline: none;height: 35px;width: 130px;border-radius: 7px" class="" >ثبت تغیرات</button>
 
         </div>
 
@@ -134,7 +134,8 @@
         ],
         product: null,
         comments : null,
-        categories : null
+        categories : null,
+        product_id : null
       }
     },
 created(){
@@ -144,7 +145,7 @@ created(){
       axios.get('product/one' + this.$route.params.id)
         .then(response => {
             this.product = response.data[0]
-
+            this.product_id = this.product.id
           http().get('shopOwner/product/comments'+this.product.id).then((res) => {
             this.comments = res.data
             console.log(this.comments)
@@ -160,13 +161,7 @@ created(){
       })
     },
     methods: {
-      addToCart(id) {
-        http().post('users/basket/add' + id).then((response) => {
-          this.$store.console.log(response)
-        }).catch(e => {
-          console.log(e)
-        })
-      },
+
       deleteComment(id){
         let x = document.getElementById(id)
         x.remove()
@@ -175,8 +170,12 @@ created(){
       updateProduct(){
 
       },
-      submit(){
-        http().post('shopOwner/product/edit' , this.product)
+      submitt(){
+        http().post('shopOwner/product/edit' , this.product).then(res => {
+          this.$alert.success({
+            message : 'تفییرات جدید ثبت شد'
+          })
+        })
       }
 
     }

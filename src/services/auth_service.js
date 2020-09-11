@@ -1,6 +1,8 @@
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
 import {http} from "./http_service";
+
+
 let loginRes = null;
 export function register(user) {
 
@@ -11,6 +13,8 @@ export function register(user) {
       address : user.address,
       phone : user.phone,
 
+
+    }).then().catch(e => {
 
     })
 

@@ -104,7 +104,17 @@
       axios.get('category/product_all')
         .then(response => (this.cats = response.data)
         ).catch(error => console.log(error))
+      if (this.$route.params){
+        this.picked1=''
+        axios.post('product/search', {
+          cat_id: this.picked
+        })
+          .then(response => (this.products = response.data)
+          ).catch(error => console.log(error))
+      }
     },
+
+
     methods: {
       gotoshop: function (id) {
 

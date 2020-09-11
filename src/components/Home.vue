@@ -90,32 +90,32 @@
     <br>
     <div style="display: flex;flex-wrap: wrap;justify-content: space-evenly;width: 51%;align-content: space-between;height: 341px;margin-right: auto;margin-left: auto">
 
-      <div style="border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+      <div v-on:click="goToCat('shoe')" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
         <img src="../img/wwshoe.svg" height="90px" width="90px">
         <h3>کفش</h3>
 
       </div>
-      <div style="border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+      <div v-on:click="goToCat('tshirt')" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
         <img src="../img/tshirt.svg" height="90px" width="90px">
         <h3>تیشرت</h3>
 
       </div>
-      <div style="border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+      <div v-on:click="goToCat('watch')" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
         <img src="../img/watch.svg" height="90px" width="90px">
         <h3>ساعت</h3>
 
       </div>
-      <div style="border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+      <div v-on:click="goToCat('pants')" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
         <img src="../img/pants.png" height="90px" width="90px">
         <h3>شلوار</h3>
 
       </div>
-      <div style="border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+      <div v-on:click="goToCat('hat')" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
         <img src="../img/hat.png" height="90px" width="90px">
         <h3>کلاه</h3>
 
       </div>
-      <div style="border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+      <div v-on:click="goToCat('shirt')" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
         <img src="../img/shirt.png" height="90px" width="90px">
         <h3>پیراهن</h3>
 
@@ -130,7 +130,10 @@
       </div>
     </div>
 
-<div style="width: 100%;height: 300px;background-color: #f3d5ed">
+<div style="width: 100%;height: 340px;background-color: #f3d5ed;position: relative">
+  <div style="width: 100%;height: 45px"></div>
+  <div style="position:absolute;top: 10px;left: 10px;background-color: white;padding: 5px;border-radius: 35%"><router-link to="/stores" style="text-decoration: none">مشاهده همه</router-link></div>
+
   <swiper class="swiper" :options="swiperOption.s3">
     <swiper-slide v-for="store in stores">
       <div  class="stores-card"
@@ -146,7 +149,33 @@
     </swiper-slide>
   </swiper>
 </div>
+    <br><br>
+    <div>
+      <div class="ac-title">
+        <div class="ac-title-side"></div>
+        <h3> محصولات </h3>
+        <div class="ac-title-side"></div>
+      </div>
+    </div>
 
+    <div style="width: 100%;height: 350px;background-color: rgba(246,240,0,0.45);position: relative;">
+      <div style="width: 100%;height: 28px"></div>
+      <div style="position:absolute;top: 10px;left: 10px;background-color: white;padding: 5px;border-radius: 35%"><router-link to="/products" style="text-decoration: none">مشاهده همه</router-link></div>
+      <swiper class="swiper" :options="swiperOption.s4">
+        <swiper-slide v-for="product in products">
+          <div class="prod-cart" @click="productpage(product.id)" dir="rtl"
+               style="box-shadow: 10px 10px rgba(208,212,211,0.52);border: solid 0.5px rgba(195,199,198,0.52);background-color: white;margin: 15px;height: 283px;width: 222px;border-radius: 2%;display: flex;flex-direction: column;align-items: center;justify-content: space-around">
+
+            <img :src="'http://localhost/storeBackend/images/'+product.pic"
+                 style="border-radius: 2%;height: 50%;width: 99%" >
+            <p style="font-size: 20px;">{{product.name}}</p>
+            <p style="background-color: #ff2400;border-radius: 10px 5px 10px 5px;color: white;padding: 5px">
+              {{product.price}} تومان</p>
+
+          </div>
+        </swiper-slide>
+      </swiper>
+    </div>
 
 
 
@@ -209,7 +238,12 @@ import {mapMutations} from 'vuex'
             freeMode: true,
 
           },
+          s4 : {
+            slidesPerView: 6,
+            spaceBetween: 0,
+            freeMode: true,
 
+          }
 
 },
         products : null,
@@ -221,6 +255,9 @@ import {mapMutations} from 'vuex'
       swiper: directive
     },
    methods : {
+     goToCat(cat){
+       this.$router.push('/products/'+cat)
+     },
      increment(){
        this.$store.commit('increment')
      },
@@ -246,7 +283,10 @@ import {mapMutations} from 'vuex'
 
 <style scoped>
 
-
+  .prod-cart:hover{
+    transform: rotate(2deg);
+    cursor: pointer;
+  }
   .zoom:hover {
     -ms-transform: scale(1.02); /* IE 9 */
     -webkit-transform: scale(1.02); /* Safari 3-8 */

@@ -55,17 +55,7 @@
 
     login: async function(){
 
-
-         if( await auth.login(this.user)) {
-
-         }else {
-           this.$alert.danger({
-             message : 'نام کابری یا رمزعبور اشتباه است'
-           })
-         }
-
-
-
+      await auth.login(this.user)
 
     },
 

@@ -1,6 +1,9 @@
 <template>
 <div>
   <div class="wrapper">
+
+      <vue-alert></vue-alert>
+
     <form v-on:submit.prevent="">
       <div class="group">
         <input type="text" v-model="store.name" required="required"/><span class="highlight"></span><span class="bar"></span>
@@ -74,7 +77,9 @@
       submit(){
         http().post('shopOwner/store/edit' , this.store).then((response) =>{
 
-
+          this.$alert.success({
+            message : 'تفییرات جدید ثبت شد'
+          })
 
         })
       }

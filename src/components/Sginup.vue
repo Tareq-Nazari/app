@@ -77,6 +77,7 @@
               phone : null,
               role : 1
             },
+            x : ''
 
           }
       },
@@ -89,15 +90,19 @@
           }
           ,
           register : async function(){
-            try {
-              await auth.register(this.user)
-              this.$router.push('/login')
-            }catch (e) {
-              console.log(e)
-            }
+
+             await auth.register(this.user)
+
+                this.$router.push('/login')
+
+
+
 
 
           },
+        alerts(){
+
+        }
 
       }
     }

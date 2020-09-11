@@ -89,6 +89,7 @@
   import AdminHome from "../AdminHome";
   import {mapGetters} from 'vuex';
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     name: "all",
@@ -161,7 +162,7 @@
       },
     },
     created() {
-      axios.get('http://127.0.0.1/laravel/public/api/admin/factors/all')
+      http().get('admin/factors/all')
         .then(response => (this.factors = response.data)
         ).catch(error => console.log(error))
     },

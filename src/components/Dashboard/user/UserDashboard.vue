@@ -10,6 +10,7 @@
     <div @click="logout" style="border-bottom: #c3c7c6 solid 1px;font-size: 24px;color: white;text-align: center;margin-top: 30px"><font-awesome-icon :icon="['fas' , 'sign-out-alt']" style="color: #e1d4de"></font-awesome-icon> خروج </div>
   </div>
   <div style="width: 1080px;height: auto;">
+    <vue-alert></vue-alert>
     <div v-if="show.profile" style="width: 100%;height: 100%;display: flex;flex-direction: column;justify-content: space-between">
       <label> نام و نام خانوادگی :
       <input v-model="profile.name" type="text" style="height: 30px;width: 200px;background-color: #d0d4d3;padding: 2px;border: none;border-radius: 5px;outline: none"></label>
@@ -121,7 +122,11 @@
               address : this.profile.address,
               phone :  this.profile.phone,
               email : this.profile.email
+              }).then(response => {
+              this.$alert.success({
+                message : 'تفییرات جدید ثبت شد'
               })
+            })
           },
           logout(){
             auth.logout()

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div style="margin-bottom: 10px;padding-left: 10px;padding-right: 10px;height: 50px;background-color: #d0d4d3;display: flex;justify-content: space-between;align-items: center">
-      <h2>فروشگاه {{store_name}}</h2>    <div style="">
-      <input id="s2" type="checkbox" class="switch" v-if="status === 1" checked>
-      <label for="s2" v-if="status === 1">مغازه باز است</label>
-      <input id="s2" v-on:click="changeStatus" type="checkbox" class="switch" v-else >
-      <label for="s2" v-else>مغازه بسته است</label>
-    </div>
+      <div style="margin-bottom: 10px;padding-left: 10px;padding-right: 10px;height: 50px;background-color: #d0d4d3;display: flex;justify-content: space-between;align-items: center">
+    <h2>فروشگاه {{store_name}}</h2>   <!--   <div style="">-->
+<!--      <input id="s2" v-on:click="changeStatus" type="checkbox" class="switch" :checked="status === 1" >-->
+<!--      <label for="s2" v-if="status === 1">مغازه باز است</label>-->
+
+<!--      <label for="s2" v-else>مغازه بسته است</label>-->
+<!--    </div>-->
       <button v-on:click="logoutw" class="exit-btn">خروج</button>
     </div>
 
@@ -41,11 +41,7 @@
         }
 
       },
-      changeStatus(){
-        if(this.status === 1){
-          this.status = 0
-        }else this.status = 1
-      }
+
     },
     mounted(){
       http().get('shopOwner/store/detail').then((response) =>{

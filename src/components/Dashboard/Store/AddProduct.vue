@@ -1,4 +1,4 @@
-<template>
+<template><div><vue-alert></vue-alert>
   <div class="add-product-container">
 
   <div v-if="img == ''" style="height: 233px;width: 98%;border: 5px dotted rgba(28,110,164,0.78);
@@ -27,7 +27,8 @@ border-radius: 7px 7px 7px 7px;position: relative">
 
   </select></label>
 
-  <button @click="addProduct" style="height: 30px;width: 100px;background-color: dodgerblue;font-family: vasir;color: white;border: 0;border-radius:  50% 50% 0 0" >ثبت</button>
+  <button @click="addProduct" style="height: 30px;width: 100px;background-color: #1e90ff;font-family: vasir;color: white;border: 0;border-radius:  50% 50% 0 0" >ثبت</button>
+    <button @click="reset" style="position: absolute;left: 0;bottom: 0;height: 30px;width: 100px;background-color: red;font-family: vasir;color: white;border: 0;border-radius:  50% 50% 0 0" >ریست</button>
 
 
 
@@ -35,7 +36,7 @@ border-radius: 7px 7px 7px 7px;position: relative">
 
 
 
-  </div>
+  </div></div>
 </template>
 <script>
   import axios from 'axios'
@@ -73,6 +74,9 @@ export default  {
     })
   },
   methods : {
+    reset(){
+      this.$router.go()
+    },
     previewImage: function(event) {
       this.product.file = this.$refs.file.files[0]
 
@@ -105,7 +109,13 @@ export default  {
       formData.append('color',this.product.color)
       formData.append('size',this.product.size)
 
-      http().post('shopOwner/product/create',formData)
+      http().post('shopOwner/product/create',formData).then(res => {
+        this.$alert.success({
+          message : 'محصول شما ثبت شد'
+
+        })
+
+      })
 
 
     },
@@ -129,7 +139,7 @@ export default  {
   }
 .add-product-container {
   border: 0.25px solid #989c9b;
-
+  position: relative;
 
   display: flex;
   flex-direction: column;
