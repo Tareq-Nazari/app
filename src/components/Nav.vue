@@ -60,7 +60,7 @@
 <script>
 
 
-  import {isLoggedIn,logout} from "../services/auth_service";
+  import {getScope, isLoggedIn, logout} from "../services/auth_service";
   import axios from 'axios'
   import {http} from "../services/http_service";
   export default {
@@ -126,7 +126,7 @@
     created() {
 
 
-        if (this.$store.getters.isLoggedIn) {
+        if (this.$store.getters.isLoggedIn && getScope() !== 'admin') {
           this.showDash = true
         }else this.showDash=false
 
