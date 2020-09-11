@@ -59,7 +59,7 @@
         formData.append('pic', this.file)
 
 
-        axios.post('http://127.0.0.1/laravel/public/api/users/profile/edit_picture',
+        axios.post('users/profile/edit_picture',
           formData
           , {
             headers: {

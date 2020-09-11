@@ -27,7 +27,7 @@
     </div>
     <div style="display: grid;grid-template-columns: 1fr;">
       <p style="font-family: vasir">عکس محصول</p>
-      <img style="height: 420px" v-bind:src="'http://127.0.0.1/laravel/images/'+product[0].pic">
+      <img style="height: 420px" v-bind:src="'http://127.0.0.1/storeBackend/images/'+product[0].pic">
 
 
     </div>
@@ -40,6 +40,7 @@
 <script>
   import AdminHome from "../AdminHome";
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     data() {
@@ -68,7 +69,7 @@
     methods: {
       deleteProduct: function (id) {
         if (confirm("آیا می خواهید مغازه را حذف کنید؟")) {
-          axios.get('http://127.0.0.1/laravel/public/api/admin/product/delete' + id)
+          http().get('admin/product/delete' + id)
             .then(resp => {
               this.$router.push({path: '/dashboard/admin/product/all'})
             }
@@ -89,7 +90,7 @@
       }
     },
     created() {
-      axios.get('http://127.0.0.1/laravel/public/api/product/one' + this.id).then(
+      axios.get('product/one' + this.id).then(
         response => {
           this.product = response.data
         }

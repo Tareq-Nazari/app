@@ -115,6 +115,7 @@
 <script>
   import AdminHome from "../AdminHome";
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     name: "edit",
@@ -144,7 +145,7 @@
         formData.append('color', this.color)
         formData.append('name', this.name)
         formData.append('cat_id', this.selected)
-        axios.post('http://127.0.0.1/laravel/public/api/admin/product/edit',
+        http().post('admin/product/edit',
           formData
         , {
           headers: {
@@ -169,7 +170,7 @@
 
     },
     created() {
-      axios.get('http://127.0.0.1/laravel/public/api/admin/category/product/all')
+      http().get('admin/category/product/all')
         .then(response => (this.categories = response.data)
         ).catch(error => console.log(error))
     },

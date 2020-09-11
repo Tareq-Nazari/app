@@ -99,13 +99,13 @@
       }
 
     }, created() {
-      axios.get('http://127.0.0.1/laravel/public/api/users/profile/show')
+      axios.get('users/profile/show')
         .then(response => (this.user = response.data[0])
         ).catch(error => console.log(error))
     },
     methods: {
       checkForm: function () {
-        axios.post('http://127.0.0.1/laravel/public/api/users/profile/edit', {
+        axios.post('users/profile/edit', {
           name: this.user.name,
           email: this.user.email,
           address: this.user.address,

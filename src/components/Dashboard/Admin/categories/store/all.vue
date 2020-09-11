@@ -64,6 +64,7 @@
   import AdminHome from "../../AdminHome";
   import {mapGetters} from 'vuex';
   import axios from "axios";
+  import {http} from "../../../../../services/http_service";
 
   export default {
     name: "all",
@@ -92,9 +93,9 @@
       delete1: function (id) {
         if (confirm("آیا می خواهید دسته بندی را حذف کنید؟")) {
 
-          axios.get('http://127.0.0.1/laravel/public/api/admin/category/store/delete'+id)
+          http().get('admin/category/store/delete'+id)
             .then(response =>{
-              axios.get('http://127.0.0.1/laravel/public/api/admin/category/store/all')
+              http().get('admin/category/store/all')
                 .then(response => (this.cats = response.data)
                 ).catch(error => console.log(error))
               }
@@ -111,7 +112,7 @@
         }
       },
       send: function () {
-        axios.post('http://127.0.0.1/laravel/public/api/admin/category/store/search', {
+        http().post('admin/category/store/search', {
           id: this.id,
           name: this.name,
         }).then(response => (this.cats = response.data))
@@ -120,7 +121,7 @@
 
     },
     created() {
-      axios.get('http://127.0.0.1/laravel/public/api/admin/category/store/all')
+      http().get('admin/category/store/all')
         .then(response => (this.cats = response.data)
         ).catch(error => console.log(error))
     },

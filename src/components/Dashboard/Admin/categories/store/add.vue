@@ -43,6 +43,7 @@
 <script>
   import AdminHome from "../../AdminHome";
   import axios from "axios";
+  import {http} from "../../../../../services/http_service";
 
   export default {
     name: "add",
@@ -57,7 +58,7 @@
     methods: {
       checkForm: function () {
 
-        axios.post('http://127.0.0.1/laravel/public/api/admin/category/store/add',
+        http().post('admin/category/store/add',
           {
             name: this.name,
           }).then(response=>{

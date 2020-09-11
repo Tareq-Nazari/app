@@ -105,6 +105,7 @@
 <script>
   import AdminHome from "../AdminHome";
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     name: "create",
@@ -127,7 +128,7 @@
 
 
     }, created() {
-      axios.get('http://127.0.0.1/laravel/public/api/category/store_all')
+      axios.get('category/store_all')
         .then(response => (this.cats = response.data)
         ).catch(error => console.log(error))
     },
@@ -142,7 +143,7 @@
         formData.append('email', this.email)
         formData.append('cat_id', this.selected)
         formData.append('name', this.name)
-        axios.post('http://127.0.0.1/laravel/public/api/admin/store/create',
+        http().post('admin/store/create',
           formData,
         ).then(response=>{
           this.$router.push({path: '/dashboard/admin/store/all',query:{message:'مغازه با موفقیت ساخته شد'}})

@@ -29,10 +29,10 @@
     </div>
     <div style="display: grid;grid-template-columns: 1fr;grid-row-gap: 20px">
       <p style="font-family: vasir">عکس پروفایل</p>
-      <img style="height: 120px" v-bind:src="'http://127.0.0.1/laravel/images/'+store[0].profile_pic">
+      <img style="height: 120px" v-bind:src="'http://127.0.0.1/storeBackend/images/'+store[0].profile_pic">
 
       <p style="font-family: vasir">عکس هدر مغازه</p>
-      <img style="height: 120px" v-bind:src="'http://127.0.0.1/laravel/images/'+store[0].header_pic">
+      <img style="height: 120px" v-bind:src="'http://127.0.0.1/storeBackend/images/'+store[0].header_pic">
 
 
     </div>
@@ -45,6 +45,7 @@
 <script>
   import AdminHome from "../AdminHome";
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     data() {
@@ -66,7 +67,7 @@
 
       deleteStore: function (id) {
         if (confirm("آیا می خواهید مغازه را حذف کنید؟")) {
-          axios.get('http://127.0.0.1/laravel/public/api/admin/store/delete' + id)
+          http().get('admin/store/delete' + id)
             .then(resp => {
               this.$router.push({path: '/dashboard/admin/store/all', query: {id,message:'مغازه باموفقیت حذف گردید'}})
             }).catch(error => console.log(error))
@@ -85,7 +86,7 @@
       }
     },
     created() {
-      axios.get('http://127.0.0.1/laravel/public/api/store/one' + this.id).then(
+      axios.get('store/one' + this.id).then(
         response => {
           this.store = response.data
         }

@@ -20,7 +20,7 @@
 
     <div style="display: grid;grid-template-columns: 1fr;grid-row-gap: 20px">
       <p style="font-family: vasir">عکس پروفایل</p>
-      <img style="height: 80%" v-bind:src="'http://127.0.0.1/laravel/images/'+user.pic">
+      <img style="height: 80%" v-bind:src="'http://127.0.0.1/storeBackend/images/'+user.pic">
 
 
     </div>
@@ -33,6 +33,7 @@
 <script>
   import AdminHome from "../AdminHome";
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     data() {
@@ -49,7 +50,7 @@
       AdminHome
     },
     created() {
-      axios.get('http://127.0.0.1/laravel/public/api/users/profile/show')
+      http().get('users/profile/show')
         .then(response => (this.user = response.data[0])
         ).catch(error => console.log(error))
     },

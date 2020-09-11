@@ -60,6 +60,7 @@
 <script>
   import AdminHome from "../../AdminHome";
   import axios from 'axios';
+  import {http} from "../../../../../services/http_service";
 
   export default {
     name: "add",
@@ -82,7 +83,7 @@
         formData.append('name', this.name)
         formData.append('store_id', this.store_id)
 
-        axios.post('http://127.0.0.1/laravel/public/api/admin/category/product/add',
+        http().post('admin/category/product/add',
           formData
         ).then(response => {
           this.$router.push({path: '/dashboard/admin/productCategory/all',query:{message:'دسته بندی با موفقیت ثبت گردید'}})

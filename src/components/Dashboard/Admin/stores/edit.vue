@@ -87,6 +87,7 @@
 <script>
   import AdminHome from "../AdminHome";
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     name: "edit",
@@ -115,7 +116,7 @@
         formData.append('address', this.address)
         formData.append('email', this.email)
         formData.append('phone', this.phone)
-        axios.post('http://127.0.0.1/laravel/public/api/admin/store/edit',
+        http().post('admin/store/edit',
           formData
           ,
 
@@ -135,7 +136,7 @@
 
     },
     created() {
-      axios.get('http://127.0.0.1/laravel/public/api/admin/category/store/all')
+      http().get('admin/category/store/all')
         .then(response => (this.categories = response.data)
         ).catch(error => console.log(error))
     },

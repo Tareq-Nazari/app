@@ -147,7 +147,7 @@
 
       },
       send: function () {
-        axios.post('http://127.0.0.1/laravel/public/api/admin/factors/search', {
+        http().post('admin/factors/search', {
           id: this.id,
           product_name: this.product_name,
           product_id: this.product_id,

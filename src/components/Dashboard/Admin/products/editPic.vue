@@ -36,6 +36,7 @@
 
 <script>
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     name: "editPic",
@@ -59,7 +60,7 @@
         formData.append('pic', this.file)
         formData.append('id', this.id)
 
-        axios.post('http://127.0.0.1/laravel/public/api/admin/product/edit_pic',
+        http().post('admin/product/edit_pic',
           formData
           , {
             headers: {

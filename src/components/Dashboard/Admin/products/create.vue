@@ -119,6 +119,7 @@
 <script>
   import AdminHome from "../AdminHome";
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     name: "create",
@@ -156,7 +157,7 @@
         formData.append('caption', this.caption)
         formData.append('name', this.name)
         formData.append('cat_id', this.selected)
-        axios.post('http://127.0.0.1/laravel/public/api/admin/product/create',
+        http().post('admin/product/create',
           formData,
           {
             headers: {
@@ -174,7 +175,7 @@
       }
     },
     created() {
-      axios.get('http://127.0.0.1/laravel/public/api/category/product_all')
+      http().get('category/product_all')
         .then(response => (this.cats = response.data)
         ).catch(error => console.log(error))
     },
