@@ -153,15 +153,7 @@ export const routes =[
 
 }},
 
-    {path: 'profile/edit',component: AdminProfileEdit}
-//   ],beforeEnter: (to,from,next) => {
-//    if(auth.isLoggedIn() == 'admin')  {
-//
-//      next()
-//    } else {
-//      next('/login')
-//    }
-// }
+
 
 
 
