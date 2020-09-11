@@ -1,6 +1,8 @@
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
 import {http} from "./http_service";
+
+
 let loginRes = null;
 export function register(user) {
 
@@ -11,6 +13,8 @@ export function register(user) {
       address : user.address,
       phone : user.phone,
 
+
+    }).then().catch(e => {
 
     })
 
@@ -30,12 +34,12 @@ export function login(user) {
        const token = JSON.stringify(response)
        localStorage.setItem('token' , token)
        loginRes = response
-
+        location.reload()
      }
 
 
   }).catch(e => {
-    console.log(e)
+    return false
   })
   if (loginRes) {return JSON.stringify(response.data.scope[0])}
 
@@ -69,7 +73,8 @@ export function logout() {
     }
   })) {
     localStorage.removeItem('token');
-
+    location.reload()
+    window.location.pathname = '/login'
   }
 
 }

@@ -1,5 +1,6 @@
 <template>
   <div style="width: 100%;height: auto">
+
     <img src="../img/products-header.jpg" width="100%" height="300px">
     <div>
       <div class="ac-title">
@@ -37,7 +38,7 @@
     </div>
     <br><br>
     <div style="display: flex;justify-content: space-around;flex-wrap: wrap;">
-      <div @click="productpage(product.id)" v-for="product in products" dir="rtl"
+      <div class="prod-cart" @click="productpage(product.id)" v-for="product in products" dir="rtl"
            style="box-shadow: 10px 10px rgba(208,212,211,0.52);border: solid 0.5px rgba(195,199,198,0.52);background-color: white;margin: 15px;height: 400px;width: 300px;border-radius: 2%;display: flex;flex-direction: column;align-items: center;justify-content: space-around">
 
         <img :src="'http://localhost/storeBackend/images/'+product.pic"
@@ -96,13 +97,24 @@
       axios.get('product/all').then((response) => {
         this.products = response.data
         console.log(response)
+
       }).catch(e => {
         alert(e)
       })
       axios.get('category/product_all')
         .then(response => (this.cats = response.data)
         ).catch(error => console.log(error))
+      if (this.$route.params){
+        this.picked1=''
+        axios.post('product/search', {
+          cat_id: this.picked
+        })
+          .then(response => (this.products = response.data)
+          ).catch(error => console.log(error))
+      }
     },
+
+
     methods: {
       gotoshop: function (id) {
 
@@ -146,6 +158,10 @@
     width: 40%;
     background-color: #888888;
     border-radius: 50%;
+  }
+  .prod-cart:hover{
+    transform: rotate(2deg);
+    cursor: pointer;
   }
 
   .stores-card {

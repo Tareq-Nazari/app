@@ -1,6 +1,6 @@
 <template>
-  <div style="display: flex;justify-content: space-evenly">
-    <div dir="rtl" style="border-radius: 2%" class="product-card" v-for="product in products">
+  <div style="display: flex;justify-content: flex-start;flex-wrap: wrap;margin-right: 2%">
+    <div :id="product.id" dir="rtl" style="border-radius: 2%;margin: 15px" class="product-card" v-for="product in products">
 
     <img :src="'http://127.0.0.1/storeBackend/images/'+product.pic" style="margin-right: 1%;margin-top: 1%;border-radius: 2%" height="50%" width="98%">
     <p class="card-title" style="font-size: 20px">{{product.name}}</p>
@@ -8,8 +8,8 @@
     <div class="card-button-1" style="right: 15px;top: 280px">
       <router-link tag="a" :to="'/dashboard/store/editproduct/'+product.id" >ویرایش</router-link>
     </div>
-    <div class="card-button-1" style="top: 280px;left: 15px;background-color: #c74d4a">
-      <router-link tag="a" to="/sfd">حذف</router-link>
+    <div v-on:click="deleteFromStore(product.id)" class="card-button-1" style="top: 280px;left: 15px;background-color: #c74d4a">
+      حذف
 
     </div>
   </div>
@@ -23,6 +23,14 @@ export default {
   data(){
     return {
       products : null
+    }
+  },
+  methods : {
+    deleteFromStore(id){
+      http().get('shopOwner/product/delete'+id).then(res => {
+        document.getElementById(id).remove()
+      })
+
     }
   },
   mounted(){

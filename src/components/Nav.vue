@@ -10,14 +10,15 @@
   <div v-else class="item"></div>
   <div class="item">لوگو</div>
   <div style="cursor: pointer" v-on:click="searchPage"><font-awesome-icon :icon="['fas','search']" /></div>
-  <div v-on:click="getCart" style="position:relative;cursor: pointer" ><font-awesome-icon :icon="['fas','shopping-cart']" /><div style="position:absolute;height: 15px;width: 15px;
-  background-color: red;border-radius: 50%;top: 58%;right: 14%;font-size: 12px;color: white">{{cartCounter}}</div></div>
+  <div v-on:click="getCard" style="position:relative;cursor: pointer" ><font-awesome-icon :icon="['fas','shopping-cart']" /></div>
   <div><font-awesome-icon :icon="['fas','user']" style="cursor: pointer" v-on:click="showuserr"/></div>
 
 <transition name="fade">
   <div v-if="showuser" style="width: 100px;height: 150px;background-color: #d6d7ff;position:absolute;left: 12px;top: 55px">
-    <button style="height: 33px;width: 76px;color: white;background-color: #00a5bb;margin-top: 25px;border: none;outline: none"><router-link to="/signup" >ثبت نام</router-link></button>
-    <button style="height: 33px;width: 76px;color: white;background-color: #f31d21;margin-top: 25px;border: none;outline: none"><router-link to="/login" >ورود</router-link></button>
+    <button v-if="log === false" style="height: 33px;width: 76px;color: white;background-color: #00a5bb;margin-top: 25px;border: none;outline: none"><router-link to="/signup" >ثبت نام</router-link></button>
+    <button v-if="log === false" style="height: 33px;width: 76px;color: white;background-color: #f31d21;margin-top: 25px;border: none;outline: none"><router-link to="/login" >ورود</router-link></button>
+    <button v-if="log" @click="logout" style="height: 33px;width: 76px;color: white;background-color: red;margin-top: 25px;border: none;outline: none"><router-link to="/login" >خروج</router-link></button>
+
 
   </div>
 </transition>
@@ -33,7 +34,7 @@
     <div style="height: 90%;width: 95%;background-color: white;border-radius: 7px;padding: 1%;overflow: auto" id="par">
 
       <div v-for="product in products"  :id="product.id" style="width: 100%;height: 55px;border-bottom: 1px solid black;display: flex;justify-items: center;justify-content: space-around;align-items: center">
-        <img src="../img/tshirt.jpg" height="50px" width="50px" >
+        <img :src="'http://localhost/storeBackend/images/'+product.thumbnail" height="50px" width="50px" >
         <p>{{product.name}}</p>
         <p>{{product.price}}</p>
         <font-awesome-icon :icon="['fas','times-circle']"  style="color : red;cursor: pointer" v-on:click="deleteFromCart(product.id)" />
@@ -59,28 +60,41 @@
 <script>
 
 
-  import {isLoggedIn} from "../services/auth_service";
+  import {isLoggedIn,logout} from "../services/auth_service";
   import axios from 'axios'
   import {http} from "../services/http_service";
   export default {
     name: "Nav",
     data(){
       return {
+        log : false,
           shopClick : 0,
           searchClick: false,
           forc : 10,
         user: {
             isLoggedIn: 1
         },
-        products : null,
         showDash : false,
-        cartCounter: null,
-        showuser : false
+        cartCounter: this.$store.getters.cartNum,
+        showuser : false,
+        products : null
       }
 
     },
 
     methods : {
+      logout(){
+        logout()
+      },
+      getCard() {
+        http().post('users/basket/all').then((response) => {
+          this.shopClick = 1
+          this.products =  response.data
+
+        }).catch((e) => {
+          return 'خالی است'
+        })
+      },
       showuserr(){
        let x = false
         x = (this.showuser == false) ? true : false
@@ -89,21 +103,12 @@
       },
       currentNav(event){
       },
-      getCart(){
-        http().post('users/basket/all').then((response) => {
-          this.shopClick = 1
-          this.products = response.data
-
-        }).catch((e) => {
-          return 'خالی است'
-        })
-
-      },
       deleteFromCart(id) {
         let x = document.getElementById(id)
         x.remove()
         http().post('users/basket/delete'+id).then((res)=>{
-
+          this.$store.commit('decrease')
+          this.cartCounter = this.$store.getters.cartNum
         })
       },
       searchPage(){
@@ -112,13 +117,15 @@
 
 
     },
-    watch: {
+
+    mounted(){
+    this.log = isLoggedIn()
 
 
     },
     created() {
 
-        this.cartCounter = this.$store.getters.cartNum
+
         if (this.$store.getters.isLoggedIn) {
           this.showDash = true
         }else this.showDash=false
@@ -126,7 +133,7 @@
 
 
     },
-    computed: {
+    computed : {
 
     }
 

@@ -25,48 +25,46 @@
 
       </div>
       <div>
-        <img style="max-width: 100%;height: auto" :src="'http://localhost/laravel/images/'+product.pic">
+        <img style="max-width: 100%;height: auto" :src="'http://localhost/storeBackend/images/'+product.pic">
       </div>
 
 
     </div>
-    <div class="main2">
 
-      <div></div>
-      <div class="moreDetail">
-
-        <p @click="change,moreInformationDisplay='none',DescriptionDisplay='block',ReviewsDisplay='none'"
-           :style="DescriptionDisplay==='block'? style5:style4">
-
-          توضیحات</p>
-        <p @click="moreInformationDisplay='none',DescriptionDisplay='none',ReviewsDisplay='block'"
-           :style="ReviewsDisplay==='block'? style5:style4">بازخوردها</p>
+    <br><br>
+    <div>
+      <div class="ac-title">
+        <div class="ac-title-side"></div>
+        <h3>نظرات</h3>
+        <div class="ac-title-side"></div>
       </div>
-      <div></div>
+    </div>
+    <br><br>
+    <div v-if="log" style="margin-right: 38px">
+      <label for="categoryAdd">نظر شما : </label>
+      <input style="width: 300px" v-model="userComment" id="categoryAdd">
+      <button v-on:click="addComment" style="border : none;background-color: #ff2400;text-shadow: rgba(0,0,0,0.64);color: white;height: 25px;width: 70px">ثبت</button>
 
     </div>
-    <div v-if="moreInformationDisplay==='block'||DescriptionDisplay==='block'||ReviewsDisplay==='block'"
-         class="moreInformation">
-      <div></div>
-      <div class=" aboutProduct">
-        <p v-if="DescriptionDisplay==='block'">
+    <div v-else style="margin-right: 43px">برای ثبت نظر ابتدا وارد شوید</div>
+    <br>
+    <br>
+    <div class=" comments">
 
-          {{product.caption}}
 
-        </p>
-
-        <div v-if="ReviewsDisplay==='block'">
-          <div style="height: 900px;width: 700px;display: flex;flex-direction: column;align-content: center;">
-            <div v-for="i in 3" style="border-radius: 10px;height: auto;max-width: 60%;margin: 10px;background-color: #d0d4d3;word-break: break-all;padding: 5px">
-          <p>ww</p>
-
-            </div>
-
-          </div>
+      <div :id="coment.id" v-for="coment in comments" style="border-radius: 10px;height: auto;width: 300px;margin: 30px;background-color: rgb(183 217 209 / 48%);word-break: break-all;padding: 5px;">
+        <div style="height: 30px;width: 50%;display: flex;align-items: center">
+          <font-awesome-icon :icon="['fas' , 'comment']" style="color: rgba(0,0,0,0.64)"></font-awesome-icon><h4 style="margin-right: 10px">
+          {{coment.name}}</h4>
         </div>
+        <p>{{coment.comment}}</p>
+
       </div>
 
+
+
     </div>
+
 
 
 
@@ -82,6 +80,7 @@
 
   import axios from 'axios'
   import {http} from "../services/http_service";
+  import {isLoggedIn} from "../services/auth_service";
 
   export default {
     components: {
@@ -111,25 +110,37 @@
             content: 'Slide content.'
           }
         ],
-        product : null
+        product : null,
+        comments : null,
+        userComment : '',
+        log : false
       }
     },
 
     mounted() {
       axios
-
-      .get('http://127.0.0.1/laravel/public/api/product/one'+this.$route.params.id)
+      .get('product/one'+this.$route.params.id)
       .then(response => {
         this.product = response.data[0]
         console.log(response.data)
-
+        axios.get('product/comments/'+this.product.id).then((res) => {
+          this.comments = res.data
+          console.log(this.comments)
+        })
       }
     )
+      this.log = isLoggedIn()
     },
     methods: {
+      addComment(){
+      http().post('users/product/add_comment',{text : this.userComment,product_id : this.product.id}).then(()=>{
+        alert('نظر شما ثبت شد')
+      })
+      },
       addToCart(id){
         http().post('users/basket/add/'+id).then((response) => {
-
+        this.$store.commit('increment')
+          this.$store.getters.
           console.log(response)
         }).catch(e =>{
           console.log(e)
@@ -184,37 +195,24 @@
     font-family: vasir;
   }
 
-  .main2 {
-    display: grid;
-    margin-top: 80px;
-    grid-template-columns: 1.7fr auto 1.7fr;
-    grid-row-gap: 20px;
-  }
 
-  .moreDetail {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 15px;
-    font-family: vasir;
-    font-size: large;
-  }
 
   .moreDetail > p:hover {
     border-bottom: 1px solid #888888;
     cursor: pointer;
   }
 
-  .moreInformation {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-
+  .ac-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
   }
-
-  .aboutProduct {
-    transition-delay: 5s;
-    font-family: vasir;
-    text-align: justify;
+  .ac-title-side{
+    height: 6px;
+    width: 40%;
+    background-color: #888888;
+    border-radius: 50%;
   }
-
 
 </style>

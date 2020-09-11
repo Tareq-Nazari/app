@@ -71,6 +71,12 @@ export const store = new Vuex.Store({
     increment: state => {
       state.counter++;
     },
+    decrease : state => {
+      state.counter--
+    },
+    setCartCount(state , n){
+      state.counter = n
+    },
     authUser(state , userData){
       state.idToken = userData.token;
       state.userId = userData.userId
@@ -127,6 +133,7 @@ export const store = new Vuex.Store({
     login({commit} , authData){
 
       axios.post('users/login' , {
+
         email : authData.email,
         password : authData.password,
 
