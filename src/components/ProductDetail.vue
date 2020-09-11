@@ -1,7 +1,7 @@
 <template>
 
   <div class="main">
-
+<vue-alert></vue-alert>
     <div class="main1">
 <div></div>
       <div class="description">
@@ -139,8 +139,9 @@
       },
       addToCart(id){
         http().post('users/basket/add/'+id).then((response) => {
-        this.$store.commit('increment')
-          this.$store.getters.
+          this.$alert.success({
+            message : 'به سبد خرید افزوده شد'
+          })
           console.log(response)
         }).catch(e =>{
           console.log(e)

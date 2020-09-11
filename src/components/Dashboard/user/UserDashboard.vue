@@ -47,8 +47,8 @@
         <label for="addr"> آدرس :
           <textarea v-model="shopRegister.address" style="height: 145px;width: 215px;background-color: #d0d4d3;padding: 2px;border: none;border-radius: 5px;outline: none"></textarea></label>
         <label>دسته بندی فروشگاه :
-          <select v-on:click="select">
-          <option  v-for="category in categories"  v-model="selectedCategory">{{category.name}}</option>
+          <select v-model="selectedCategory">
+          <option  v-for="category in categories" :value="category.id">{{category.name}}</option>
 
           </select>
         </label>
@@ -57,7 +57,7 @@
       </div>
 
 
-{{selectedCategory}}
+
   </div>
 </div>
 </template>
@@ -90,7 +90,7 @@
               status : 0
             },
             categories : null,
-            selectedCategory : null,
+            selectedCategory :'3',
             profile : null,
             factors : null
           }

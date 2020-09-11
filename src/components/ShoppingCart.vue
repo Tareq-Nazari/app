@@ -1,5 +1,6 @@
 <template>
     <div style="background-color: #F5F5F5;width: 100%;min-height: 670px;overflow: auto">
+      <vue-alert></vue-alert>
       <div  style="background-color: #FFFFFF;min-height: 163px;width:55%;margin-top: 50px;margin-left: auto;margin-right: auto;">
      <div :id="product.id" v-for="product in products" style="display: flex;margin: 10px;position: relative;border-bottom: 1px solid #d0d4d3">
        <img style="border-radius: 5px" :src="'http://127.0.0.1/storeBackend/thumbnail/'+product.thumbnail" height="150" width="150">
@@ -41,10 +42,12 @@
       methods : {
           payment(){
             http().post('users/basket/payment',this.products).then((res) => {
-                this.$alert.success({
-                  message : 'پرداخت شد'
-                })
-                this.$router.push('/')
+
+             this.$router.push({path : '/',query : {msg : 'پرداخت شد'}})
+
+
+
+
             })
           },
         deleteFromCart(id){

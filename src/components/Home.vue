@@ -2,7 +2,6 @@
 
   <div style="font-family: vasir">
 
-
 <swiper class="swiper" :option="swiperOption.s1">
   <swiper-slide >
     <div>
@@ -61,13 +60,13 @@
   <swiper-slide v-for="product in products">
     <div class="product-card">
 
-      <img class="card-image" src="src/img/chetoz.webp"
+      <img class="card-image" :src="'http://localhost/storeBackend/images/'+product.pic"
            height="50%" width="98%">
       <p class="card-title">{{product.name}}</p>
       <p class="card-price">قیمت : {{product.price}}</p>
       <p class="card-desc">{{product.caption}}</p>
 
-      <button class="card-button" @click="increment">مشاهده</button>
+      <button class="card-button" @click="productPage(product.id)">مشاهده</button>
     </div>
   </swiper-slide>
   <div class="swiper-button-prev" slot="button-prev"></div>
@@ -248,6 +247,7 @@ import {mapMutations} from 'vuex'
 },
         products : null,
         stores : null,
+        msg : ''
       }
     },
 
@@ -278,6 +278,10 @@ import {mapMutations} from 'vuex'
         this.stores = res.data
       })
 
+
+
+    },
+    created() {
 
     }
   }

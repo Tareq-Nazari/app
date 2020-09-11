@@ -101,7 +101,7 @@
       }).catch(e => {
         alert(e)
       })
-      axios.get('category/product_all')
+      axios.get('category/store_all')
         .then(response => (this.cats = response.data)
         ).catch(error => console.log(error))
       if (this.$route.params){

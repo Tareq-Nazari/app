@@ -46,7 +46,7 @@
 
             <select v-model="product.cat_id">
               <option :value="product.cat_id" selected>{{product.cat_name}}</option>
-              <option v-for="category in categories" :value="category.id"></option>
+              <option v-for="category in categories" :value="category.id">{{category.name}}</option>
             </select>
             <label>دسته بندی محصول</label>
           </div>

@@ -21,7 +21,9 @@ border-radius: 7px 7px 7px 7px;position: relative">
     <input v-model="product.size" type="text" placeholder="سایز" class="add-product-input" >
   <input v-model="product.price" type="text" placeholder="قیمت" class="add-product-input" >
   <textarea v-model="product.caption" placeholder="توضیحات" style="padding: 8px;border: 0;border-radius: 12px;background-color: #d9dddc;outline: 0;height: 50px;width: 220px;" ></textarea>
-  <label>دسته بندی :  <select v-model="product.cat_id">
+  <label>
+
+    دسته بندی :  <select v-model="product.cat_id">
     <option v-for="category in categories" :value="category.id">{{category.name}}</option>
 
 

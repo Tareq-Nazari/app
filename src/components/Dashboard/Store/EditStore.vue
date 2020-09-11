@@ -42,8 +42,11 @@
 
     <div style="display: flex;justify-content: space-around;margin-bottom: 30px">
       <div style="margin-right: 38px">
-        <label for="categoryAdd">افزودن دسته بندی به محصولات</label>
-        <input v-model="category" id="categoryAdd">
+        <label>دسته بندی :
+          <select v-model="category">
+          <option v-for="category in categoriess" :value="category.id">{{category.name}}</option>
+
+        </select></label>
         <button v-on:click="addCategory" style="border : none;background-color: #ff2400;text-shadow: rgba(0,0,0,0.64);color: white;height: 25px;width: 70px">افزودن</button>
 
       </div>
@@ -72,13 +75,14 @@
           return {
             status : 0,
             category : '',
-            categories : null
+            categories : null,
+            categoriess:null,
 
           }
       },
       methods : {
          addCategory(){
-           http().post('shopOwner/category/add',{name : this.category})
+           http().post('shopOwner/category/add',{id : this.category})
          },
         deleteCategory(id){
           http().get('shopOwner/category/delete'+id).then((res) => {
@@ -94,6 +98,11 @@
 
             console.log(this.categories)
           })
+        axios.get('category/store_all').then((res) => {
+          this.categoriess = res.data
+
+          console.log(this.categories)
+        })
         }
 
 
