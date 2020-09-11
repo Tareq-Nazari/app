@@ -38,7 +38,7 @@
     </div>
     <br><br>
     <div style="display: flex;justify-content: space-around;flex-wrap: wrap;">
-      <div class="prod-cart" @click="productpage(product.id)" v-for="product in products" dir="rtl"
+      <div class="prod-cart" @click="productPage(product.id)" v-for="product in products" dir="rtl"
            style="box-shadow: 10px 10px rgba(208,212,211,0.52);border: solid 0.5px rgba(195,199,198,0.52);background-color: white;margin: 15px;height: 400px;width: 300px;border-radius: 2%;display: flex;flex-direction: column;align-items: center;justify-content: space-around">
 
         <img :src="'http://localhost/storeBackend/images/'+product.pic"
@@ -116,6 +116,9 @@
 
 
     methods: {
+      productPage(id){
+        this.$router.push('product/'+id)
+      },
       gotoshop: function (id) {
 
         this.$router.push({path: '/storePage' ,query:{id} })

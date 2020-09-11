@@ -163,7 +163,7 @@
       <div style="position:absolute;top: 10px;left: 10px;background-color: white;padding: 5px;border-radius: 35%"><router-link to="/products" style="text-decoration: none">مشاهده همه</router-link></div>
       <swiper class="swiper" :options="swiperOption.s4">
         <swiper-slide v-for="product in products">
-          <div class="prod-cart" @click="productpage(product.id)" dir="rtl"
+          <div class="prod-cart" @click="productPage(product.id)" dir="rtl"
                style="box-shadow: 10px 10px rgba(208,212,211,0.52);border: solid 0.5px rgba(195,199,198,0.52);background-color: white;margin: 15px;height: 283px;width: 222px;border-radius: 2%;display: flex;flex-direction: column;align-items: center;justify-content: space-around">
 
             <img :src="'http://localhost/storeBackend/images/'+product.pic"
@@ -257,6 +257,9 @@ import {mapMutations} from 'vuex'
    methods : {
      goToCat(cat){
        this.$router.push('/products/'+cat)
+     },
+     productPage(id){
+       this.$router.push('product/'+id)
      },
      increment(){
        this.$store.commit('increment')

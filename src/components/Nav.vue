@@ -34,7 +34,7 @@
     <div style="height: 90%;width: 95%;background-color: white;border-radius: 7px;padding: 1%;overflow: auto" id="par">
 
       <div v-for="product in products"  :id="product.id" style="width: 100%;height: 55px;border-bottom: 1px solid black;display: flex;justify-items: center;justify-content: space-around;align-items: center">
-        <img :src="'http://localhost/storeBackend/images/'+product.thumbnail" height="50px" width="50px" >
+        <img :src="'http://localhost/storeBackend/thumbnail/'+product.thumbnail" height="50px" width="50px" >
         <p>{{product.name}}</p>
         <p>{{product.price}}</p>
         <font-awesome-icon :icon="['fas','times-circle']"  style="color : red;cursor: pointer" v-on:click="deleteFromCart(product.id)" />

@@ -25,7 +25,7 @@
 
       </div>
       <div>
-        <img style="max-width: 100%;height: auto" :src="'http://localhost/storeBackend/images/'+product.pic">
+        <img style="width: 75%;height: 500px" :src="'http://localhost/storeBackend/images/'+product.pic">
       </div>
 
 

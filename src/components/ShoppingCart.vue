@@ -41,7 +41,10 @@
       methods : {
           payment(){
             http().post('users/basket/payment',this.products).then((res) => {
-
+                this.$alert.success({
+                  message : 'پرداخت شد'
+                })
+                this.$router.push('/')
             })
           },
         deleteFromCart(id){

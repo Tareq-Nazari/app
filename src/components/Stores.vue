@@ -106,6 +106,9 @@
       })
     },
     methods: {
+      productPage(id){
+        this.$router.push('product/'+id)
+      },
       gotoshop: function (id) {
 
         this.$router.push({path: '/storePage' ,query:{id} })
