@@ -6,7 +6,7 @@
   <div class="item" @click="currentNav($event)" id="/store"><router-link to="/stores">فروشگاه ها</router-link></div>
   <div class="item" @click="currentNav($event)" id="/products"><router-link to="/products">محصولات</router-link></div>
   <div class="item" @click="currentNav($event)" id="/contact"><router-link to="/contact">درباره ما</router-link></div>
-  <div v-if="showDash === true" style="background-color: #E11D20;color: white;border-radius: 6px" class="item" v-on:click="currentNav($event)" id="/about"><router-link style="color: white" to="/dashboard/user/" replace>داشبورد</router-link></div>
+  <div v-if="log" style="background-color: #E11D20;color: white;border-radius: 6px" class="item" v-on:click="currentNav($event)" id="/about"><router-link style="color: white" :to="'/dashboard/'+showDash+'/'" replace>داشبورد</router-link></div>
   <div v-else class="item"></div>
   <div class="item">لوگو</div>
   <div style="cursor: pointer" v-on:click="searchPage"><font-awesome-icon :icon="['fas','search']" /></div>
@@ -76,7 +76,7 @@
         },
         showDash : false,
         cartCounter: this.$store.getters.cartNum,
-        showuser : false,
+        showuser : '',
         products : null
       }
 
@@ -120,15 +120,16 @@
 
     mounted(){
     this.log = isLoggedIn()
+      if (getScope() === 'user' || getScope() === 'shopOwner') {
+        this.showDash = 'user'
+      }else this.showDash = 'admin'
 
 
     },
     created() {
 
 
-        if (this.$store.getters.isLoggedIn && getScope() !== 'admin') {
-          this.showDash = true
-        }else this.showDash=false
+
 
 
 
