@@ -103,6 +103,7 @@
 <script>
   import AdminHome from "../AdminHome";
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     name: "add",
@@ -145,7 +146,7 @@
       },
     },
     created() {
-      axios.get('http://127.0.0.1/laravel/public/api/admin/roles')
+      http().get('admin/roles')
         .then(response => (this.roles = response.data)
         ).catch(error => console.log(error))
     },

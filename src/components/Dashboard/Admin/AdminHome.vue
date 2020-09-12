@@ -108,7 +108,7 @@
   import {mapMutations} from 'vuex';
   import {mapGetters} from 'vuex';
   import axios from 'axios';
-  import * as auth from '../../../services/auth_service'
+  import * as auth from '../../../services/auth_service';
 
   export default {
     name: "AdminHome",
@@ -132,12 +132,9 @@
       ...mapMutations([
         "turnOff"
       ]),
-      logOut: async function () {
-
-
+      logOut () {
            auth.logout();
            this.$router.push('/login');
-
 
 
       }

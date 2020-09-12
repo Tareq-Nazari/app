@@ -36,6 +36,7 @@
 
 <script>
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     name: "editPic",
@@ -59,7 +60,7 @@
         formData.append('pic', this.file)
 
 
-        axios.post('users/profile/edit_picture',
+        http().post('users/profile/edit_picture',
           formData
           , {
             headers: {

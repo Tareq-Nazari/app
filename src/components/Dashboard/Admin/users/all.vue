@@ -80,6 +80,7 @@
   import AdminHome from "../AdminHome";
   import {mapGetters} from 'vuex';
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     name: "all",
@@ -125,7 +126,7 @@
 
       },
       send: function () {
-        axios.post('http://127.0.0.1/laravel/public/api/admin/users/search', {
+        http().post('admin/users/search', {
           id: this.id,
           profile_id: this.profile_id,
           name: this.name,
@@ -139,7 +140,7 @@
 
     },
     created() {
-      axios.get('http://127.0.0.1/laravel/public/api/admin/users/all')
+      http().get('admin/users/all')
         .then(response => (this.users = response.data)
         ).catch(error => console.log(error))
     },

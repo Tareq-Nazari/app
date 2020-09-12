@@ -93,6 +93,7 @@
 <script>
   import AdminHome from "../AdminHome";
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     name: "edit",
@@ -114,7 +115,7 @@
 
     }, methods: {
       checkForm: function (id) {
-        axios.post('http://127.0.0.1/laravel/public/api/admin/users/edit', {
+        http().post('admin/users/edit', {
           role: this.role,
           id: this.id,
           pic: this.file,

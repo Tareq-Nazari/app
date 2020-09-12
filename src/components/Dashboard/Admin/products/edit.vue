@@ -85,13 +85,13 @@
         </div>
 
 
-        <div class="inp">
-          <p> دسته بندی مغازه </p>
-          <select v-model="selected" style="padding-right: 12%" name="cat_id" id="cars">
-            <option v-for="cats in  categories" :value="cats.id">{{cats.name}}</option>
+<!--        <div class="inp">-->
+<!--          <p> دسته بندی مغازه </p>-->
+<!--          <select v-model="selected" style="padding-right: 12%" name="cat_id" id="cars">-->
+<!--            <option v-for="cats in  categories" :value="cats.id">{{cats.name}}</option>-->
 
-          </select>
-        </div>
+<!--          </select>-->
+<!--        </div>-->
 
         <div style="margin-top: 15px">
           <button
@@ -170,9 +170,9 @@
 
     },
     created() {
-      http().get('admin/category/product/all')
-        .then(response => (this.categories = response.data)
-        ).catch(error => console.log(error))
+      // http().get('admin/category/product/all')
+      //   .then(response => (this.categories = response.data)
+      //   ).catch(error => console.log(error))
     },
     components: {AdminHome},
   }

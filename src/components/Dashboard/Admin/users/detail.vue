@@ -28,7 +28,7 @@
     </div>
     <div style="display: grid;grid-template-columns: 1fr;grid-row-gap: 20px">
       <p style="font-family: vasir">عکس پروفایل</p>
-      <img style="height: 80%" v-bind:src="'http://127.0.0.1/laravel/images/'+user[0].pic">
+      <img style="height: 80%" v-bind:src="'http://127.0.0.1/storeBackend/images/'+user[0].pic">
 
 
     </div>
@@ -41,6 +41,7 @@
 <script>
   import AdminHome from "../AdminHome";
   import axios from "axios";
+  import {http} from "../../../../services/http_service";
 
   export default {
     data() {
@@ -79,7 +80,7 @@ message:this.$route.query.message,
     methods: {
       deleteUser: function (id) {
         if (confirm("آیا می خواهید کاربر را حذف کنید؟")) {
-          axios.get('http://127.0.0.1/laravel/public/api/admin/users/delete' + id)
+          http().get('admin/users/delete' + id)
             .then(resp => {
                 this.$router.push({path: '/dashboard/admin/users/all',query:{message:'کاربر باموفقیت حذف شد'}})
               }
@@ -100,7 +101,7 @@ message:this.$route.query.message,
       }
     },
     created() {
-      axios.post('http://127.0.0.1/laravel/public/api/admin/users/search', {
+      http().post('admin/users/search', {
         'id': this.id
       })
         .then(response => (this.user = response.data)
