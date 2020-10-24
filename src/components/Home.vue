@@ -87,34 +87,34 @@
       </div>
     </div>
     <br>
-    <div style="display: flex;flex-wrap: wrap;justify-content: space-evenly;width: 51%;align-content: space-between;height: 341px;margin-right: auto;margin-left: auto">
+    <div style="display: flex;flex-wrap: wrap;justify-content: space-evenly;width: 47%;align-content: space-between;height: 341px;margin-right: auto;margin-left: auto">
 
-      <div v-on:click="goToCat('shoe')" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+      <div v-on:click="goToCat(21)" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
         <img src="../img/wwshoe.svg" height="90px" width="90px">
         <h3>کفش</h3>
 
       </div>
-      <div v-on:click="goToCat('tshirt')" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+      <div v-on:click="goToCat(22)" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
         <img src="../img/tshirt.svg" height="90px" width="90px">
         <h3>تیشرت</h3>
 
       </div>
-      <div v-on:click="goToCat('watch')" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+      <div v-on:click="goToCat(27)" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
         <img src="../img/watch.svg" height="90px" width="90px">
         <h3>ساعت</h3>
 
       </div>
-      <div v-on:click="goToCat('pants')" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+      <div v-on:click="goToCat(26)" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
         <img src="../img/pants.png" height="90px" width="90px">
         <h3>شلوار</h3>
 
       </div>
-      <div v-on:click="goToCat('hat')" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+      <div v-on:click="goToCat(25)" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
         <img src="../img/hat.png" height="90px" width="90px">
         <h3>کلاه</h3>
 
       </div>
-      <div v-on:click="goToCat('shirt')" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
+      <div v-on:click="goToCat(24)" style="cursor: pointer;border-radius: 5px;border: 1px solid gray; height: 150px;width: 200px;display: flex;flex-direction: column;justify-content: flex-end;padding-top: 26px;align-items: center;">
         <img src="../img/shirt.png" height="90px" width="90px">
         <h3>پیراهن</h3>
 

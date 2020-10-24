@@ -43,7 +43,7 @@
           <div style="border-radius: 10px;display: flex;justify-content: space-evenly;align-items: center;background-color: red;height: 40px;min-width: 100px">
 
             <input :id="cat.id" :value="cat.id" v-model="picked" v-on:change="select1" type="radio">
-            <label :for="cat.id">{{cat.name}}</label>
+            <label :for="cat.id">{{cat.cat_name}}</label>
 
           </div>
         </swiper-slide>

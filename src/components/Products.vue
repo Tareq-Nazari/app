@@ -16,7 +16,7 @@
           <div style="border-radius: 10px;display: flex;justify-content: space-evenly;align-items: center;background-color: red;height: 40px;min-width: 100px">
 
             <input id="all" v-model="picked1" v-on:change="selectall" type="radio">
-            <label for="all">all</label>
+            <label for="all">همه</label>
 
           </div>
         </swiper-slide>
@@ -105,9 +105,10 @@
         .then(response => (this.cats = response.data)
         ).catch(error => console.log(error))
       if (this.$route.params){
+        console.log(this.$route.params)
         this.picked1=''
         axios.post('product/search', {
-          cat_id: this.picked
+          cat_id: this.$route.params
         })
           .then(response => (this.products = response.data)
           ).catch(error => console.log(error))
@@ -117,7 +118,8 @@
 
     methods: {
       productPage(id){
-        this.$router.push('product/'+id)
+        // this.$router.go(-1)
+        this.$router.push('/product/'+id)
       },
       gotoshop: function (id) {
 
