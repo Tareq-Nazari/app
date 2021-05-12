@@ -18,7 +18,7 @@
     "axios": "^0.19.2",
     "jsonwebtoken": "^8.5.1",
     "regenerator-runtime": "^0.13.7",
-    "swiper": "^6.1.2",
+    "swiper": "^6.5.1",
     "vue": "^2.6.12",
     "vue-awesome-swiper": "^4.1.1",
     "vue-carousel": "^0.18.0",
